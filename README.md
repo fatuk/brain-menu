@@ -1,5 +1,7 @@
 # Brain-like 3d menu
 
+## [Demo](https://fatuk.github.io/brain-menu/public)
+
 ## How to run?
 
 * download this repo

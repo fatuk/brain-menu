@@ -1,0 +1,1 @@
+{"version":3,"sources":["app.js"],"names":[],"mappings":";;AAAA,EAAE,YAAM;AACP,SAAQ,GAAR,CAAY,eAAZ;AACA,CAFD","file":"app.js","sourcesContent":["$(() => {\n\tconsole.log('Hello ES2015!');\n});\n"],"sourceRoot":"/source/"}
