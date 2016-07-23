@@ -16,10 +16,8 @@ import templateData from './app/data/data.json';
 import mainBowerFiles from 'main-bower-files';
 let bowerFiles = mainBowerFiles();
 
-console.info(`
-********** Bower Files **********
-${bowerFiles}
-`);
+console.info('********** Bower Files **********');
+console.info(bowerFiles);
 
 /******************************
  * Default task
@@ -157,6 +155,10 @@ gulp.task('browser-sync', () => {
 gulp.task('watch', () => {
 	gulp.watch('app/less/*.less', ['less']);
 	gulp.watch('app/js/**/*.js', ['jsConcat']);
+	gulp.watch([
+		'assets/libs/**/*.*',
+		'assets/models/**/*.*'
+	], ['copyAssets']);
 	gulp.watch('app/templates/**/*.handlebars', ['handlebars']);
 });
 

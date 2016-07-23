@@ -20,11 +20,16 @@
   "overrides": {
     "normalize.less": {
       "ignore": "normalize.less"
+    },
+    "dat-gui": {
+      "main": "build/dat.gui.min.js"
     }
   },
   "dependencies": {
     "jquery": "~2.1.1",
     "normalize.less": "^1.0.0",
-    "three.js": "^0.78.0"
+    "three.js": "^0.78.0",
+    "dat-gui": "^0.5.1",
+    "stats.js": "*"
   }
 }
