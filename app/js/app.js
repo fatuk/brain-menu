@@ -165,6 +165,7 @@ function addModel (geometry, materials) {
 	model.position.set(0, 20, -50);
 	model.rotation.set(-1.6, 0, 0);
 	model.castShadow = true;
+	model.receiveShadow = true;
 	scene.add(model);
 	// look at mesh
 	let {x, y, z} = model.position;
