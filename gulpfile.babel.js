@@ -48,9 +48,9 @@ gulp.task('build', [
  ******************************/
 gulp.task('copyAssets', () => {
 	return gulp.src([
-		'assets/**/*.*',
-		'!assets/**/*.less'
-	])
+			'assets/**/*.*',
+			'!assets/**/*.less'
+		])
 		.pipe(gulp.dest('public'));
 });
 
@@ -58,7 +58,7 @@ gulp.task('copyAssets', () => {
  * Handlebars
  ******************************/
 gulp.task('handlebars', () => {
-	templateData.timestamp = + new Date();
+	templateData.timestamp = +new Date();
 	return gulp.src('app/templates/*.handlebars')
 		.pipe(handlebars(templateData, {
 			ignorePartials: true, //ignores the unknown partials
@@ -145,6 +145,12 @@ gulp.task('browser-sync', () => {
 			baseDir: './public'
 		},
 		open: false,
+		middleware: [{
+			route: 'blob:*',
+			handle: function (req, res, next) {
+				console.log(req, res, next);
+			}
+		}],
 		ghostMode: false
 	});
 });

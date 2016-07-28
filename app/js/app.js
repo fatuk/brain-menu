@@ -1,81 +1,68 @@
-var renderer = new THREE.WebGLRenderer();
+/*
+	Three.js "tutorials by example"
+	Author: Lee Stemkoski
+	Date: July 2013 (three.js v59dev)
+*/
 
-var camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 1, 1000);
+// MAIN
 
-var controls = new THREE.OrbitControls(camera, renderer.domElement);
-// controls.enableDamping = true;
+// standard global variables
+var container, scene, camera, renderer, controls, stats, spotLight;
+var keyboard = new THREEx.KeyboardState();
+var clock = new THREE.Clock();
+// custom global variables
+var cube;
 
-var scene = new THREE.Scene();
+init();
+animate();
 
-var matFloor = new THREE.MeshPhongMaterial();
-var matBox = new THREE.MeshPhongMaterial({
-	color: 0x4080ff
-});
-
-var geoFloor = new THREE.BoxGeometry(2000, 1, 2000);
-var geoBox = new THREE.BoxGeometry(3, 1, 2);
-
-var mshFloor = new THREE.Mesh(geoFloor, matFloor);
-var mshBox = new THREE.Mesh(geoBox, matBox);
-
-var ambient = new THREE.AmbientLight(0xffffff, 0.1);
-
-var spotLight = new THREE.SpotLight(0xffffff, 1);
-var lightHelper;
-
-var gui, guiElements, param = {
-	color: '0xffffff'
-};
-// Load mesh
-var model, mesh, texture;
-new THREE.JSONLoader().load('models/model.json', function (geometry) {
-	let modelTextureLoader = new THREE.TextureLoader();
-	modelTextureLoader.load('models/flawless-brick-tile-wx6341.jpg', (texture) => {
-		var material = new THREE.MeshLambertMaterial({
-			map: texture
-		});
-		// create mesh
-		model = new THREE.Mesh(geometry, material);
-		model.scale.set(10, 10, 10);
-		model.castShadow = true;
-		scene.add(model);
-		// look at mesh
-		camera.lookAt(model.position);
-		spotLight.target = model;
-		console.log(model.position);
-
-		// start render loop
-		render();
-	});
-});
-// var jsonLoader = new THREE.JSONLoader();
-// jsonLoader.load('models/model.json', (geometry, materials) => {
-// 	var material = new THREE.MeshFaceMaterial(materials);
-// 	model = new THREE.Mesh(geometry, material);
-// 	model.scale.set(1, 1, 1);
-// 	model.castShadow = true;
-// 	console.log(model);
-// 	model.position.set(40, 1.8, 0);
-// 	scene.add(model);
-// 	render();
-// });
-
-// Stats
-var stats = new Stats();
-stats.showPanel(0); // 0: fps, 1: ms, 2: mb, 3+: custom
-document.body.appendChild(stats.dom);
-
+// FUNCTIONS
 function init() {
-
+	// SCENE
+	scene = new THREE.Scene();
+	// CAMERA
+	var SCREEN_WIDTH = window.innerWidth,
+		SCREEN_HEIGHT = window.innerHeight;
+	var VIEW_ANGLE = 45,
+		ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT,
+		NEAR = 0.1,
+		FAR = 20000;
+	camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
+	scene.add(camera);
+	camera.position.set(0, 150, 400);
+	camera.lookAt(scene.position);
+	// RENDERER
+	if (Detector.webgl)
+		renderer = new THREE.WebGLRenderer({
+			antialias: true
+		});
+	else
+		renderer = new THREE.CanvasRenderer();
+	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 	renderer.shadowMap.enabled = true;
 	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
 	renderer.gammaInput = true;
 	renderer.gammaOutput = true;
 
-	camera.position.set(65, 8, -10);
-
-	spotLight.position.set(15, 40, 35);
+	container = document.getElementById('brain');
+	container.appendChild(renderer.domElement);
+	// EVENTS
+	THREEx.WindowResize(renderer, camera);
+	THREEx.FullScreen.bindKey({
+		charCode: 'm'.charCodeAt(0)
+	});
+	// CONTROLS
+	controls = new THREE.OrbitControls(camera, renderer.domElement);
+	// STATS
+	stats = new Stats();
+	stats.domElement.style.position = 'absolute';
+	stats.domElement.style.bottom = '0px';
+	stats.domElement.style.zIndex = 100;
+	container.appendChild(stats.domElement);
+	// Spotlight
+	spotLight = new THREE.SpotLight(0xffffff, 1);
+	var lightHelper;
+	spotLight.position.set(15, 50, 35);
 	spotLight.castShadow = true;
 	spotLight.angle = Math.PI / 4;
 	spotLight.penumbra = 0.05;
@@ -84,149 +71,122 @@ function init() {
 	spotLight.shadow.mapSize.width = 1024;
 	spotLight.shadow.mapSize.height = 1024;
 	spotLight.shadow.camera.near = 1;
-	spotLight.shadow.camera.far = 200;
-
+	spotLight.shadow.camera.far = 500;
 	lightHelper = new THREE.SpotLightHelper(spotLight);
-
-	matFloor.color.set(0x808080);
-
-	mshFloor.receiveShadow = true;
-	mshFloor.position.set(0, -0.05, 0);
-
-	mshBox.castShadow = true;
-	mshBox.position.set(40, 1.8, 0);
-
-	scene.add(camera);
-	scene.add(mshFloor);
-	// scene.add(mshBox);
-	scene.add(ambient);
 	scene.add(spotLight);
-	scene.add(new THREE.AxisHelper(10));
 	scene.add(lightHelper);
+	// FLOOR
+	var floorTexture = new THREE.ImageUtils.loadTexture('models/checkerboard.jpg');
+	floorTexture.wrapS = floorTexture.wrapT = THREE.RepeatWrapping;
+	floorTexture.repeat.set(10, 10);
+	var floorMaterial = new THREE.MeshPhongMaterial({
+		map: floorTexture,
+		side: THREE.DoubleSide
+	});
+	var floorGeometry = new THREE.PlaneGeometry(1000, 1000, 10, 10);
+	var floor = new THREE.Mesh(floorGeometry, floorMaterial);
+	floor.position.y = -0.5;
+	floor.rotation.x = Math.PI / 2;
+	floor.receiveShadow = true;
+	scene.add(floor);
+	// SKYBOX/FOG
+	var skyBoxGeometry = new THREE.CubeGeometry(10000, 10000, 10000);
+	var skyBoxMaterial = new THREE.MeshBasicMaterial({
+		color: 0x9999ff,
+		side: THREE.BackSide
+	});
+	var skyBox = new THREE.Mesh(skyBoxGeometry, skyBoxMaterial);
+	scene.add(skyBox);
+	scene.fog = new THREE.FogExp2(0x9999ff, 0.00125);
 
-	document.body.appendChild(renderer.domElement);
-	renderer.setSize(window.innerWidth, window.innerHeight);
+	////////////
+	// CUSTOM //
+	////////////
 
-	controls.addEventListener('change', render);
-	controls.minDistance = 20;
-	controls.maxDistance = 500;
-	controls.maxPolarAngle = Math.PI / 2;
-	controls.enablePan = false;
-	controls.target.copy(mshBox.position);
-	controls.update();
+	// Spheres
+	//   Note: a standard flat rectangular image will look distorted,
+	//   a "spherical projection" image will look "normal".
 
-	window.addEventListener('resize', onResize, false);
+	// radius, segmentsWidth, segmentsHeight
+	var sphereGeom = new THREE.SphereGeometry(40, 32, 16);
+
+	// var light2 = new THREE.AmbientLight(0x444444);
+	var light2 = new THREE.AmbientLight(0xffffff, 0.001);
+	scene.add(light2);
+
+	// create a small sphere to show position of light
+	var lightbulb = new THREE.Mesh(
+		new THREE.SphereGeometry(10, 16, 8),
+		new THREE.MeshBasicMaterial({
+			color: 0xffaa00
+		})
+	);
+	scene.add(lightbulb);
+	// lightbulb.position = light.position;
+
+	// Cubes
+	//   Note: when using a single image, it will appear on each of the faces.
+	//   Six different images (one per face) may be used if desired.
+
+	var cubeGeometry = new THREE.CubeGeometry(85, 85, 85);
+
+	var crateTexture = new THREE.ImageUtils.loadTexture('models/brick.jpg');
+	var crateMaterial = new THREE.MeshBasicMaterial({
+		map: crateTexture
+	});
+	var crate = new THREE.Mesh(cubeGeometry.clone(), crateMaterial);
+	crate.position.set(-60, 50, -100);
+	// scene.add(crate);
+
+
+	// My model loader
+	// Load mesh
+	new THREE.JSONLoader().load('models/brain.json', addModel);
 
 }
 
-function onResize() {
-	renderer.setSize(window.innerWidth, window.innerHeight);
-	camera.aspect = (window.innerWidth / window.innerHeight);
-	camera.updateProjectionMatrix();
+function addModel (geometry, materials) {
+	/*var material = new THREE.MeshBasicMaterial({
+		map: new THREE.ImageUtils.loadTexture('models/brick.jpg', {}, function () {
+			render();
+		})
+	});*/
+	// create mesh
+	var model, mesh, texture;
+	materials[0].color = {r: 1, g: 0.5, b: 0.5};
+	materials[1].color = {r: 1, g: 1, b: 0};
+	materials[2].color = {r: 0, g: 1, b: 1};
+	materials[3].color = {r: 0, g: 1, b: 0};
+	materials[4].color = {r: 0.6, g: 1, b: 0};
+	var material = new THREE.MultiMaterial(materials);
+	console.log(material);
+	model = new THREE.Mesh(geometry, material);
+	model.scale.set(0.2, 0.2, 0.2);
+	model.position.set(0, 20, -50);
+	model.rotation.set(-1.6, 0, 0);
+	model.castShadow = true;
+	scene.add(model);
+	// look at mesh
+	let {x, y, z} = model.position;
+	camera.lookAt(0, 0, 0);
+	spotLight.target = model;
+}
+
+function animate() {
+	requestAnimationFrame(animate);
+	render();
+	update();
+}
+
+function update() {
+	if (keyboard.pressed("z")) {
+		// do something
+	}
+
+	controls.update();
+	stats.update();
 }
 
 function render() {
-	stats.begin();
-	lightHelper.update(); // required
 	renderer.render(scene, camera);
-	stats.end();
 }
-
-function clearGui() {
-
-	if (gui) gui.destroy();
-
-	gui = new dat.GUI();
-
-	gui.open();
-
-}
-
-function buildGui() {
-
-	clearGui();
-
-	addGui('light color', spotLight.color.getHex(), function (val) {
-
-		spotLight.color.setHex(val);
-		render();
-
-	}, true);
-
-	addGui('intensity', spotLight.intensity, function (val) {
-
-		spotLight.intensity = val;
-		render();
-
-	}, false, 0, 2);
-
-	addGui('distance', spotLight.distance, function (val) {
-
-		spotLight.distance = val;
-		render();
-
-	}, false, 0, 200);
-
-	addGui('angle', spotLight.angle, function (val) {
-
-		spotLight.angle = val;
-		render();
-
-	}, false, 0, Math.PI / 3);
-
-	addGui('penumbra', spotLight.penumbra, function (val) {
-
-		spotLight.penumbra = val;
-		render();
-
-	}, false, 0, 1);
-
-	addGui('decay', spotLight.decay, function (val) {
-
-		spotLight.decay = val;
-		render();
-
-	}, false, 1, 2);
-
-}
-
-function addGui(name, value, callback, isColor, min, max) {
-
-	var node;
-	param[name] = value;
-
-	if (isColor) {
-
-		node = gui.addColor(param, name).onChange(function () {
-
-			callback(param[name]);
-
-		});
-
-	} else if (typeof value == 'object') {
-
-		node = gui.add(param, name, value).onChange(function () {
-
-			callback(param[name]);
-
-		});
-
-	} else {
-
-		node = gui.add(param, name, min, max).onChange(function () {
-
-			callback(param[name]);
-
-		});
-
-	}
-
-	return node;
-
-}
-
-init();
-
-buildGui();
-
-render();
