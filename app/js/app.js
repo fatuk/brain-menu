@@ -34,7 +34,7 @@ function init() {
 	// RENDERER
 	if (Detector.webgl)
 		renderer = new THREE.WebGLRenderer({
-			antialias: false
+			antialias: true
 		});
 	else
 		renderer = new THREE.CanvasRenderer();
