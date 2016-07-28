@@ -9,7 +9,7 @@
 // MAIN
 
 // standard global variables
-var container, scene, camera, renderer, controls, stats, spotLight;
+var container, scene, camera, renderer, controls, stats, spotLight, lightbulb;
 var keyboard = new THREEx.KeyboardState();
 var clock = new THREE.Clock();
 // custom global variables
@@ -38,7 +38,7 @@ function init() {
 		antialias: false
 	});else renderer = new THREE.CanvasRenderer();
 	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
-	renderer.shadowMap.enabled = true;
+	renderer.shadowMap.enabled = false;
 	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 	renderer.gammaInput = true;
 	renderer.gammaOutput = true;
@@ -114,10 +114,10 @@ function init() {
 	scene.add(light2);
 
 	// create a small sphere to show position of light
-	var lightbulb = new THREE.Mesh(new THREE.SphereGeometry(10, 16, 8), new THREE.MeshBasicMaterial({
+	lightbulb = new THREE.Mesh(new THREE.SphereGeometry(10, 16, 8), new THREE.MeshBasicMaterial({
 		color: 0xffaa00
 	}));
-	scene.add(lightbulb);
+	// scene.add(lightbulb);
 	// lightbulb.position = light.position;
 
 	// Cubes
@@ -159,8 +159,9 @@ function addModel(geometry, materials) {
 	model.scale.set(0.2, 0.2, 0.2);
 	model.position.set(0, 20, -50);
 	model.rotation.set(-1.6, 0, 0);
-	model.castShadow = true;
-	model.receiveShadow = true;
+	model.castShadow = false;
+	model.receiveShadow = false;
+	model.position.set(0, 0, 0);
 	scene.add(model);
 	// look at mesh
 	var _model$position = model.position;
