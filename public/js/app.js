@@ -13,6 +13,7 @@ var camera = void 0,
     material = void 0,
     mesh = void 0,
     spotLight = void 0,
+    ambientLight = void 0,
     lightHelper = void 0;
 var angle = 0;
 var width = window.innerWidth;
@@ -129,18 +130,24 @@ function cameraInit() {
 "use strict";
 
 function lightInit() {
-	spotLight = new THREE.SpotLight(0xffffff, 2);
-	spotLight.position.set(0, 50, 250);
-	spotLight.castShadow = true;
-	spotLight.angle = Math.PI / 4;
+	// Ambient light
+	ambientLight = new THREE.AmbientLight(0x222222);
+	// Spotlight
+	spotLight = new THREE.SpotLight(0xffffff);
+	spotLight.position.set(0, 70, 250);
+	spotLight.castShadow = false;
+	spotLight.angle = Math.PI / 1;
 	spotLight.penumbra = 0.05;
 	spotLight.decay = 2;
-	spotLight.distance = 350;
+	spotLight.intensity = 7;
+	spotLight.distance = 450;
 	spotLight.shadow.mapSize.width = 1024;
 	spotLight.shadow.mapSize.height = 1024;
 	spotLight.shadow.camera.near = 1;
 	spotLight.shadow.camera.far = 500;
+	// Light helper
 	lightHelper = new THREE.SpotLightHelper(spotLight);
+	scene.add(ambientLight);
 	scene.add(spotLight);
 	scene.add(lightHelper);
 }
@@ -148,17 +155,18 @@ function lightInit() {
 
 function modelInit() {
 	var loader = new THREE.JSONLoader();
-	loader.load('models/brain.json', function (geometry, materials) {
+	loader.load('models/2_brain1-3.json', function (geometry, materials) {
 		material = new THREE.MultiMaterial(materials);
+		// material = new THREE.MeshLambertMaterial();
 		mesh = new THREE.Mesh(geometry, material);
+		mesh.position.set(0, -50, -100);
+		mesh.scale.set(70, 70, 70);
 		scene.add(mesh);
 	});
+
 	/*geometry = new THREE.CubeGeometry(100, 100, 100);
- material = new THREE.MeshPhongMaterial({
- 	color: 0xfff000,
- 	wireframe: false
- });
- 	mesh = new THREE.Mesh(geometry, material);
+ material = new THREE.MeshPhongMaterial();
+ mesh = new THREE.Mesh(geometry, material);
  scene.add(mesh);*/
 }
 "use strict";

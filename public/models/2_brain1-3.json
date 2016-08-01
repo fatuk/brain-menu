@@ -17,7 +17,7 @@
         "depthTest":true,
         "DbgIndex":0,
         "colorDiffuse":[0.64,0.64,0.64],
-        "shading":"phong",
+        "shading":"lambert",
         "mapDiffuseWrap":["RepeatWrapping","RepeatWrapping"],
         "wireframe":false,
         "mapDiffuseRepeat":[1,1],

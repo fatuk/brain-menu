@@ -5,6 +5,7 @@ let camera,
 	material,
 	mesh,
 	spotLight,
+	ambientLight,
 	lightHelper;
 let angle = 0;
 let width = window.innerWidth;
