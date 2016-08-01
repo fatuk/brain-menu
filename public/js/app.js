@@ -149,7 +149,7 @@ function lightInit() {
 	lightHelper = new THREE.SpotLightHelper(spotLight);
 	scene.add(ambientLight);
 	scene.add(spotLight);
-	scene.add(lightHelper);
+	// scene.add(lightHelper);
 }
 'use strict';
 
