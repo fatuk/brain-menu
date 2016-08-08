@@ -13,8 +13,15 @@ var camera = void 0,
     material = void 0,
     mesh = void 0,
     spotLight = void 0,
+    directLight1 = void 0,
+    directLight2 = void 0,
     ambientLight = void 0,
-    lightHelper = void 0;
+    lightHelper1 = void 0,
+    lineServices = void 0,
+    lineProjects = void 0,
+    lineAbout = void 0,
+    lineContacts = void 0,
+    lightHelper2 = void 0;
 var angle = 0;
 var width = window.innerWidth;
 var height = window.innerHeight;
@@ -48,8 +55,12 @@ function init() {
 	cameraInit();
 	lightInit();
 	modelInit();
+	lines();
 
-	renderer = new THREE.WebGLRenderer();
+	renderer = new THREE.WebGLRenderer({
+		alpha: true,
+		antialias: false
+	});
 	renderer.setSize(window.innerWidth, window.innerHeight);
 
 	document.body.appendChild(renderer.domElement);
@@ -123,33 +134,60 @@ function onDocumentTouchMove(event) {
 "use strict";
 
 function cameraInit() {
-	camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000);
-	camera.position.z = 500;
+	camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 10000);
+	camera.position.x = -0.26;
+	camera.position.y = 1;
+	camera.position.z = 10.85;
 	scene.add(camera);
 }
 "use strict";
 
 function lightInit() {
 	// Ambient light
-	ambientLight = new THREE.AmbientLight(0x222222);
+	ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
 	// Spotlight
-	spotLight = new THREE.SpotLight(0xffffff);
-	spotLight.position.set(0, 70, 250);
-	spotLight.castShadow = false;
-	spotLight.angle = Math.PI / 1;
-	spotLight.penumbra = 0.05;
-	spotLight.decay = 2;
-	spotLight.intensity = 7;
-	spotLight.distance = 450;
-	spotLight.shadow.mapSize.width = 1024;
-	spotLight.shadow.mapSize.height = 1024;
-	spotLight.shadow.camera.near = 1;
-	spotLight.shadow.camera.far = 500;
+	directLight1 = new THREE.DirectionalLight(0xffffff, 2);
+	directLight2 = new THREE.DirectionalLight(0xffffff);
+	directLight1.position.set(5, 10, 7.5);
+	directLight2.position.set(5, 10, -7.5);
 	// Light helper
-	lightHelper = new THREE.SpotLightHelper(spotLight);
+	lightHelper1 = new THREE.DirectionalLightHelper(directLight1);
+	lightHelper2 = new THREE.DirectionalLightHelper(directLight2);
 	scene.add(ambientLight);
-	scene.add(spotLight);
-	// scene.add(lightHelper);
+	scene.add(directLight1);
+	// scene.add(directLight2);
+	// scene.add(lightHelper1);
+	// scene.add(lightHelper2);
+}
+"use strict";
+
+function lines() {
+	var material = new THREE.LineBasicMaterial({
+		color: 0x8e7f78
+	});
+
+	var geometry = new THREE.Geometry();
+	/*	geometry.vertices.push(
+ 		new THREE.Vector3(-10, 1, 0),
+ 		new THREE.Vector3(0, 0, 0)
+ 	);*/
+
+	lineServices = new THREE.Line(geometry, material);
+	lineServices.geometry.vertices = [new THREE.Vector3(-10, 1, 0), new THREE.Vector3(0, 0, 0)];
+
+	lineContacts = new THREE.Line(geometry.clone(), material);
+	lineContacts.geometry.vertices = [new THREE.Vector3(0, -10, 0), new THREE.Vector3(0, 0, 0)];
+
+	lineAbout = new THREE.Line(geometry.clone(), material);
+	lineAbout.geometry.vertices = [new THREE.Vector3(10, 0, 0), new THREE.Vector3(0, 0, 0)];
+
+	lineProjects = new THREE.Line(geometry.clone(), material);
+	lineProjects.geometry.vertices = [new THREE.Vector3(0, 10, 0), new THREE.Vector3(0, 0, 0)];
+
+	scene.add(lineServices);
+	scene.add(lineContacts);
+	scene.add(lineAbout);
+	scene.add(lineProjects);
 }
 'use strict';
 
@@ -157,10 +195,16 @@ function modelInit() {
 	var loader = new THREE.JSONLoader();
 	loader.load('models/2_brain1-3.json', function (geometry, materials) {
 		material = new THREE.MultiMaterial(materials);
+		material.wireframe = true;
 		// material = new THREE.MeshLambertMaterial();
 		mesh = new THREE.Mesh(geometry, material);
-		mesh.position.set(0, -50, -100);
-		mesh.scale.set(70, 70, 70);
+		mesh.geometry.verticesNeedUpdate = true;
+		mesh.geometry.normalsNeedUpdate = true;
+		mesh.geometry.computeBoundingSphere();
+		mesh.geometry.computeFaceNormals();
+		mesh.geometry.computeVertexNormals();
+		mesh.position.set(0, 0, 0);
+		mesh.scale.set(1, 1, 1);
 		scene.add(mesh);
 	});
 
@@ -187,7 +231,28 @@ function render() {
 		if (mesh.rotation.x < -0.5) {
 			mesh.rotation.x = -0.5;
 		}
+
+		var vectorServices = mesh.geometry.vertices[500].clone();
+		vectorServices.applyMatrix4(mesh.matrixWorld);
+		lineServices.geometry.vertices[1] = vectorServices;
+		lineServices.geometry.verticesNeedUpdate = true;
+
+		var vectorContacts = mesh.geometry.vertices[100].clone();
+		vectorContacts.applyMatrix4(mesh.matrixWorld);
+		lineContacts.geometry.vertices[1] = vectorContacts;
+		lineContacts.geometry.verticesNeedUpdate = true;
+
+		var vectorProjects = mesh.geometry.vertices[2000].clone();
+		vectorProjects.applyMatrix4(mesh.matrixWorld);
+		lineProjects.geometry.vertices[1] = vectorProjects;
+		lineProjects.geometry.verticesNeedUpdate = true;
+
+		var vectorAbout = mesh.geometry.vertices[1000].clone();
+		vectorAbout.applyMatrix4(mesh.matrixWorld);
+		lineAbout.geometry.vertices[1] = vectorAbout;
+		lineAbout.geometry.verticesNeedUpdate = true;
 	}
+
 	renderer.render(scene, camera);
 }
 //# sourceMappingURL=../js/app.js.map

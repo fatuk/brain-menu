@@ -5,8 +5,15 @@ let camera,
 	material,
 	mesh,
 	spotLight,
+	directLight1,
+	directLight2,
 	ambientLight,
-	lightHelper;
+	lightHelper1,
+	lineServices,
+	lineProjects,
+	lineAbout,
+	lineContacts,
+	lightHelper2;
 let angle = 0;
 let width = window.innerWidth;
 let height = window.innerHeight;
@@ -40,8 +47,12 @@ function init() {
 	cameraInit();
 	lightInit();
 	modelInit();
+	lines();
 
-	renderer = new THREE.WebGLRenderer();
+	renderer = new THREE.WebGLRenderer({
+		alpha: true,
+		antialias: false
+	});
 	renderer.setSize(window.innerWidth, window.innerHeight);
 
 	document.body.appendChild(renderer.domElement);

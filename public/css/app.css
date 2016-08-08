@@ -387,6 +387,9 @@ body {
   font-family: sans-serif;
   margin: 0;
   overflow: hidden;
+  background: #2e1711;
+  background: radial-gradient(ellipse at center, #2e1711 0%, #0e0906 100%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#2e1711', endColorstr='#0e0906', GradientType=1);
 }
 .container {
   width: 800px;
