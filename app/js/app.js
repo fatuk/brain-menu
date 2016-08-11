@@ -13,6 +13,9 @@ let camera,
 	lineServices,
 	lineProjects,
 	lineAbout,
+	projector,
+	INTERSECTED,
+	raycaster,
 	lineContacts,
 	lightHelper2;
 let angle = 0;
@@ -39,6 +42,8 @@ const ROTATION_BOUNCE = 0.05;
 const MOUSE_ROTATION_SPEED = 0.008;
 const TOUCH_ROTATION_SPEED = 0.008;
 
+let mouse = new THREE.Vector2(); // create once
+
 init();
 animate();
 
@@ -46,14 +51,18 @@ function init() {
 	// scene = new THREE.Scene();
 
 	// lightInit();
+	raycaster = new THREE.Raycaster(); // create once
 	modelInit();
+	mouseHover();
+
 	// lines();
 
 	renderer = new THREE.WebGLRenderer({
 		alpha: true,
-		antialias: false
+		antialias: true
 	});
 	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.sortObjects = false;
 
 	document.body.appendChild(renderer.domElement);
 
@@ -61,5 +70,11 @@ function init() {
 	document.addEventListener('touchstart', onDocumentTouchStart, false);
 	document.addEventListener('touchmove', onDocumentTouchMove, false);
 	window.addEventListener('resize', onWindowResize, false);
+
+	// initialize object to perform world/screen calculations
+	projector = new THREE.Projector();
+
+	// when the mouse moves, call the given function
+	document.addEventListener('mousemove', onMouseHover, false);
 
 }

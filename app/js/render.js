@@ -18,6 +18,7 @@ function render() {
 		}
 
 
+
 		/*var vectorServices = mesh.geometry.vertices[500].clone();
 		vectorServices.applyMatrix4(mesh.matrixWorld);
 		lineServices.geometry.vertices[1] = vectorServices;

@@ -2,6 +2,7 @@
 
 function animate() {
 	requestAnimationFrame(animate);
+	mouseHover();
 	render();
 }
 'use strict';
@@ -21,6 +22,9 @@ var camera = void 0,
     lineServices = void 0,
     lineProjects = void 0,
     lineAbout = void 0,
+    projector = void 0,
+    INTERSECTED = void 0,
+    raycaster = void 0,
     lineContacts = void 0,
     lightHelper2 = void 0;
 var angle = 0;
@@ -47,6 +51,8 @@ var ROTATION_BOUNCE = 0.05;
 var MOUSE_ROTATION_SPEED = 0.008;
 var TOUCH_ROTATION_SPEED = 0.008;
 
+var mouse = new THREE.Vector2(); // create once
+
 init();
 animate();
 
@@ -54,14 +60,18 @@ function init() {
 	// scene = new THREE.Scene();
 
 	// lightInit();
+	raycaster = new THREE.Raycaster(); // create once
 	modelInit();
+	mouseHover();
+
 	// lines();
 
 	renderer = new THREE.WebGLRenderer({
 		alpha: true,
-		antialias: false
+		antialias: true
 	});
 	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.sortObjects = false;
 
 	document.body.appendChild(renderer.domElement);
 
@@ -69,6 +79,12 @@ function init() {
 	document.addEventListener('touchstart', onDocumentTouchStart, false);
 	document.addEventListener('touchmove', onDocumentTouchMove, false);
 	window.addEventListener('resize', onWindowResize, false);
+
+	// initialize object to perform world/screen calculations
+	projector = new THREE.Projector();
+
+	// when the mouse moves, call the given function
+	document.addEventListener('mousemove', onMouseHover, false);
 }
 'use strict';
 
@@ -91,6 +107,12 @@ function onDocumentMouseDown(event) {
 	targetRotationOnMouseDownX = targetRotationX;
 	mouseYOnMouseDown = event.clientY - windowHalfY;
 	targetRotationOnMouseDownY = targetRotationY;
+}
+
+function onMouseHover(event) {
+	event.preventDefault();
+	mouse.x = event.clientX / window.innerWidth * 2 - 1;
+	mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
 }
 
 function onDocumentMouseMove(event) {
@@ -224,6 +246,43 @@ function modelInit() {
 		mesh = scene.children[3];
 		mesh.rotation.z = 0.1;
 	});
+}
+"use strict";
+
+function mouseHover() {
+
+	// var intersects = raycaster.intersectObjects( scene.children[3].children );
+	if (scene) {
+		camera.updateMatrixWorld();
+
+		/*scene.children[3].children[0].position.x += 0.01;
+  scene.children[3].children[1].position.x += -0.01;
+  scene.children[3].children[2].position.y += 0.01;
+  scene.children[3].children[3].position.z += 0.01;*/
+		// find intersections
+		raycaster.setFromCamera(mouse, camera);
+
+		var intersects = raycaster.intersectObjects(scene.children, true);
+
+		if (intersects.length > 0) {
+
+			if (INTERSECTED != intersects[0].object) {
+
+				if (INTERSECTED) {
+					INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+				}
+
+				INTERSECTED = intersects[0].object;
+				INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+				INTERSECTED.material.emissive.setHex(0xff0000);
+			}
+		} else {
+			if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+			INTERSECTED = null;
+		}
+
+		renderer.render(scene, camera);
+	}
 }
 "use strict";
 
