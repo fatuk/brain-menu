@@ -193,6 +193,22 @@ function lines() {
 }
 'use strict';
 
+function loadProgress(loading) {
+	var $progressContainer = document.getElementsByClassName('js-loader')[0];
+	var total = loading.total;
+	var loaded = loading.loaded;
+	var loadedPercents = Math.round(loaded / total * 100);
+
+	$progressContainer.textContent = loadedPercents + ' %';
+
+	if (loadedPercents === 0) {
+		setTimeout(function () {
+			$progressContainer.className = 'hide';
+		}, 500);
+	}
+}
+'use strict';
+
 function modelInit() {
 	var XHRLoader = new THREE.XHRLoader();
 	var jsonUrl = 'models/app.json';
@@ -206,8 +222,7 @@ function modelInit() {
 		cameraInit();
 		mesh = scene.children[3];
 		mesh.rotation.z = 0.1;
-		console.log(scene.children[3]);
-	});
+	}, loadProgress);
 }
 "use strict";
 
