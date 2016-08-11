@@ -195,6 +195,8 @@ function lines() {
 
 function loadProgress(loading) {
 
+	console.log(loading);
+
 	var $progressContainer = document.getElementsByClassName('js-loader')[0];
 	var total = loading.total;
 	var loaded = loading.loaded;
