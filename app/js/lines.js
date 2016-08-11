@@ -17,6 +17,7 @@ function lines() {
 
 	lineContacts = new THREE.Line(geometry.clone(), material);
 	lineContacts.geometry.vertices = [
+		// new THREE.Vector3(0, -10, 0),
 		new THREE.Vector3(0, -10, 0),
 		new THREE.Vector3(0, 0, 0)
 	];

@@ -12,6 +12,7 @@ var camera = void 0,
     geometry = void 0,
     material = void 0,
     mesh = void 0,
+    pivot = void 0,
     spotLight = void 0,
     directLight1 = void 0,
     directLight2 = void 0,
@@ -50,12 +51,11 @@ init();
 animate();
 
 function init() {
-	scene = new THREE.Scene();
+	// scene = new THREE.Scene();
 
-	cameraInit();
-	lightInit();
+	// lightInit();
 	modelInit();
-	lines();
+	// lines();
 
 	renderer = new THREE.WebGLRenderer({
 		alpha: true,
@@ -176,7 +176,9 @@ function lines() {
 	lineServices.geometry.vertices = [new THREE.Vector3(-10, 1, 0), new THREE.Vector3(0, 0, 0)];
 
 	lineContacts = new THREE.Line(geometry.clone(), material);
-	lineContacts.geometry.vertices = [new THREE.Vector3(0, -10, 0), new THREE.Vector3(0, 0, 0)];
+	lineContacts.geometry.vertices = [
+	// new THREE.Vector3(0, -10, 0),
+	new THREE.Vector3(0, -10, 0), new THREE.Vector3(0, 0, 0)];
 
 	lineAbout = new THREE.Line(geometry.clone(), material);
 	lineAbout.geometry.vertices = [new THREE.Vector3(10, 0, 0), new THREE.Vector3(0, 0, 0)];
@@ -192,31 +194,27 @@ function lines() {
 'use strict';
 
 function modelInit() {
-	var loader = new THREE.JSONLoader();
-	loader.load('models/2_brain1-3.json', function (geometry, materials) {
-		material = new THREE.MultiMaterial(materials);
-		material.wireframe = true;
-		// material = new THREE.MeshLambertMaterial();
-		mesh = new THREE.Mesh(geometry, material);
-		mesh.geometry.verticesNeedUpdate = true;
-		mesh.geometry.normalsNeedUpdate = true;
-		mesh.geometry.computeBoundingSphere();
-		mesh.geometry.computeFaceNormals();
-		mesh.geometry.computeVertexNormals();
-		mesh.position.set(0, 0, 0);
-		mesh.scale.set(1, 1, 1);
-		scene.add(mesh);
-	});
+	var XHRLoader = new THREE.XHRLoader();
+	var jsonUrl = 'models/app.json';
 
-	/*geometry = new THREE.CubeGeometry(100, 100, 100);
- material = new THREE.MeshPhongMaterial();
- mesh = new THREE.Mesh(geometry, material);
- scene.add(mesh);*/
+	XHRLoader.load(jsonUrl, function (text) {
+		var json = JSON.parse(text);
+
+		var loader = new THREE.ObjectLoader();
+
+		scene = loader.parse(json.scene);
+		cameraInit();
+		mesh = scene.children[3];
+		mesh.rotation.z = 0.1;
+		console.log(scene.children[3]);
+	});
 }
 "use strict";
 
 function render() {
 	if (mesh) {
+		// mesh.rotation.y += 0.1;
+		// mesh.rotation.z = 0.1;
 		mesh.rotation.y += (targetRotationX - mesh.rotation.y) * ROTATION_BOUNCE;
 
 		finalRotationY = targetRotationY - mesh.rotation.x;
@@ -232,27 +230,26 @@ function render() {
 			mesh.rotation.x = -0.5;
 		}
 
-		var vectorServices = mesh.geometry.vertices[500].clone();
-		vectorServices.applyMatrix4(mesh.matrixWorld);
-		lineServices.geometry.vertices[1] = vectorServices;
-		lineServices.geometry.verticesNeedUpdate = true;
-
-		var vectorContacts = mesh.geometry.vertices[100].clone();
-		vectorContacts.applyMatrix4(mesh.matrixWorld);
-		lineContacts.geometry.vertices[1] = vectorContacts;
-		lineContacts.geometry.verticesNeedUpdate = true;
-
-		var vectorProjects = mesh.geometry.vertices[2000].clone();
-		vectorProjects.applyMatrix4(mesh.matrixWorld);
-		lineProjects.geometry.vertices[1] = vectorProjects;
-		lineProjects.geometry.verticesNeedUpdate = true;
-
-		var vectorAbout = mesh.geometry.vertices[1000].clone();
-		vectorAbout.applyMatrix4(mesh.matrixWorld);
-		lineAbout.geometry.vertices[1] = vectorAbout;
-		lineAbout.geometry.verticesNeedUpdate = true;
+		/*var vectorServices = mesh.geometry.vertices[500].clone();
+  vectorServices.applyMatrix4(mesh.matrixWorld);
+  lineServices.geometry.vertices[1] = vectorServices;
+  lineServices.geometry.verticesNeedUpdate = true;
+  	var vectorContacts = mesh.geometry.vertices[100].clone();
+  vectorContacts.applyMatrix4(mesh.matrixWorld);
+  lineContacts.geometry.vertices[1] = vectorContacts;
+  lineContacts.geometry.verticesNeedUpdate = true;
+  	var vectorProjects = mesh.geometry.vertices[2000].clone();
+  vectorProjects.applyMatrix4(mesh.matrixWorld);
+  lineProjects.geometry.vertices[1] = vectorProjects;
+  lineProjects.geometry.verticesNeedUpdate = true;
+  	var vectorAbout = mesh.geometry.vertices[1000].clone();
+  vectorAbout.applyMatrix4(mesh.matrixWorld);
+  lineAbout.geometry.vertices[1] = vectorAbout;
+  lineAbout.geometry.verticesNeedUpdate = true;*/
 	}
 
-	renderer.render(scene, camera);
+	if (scene) {
+		renderer.render(scene, camera);
+	}
 }
 //# sourceMappingURL=../js/app.js.map

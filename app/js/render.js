@@ -1,5 +1,7 @@
 function render() {
 	if (mesh) {
+		// mesh.rotation.y += 0.1;
+		// mesh.rotation.z = 0.1;
 		mesh.rotation.y += (targetRotationX - mesh.rotation.y) * ROTATION_BOUNCE;
 
 		finalRotationY = (targetRotationY - mesh.rotation.x);
@@ -16,7 +18,7 @@ function render() {
 		}
 
 
-		var vectorServices = mesh.geometry.vertices[500].clone();
+		/*var vectorServices = mesh.geometry.vertices[500].clone();
 		vectorServices.applyMatrix4(mesh.matrixWorld);
 		lineServices.geometry.vertices[1] = vectorServices;
 		lineServices.geometry.verticesNeedUpdate = true;
@@ -34,10 +36,12 @@ function render() {
 		var vectorAbout = mesh.geometry.vertices[1000].clone();
 		vectorAbout.applyMatrix4(mesh.matrixWorld);
 		lineAbout.geometry.vertices[1] = vectorAbout;
-		lineAbout.geometry.verticesNeedUpdate = true;
+		lineAbout.geometry.verticesNeedUpdate = true;*/
 
 
 	}
 
-	renderer.render(scene, camera);
+	if (scene) {
+		renderer.render(scene, camera);
+	}
 }

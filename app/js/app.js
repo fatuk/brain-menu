@@ -4,6 +4,7 @@ let camera,
 	geometry,
 	material,
 	mesh,
+	pivot,
 	spotLight,
 	directLight1,
 	directLight2,
@@ -42,12 +43,11 @@ init();
 animate();
 
 function init() {
-	scene = new THREE.Scene();
+	// scene = new THREE.Scene();
 
-	cameraInit();
-	lightInit();
+	// lightInit();
 	modelInit();
-	lines();
+	// lines();
 
 	renderer = new THREE.WebGLRenderer({
 		alpha: true,
