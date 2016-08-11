@@ -194,6 +194,7 @@ function lines() {
 'use strict';
 
 function loadProgress(loading) {
+
 	var $progressContainer = document.getElementsByClassName('js-loader')[0];
 	var total = loading.total;
 	var loaded = loading.loaded;
@@ -201,10 +202,8 @@ function loadProgress(loading) {
 
 	$progressContainer.textContent = loadedPercents + ' %';
 
-	if (loadedPercents === 0) {
-		setTimeout(function () {
-			$progressContainer.className = 'hide';
-		}, 500);
+	if (loadedPercents === 100) {
+		$progressContainer.className = 'hide';
 	}
 }
 'use strict';

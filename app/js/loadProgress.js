@@ -1,4 +1,5 @@
 function loadProgress (loading) {
+
 	let $progressContainer = document.getElementsByClassName('js-loader')[0];
 	let total = loading.total;
 	let loaded = loading.loaded;
@@ -6,9 +7,7 @@ function loadProgress (loading) {
 
 	$progressContainer.textContent = `${loadedPercents} %`;
 
-	if (loadedPercents === 0) {
-		setTimeout(function () {
-			$progressContainer.className = 'hide';
-		}, 500)
+	if (loadedPercents === 100) {
+		$progressContainer.className = 'hide';
 	}
 }
