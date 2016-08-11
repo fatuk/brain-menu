@@ -417,6 +417,7 @@ body {
   background: rgba(255, 255, 255, 0.2);
   color: #fff;
   text-shadow: 1px 1px 0 #000;
+  display: none;
 }
 @media (min-width: 1310px) {
   body:before {
