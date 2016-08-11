@@ -11,5 +11,5 @@ function modelInit() {
 		cameraInit();
 		mesh = scene.children[3];
 		mesh.rotation.z = 0.1;
-	}, loadProgress);
+	});
 }
