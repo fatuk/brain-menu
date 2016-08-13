@@ -31,6 +31,9 @@ var angle = 0;
 var width = window.innerWidth;
 var height = window.innerHeight;
 
+var $rotationInfoX = document.getElementsByClassName('js-rotationX')[0];
+var $rotationInfoY = document.getElementsByClassName('js-rotationY')[0];
+
 var targetRotationX = 0;
 var targetRotationOnMouseDownX = 0;
 
@@ -62,7 +65,7 @@ function init() {
 	// lightInit();
 	raycaster = new THREE.Raycaster(); // create once
 	modelInit();
-	mouseHover();
+	// mouseHover();
 
 	// lines();
 
@@ -80,6 +83,7 @@ function init() {
 	document.addEventListener('touchstart', onDocumentTouchStart, false);
 	document.addEventListener('touchmove', onDocumentTouchMove, false);
 	window.addEventListener('resize', onWindowResize, false);
+	document.addEventListener('DOMContentLoaded', onDocumentReady);
 
 	// initialize object to perform world/screen calculations
 	projector = new THREE.Projector();
@@ -88,6 +92,10 @@ function init() {
 	document.addEventListener('mousemove', onMouseHover, false);
 }
 'use strict';
+
+function onDocumentReady() {
+	menu();
+}
 
 function onWindowResize() {
 	width = window.innerWidth;
@@ -233,6 +241,35 @@ function loadProgress(loading) {
 }
 'use strict';
 
+function menu() {
+	var $aboutBtn = document.getElementsByClassName('js-about')[0] || {};
+	var $projectsBtn = document.getElementsByClassName('js-projects')[0] || {};
+	var $servicesBtn = document.getElementsByClassName('js-services')[0] || {};
+	var $contactsBtn = document.getElementsByClassName('js-contacts')[0] || {};
+
+	$aboutBtn.addEventListener('click', function () {
+		console.log('about');
+		var circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
+		targetRotationX = Math.PI * 2 * circleNumber;
+		targetRotationY = 0;
+	});
+	$projectsBtn.addEventListener('click', function () {
+		console.log('projects');
+		targetRotationY = 1;
+	});
+	$servicesBtn.addEventListener('click', function () {
+		console.log('services');
+		var circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
+		targetRotationX = Math.PI * 2 * circleNumber + Math.PI;
+		targetRotationY = 0;
+	});
+	$contactsBtn.addEventListener('click', function () {
+		console.log('contacts');
+		targetRotationY = -0.5;
+	});
+}
+'use strict';
+
 function modelInit() {
 	var XHRLoader = new THREE.XHRLoader();
 	var jsonUrl = 'models/app-brain.json';
@@ -292,6 +329,16 @@ function render() {
 		// mesh.rotation.y += 0.1;
 		// mesh.rotation.z = 0.1;
 		mesh.rotation.y += (targetRotationX - mesh.rotation.y) * ROTATION_BOUNCE;
+
+		// Rotation info
+		$rotationInfoX.textContent = Math.round(mesh.rotation.x * 100) / 100;
+		$rotationInfoY.textContent = Math.round(mesh.rotation.y * 100) / 100;
+
+		/*if (mesh.rotation.y > Math.PI * 2) {
+  	console.log('more');
+  	mesh.rotation.y = 1;
+  	targetRotationY = 1;
+  }*/
 
 		finalRotationY = targetRotationY - mesh.rotation.x;
 		if (mesh.rotation.x <= 1 && mesh.rotation.x >= -1) {

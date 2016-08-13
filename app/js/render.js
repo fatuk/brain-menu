@@ -4,6 +4,16 @@ function render() {
 		// mesh.rotation.z = 0.1;
 		mesh.rotation.y += (targetRotationX - mesh.rotation.y) * ROTATION_BOUNCE;
 
+		// Rotation info
+		$rotationInfoX.textContent = Math.round(mesh.rotation.x * 100) / 100;
+		$rotationInfoY.textContent = Math.round(mesh.rotation.y * 100) / 100;
+
+		/*if (mesh.rotation.y > Math.PI * 2) {
+			console.log('more');
+			mesh.rotation.y = 1;
+			targetRotationY = 1;
+		}*/
+
 		finalRotationY = (targetRotationY - mesh.rotation.x);
 		if (mesh.rotation.x <= 1 && mesh.rotation.x >= -1) {
 			mesh.rotation.x += finalRotationY * ROTATION_BOUNCE;

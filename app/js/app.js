@@ -22,6 +22,9 @@ let angle = 0;
 let width = window.innerWidth;
 let height = window.innerHeight;
 
+let $rotationInfoX = document.getElementsByClassName('js-rotationX')[0];
+let $rotationInfoY = document.getElementsByClassName('js-rotationY')[0];
+
 let targetRotationX = 0;
 let targetRotationOnMouseDownX = 0;
 
@@ -53,7 +56,7 @@ function init() {
 	// lightInit();
 	raycaster = new THREE.Raycaster(); // create once
 	modelInit();
-	mouseHover();
+	// mouseHover();
 
 	// lines();
 
@@ -71,6 +74,7 @@ function init() {
 	document.addEventListener('touchstart', onDocumentTouchStart, false);
 	document.addEventListener('touchmove', onDocumentTouchMove, false);
 	window.addEventListener('resize', onWindowResize, false);
+	document.addEventListener('DOMContentLoaded', onDocumentReady);
 
 	// initialize object to perform world/screen calculations
 	projector = new THREE.Projector();

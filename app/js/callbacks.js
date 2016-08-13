@@ -1,3 +1,7 @@
+function onDocumentReady () {
+	menu();
+}
+
 function onWindowResize() {
 	width = window.innerWidth;
 	height = window.innerHeight;
