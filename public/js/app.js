@@ -1,7 +1,7 @@
 "use strict";
 
 function animate() {
-	requestAnimationFrame(animate);
+	animationLoop = requestAnimationFrame(animate);
 	// mouseHover();
 	render();
 }
@@ -26,6 +26,7 @@ var camera = void 0,
     INTERSECTED = void 0,
     raycaster = void 0,
     lineContacts = void 0,
+    animationLoop = void 0,
     lightHelper2 = void 0;
 var angle = 0;
 var width = window.innerWidth;
@@ -66,6 +67,13 @@ function init() {
 	raycaster = new THREE.Raycaster(); // create once
 	modelInit();
 	// mouseHover();
+
+	setTimeout(function () {
+		cancelAnimationFrame(animationLoop);
+		setTimeout(function () {
+			animate();
+		}, 2000);
+	}, 10000);
 
 	// lines();
 

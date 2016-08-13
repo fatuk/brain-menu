@@ -17,6 +17,7 @@ let camera,
 	INTERSECTED,
 	raycaster,
 	lineContacts,
+	animationLoop,
 	lightHelper2;
 let angle = 0;
 let width = window.innerWidth;
@@ -57,6 +58,13 @@ function init() {
 	raycaster = new THREE.Raycaster(); // create once
 	modelInit();
 	// mouseHover();
+
+	setTimeout(function () {
+		cancelAnimationFrame(animationLoop);
+		setTimeout(function () {
+			animate();
+		}, 2000)
+	}, 10000);
 
 	// lines();
 
