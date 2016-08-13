@@ -60,6 +60,7 @@ gulp.task('copyAssets', () => {
 gulp.task('handlebars', () => {
 	templateData.timestamp = +new Date();
 	return gulp.src('app/templates/*.handlebars')
+		.pipe(plumber())
 		.pipe(handlebars(templateData, {
 			ignorePartials: true, //ignores the unknown partials
 			partials: {
@@ -83,6 +84,7 @@ gulp.task('handlebars', () => {
  ******************************/
 gulp.task('pluginsConcat', () => {
 	return gulp.src(bowerFiles)
+		.pipe(plumber())
 		.pipe(concat('plugins.min.js'))
 		.pipe(gulp.dest('public/js'));
 });
@@ -92,6 +94,7 @@ gulp.task('pluginsConcat', () => {
  ******************************/
 gulp.task('pluginsConcatBuild', () => {
 	return gulp.src(bowerFiles)
+		.pipe(plumber())
 		.pipe(concat('plugins.min.js'))
 		.pipe(uglify())
 		.pipe(gulp.dest('public/js'));

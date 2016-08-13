@@ -506,53 +506,115 @@ body {
   width: 70%;
   float: left;
 }
+.modal {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  margin-left: -200px;
+  color: #fff;
+  width: 400px;
+  text-align: center;
+  z-index: 100;
+}
+.modal__title {
+  font-size: 36px;
+  margin: 0;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+.modal__text {
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: .7;
+}
+.btn {
+  background: #ccc;
+  padding: 0 20px;
+  border: none;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  border-radius: 2px;
+  color: #555;
+  transition: background .3s;
+  text-decoration: none;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+.btn__text {
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  font-size: 12px;
+  vertical-align: middle;
+}
+.btn:hover {
+  background: #dbdbdb;
+}
+.btn:active {
+  transition: none;
+  background: #ccc;
+}
+.btn_wide {
+  width: 100%;
+}
+.btn_upper {
+  text-transform: uppercase;
+}
+.btn_big {
+  text-transform: uppercase;
+}
+.btn_big .btn__text {
+  height: 60px;
+  line-height: 60px;
+}
+.btn_big .fa {
+  height: 60px;
+  line-height: 60px;
+}
+.btn_transparent {
+  background: none;
+  border: none;
+}
+.btn_red {
+  background: #ee0013;
+  color: #fff;
+}
+.btn_red:hover {
+  background: #d90000;
+}
+.btn_red:active {
+  transition: none;
+  background: #ee0013;
+}
+.btn .fa {
+  color: #555;
+  font-size: 18px;
+  height: 40px;
+  line-height: 40px;
+  vertical-align: middle;
+}
+.btn .fa:before {
+  vertical-align: middle;
+}
+.btn .fa + .btn__text {
+  margin-left: 3px;
+}
+.overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
 @media (min-width: 1310px) {
-  body:before {
-    content: 'Desktop';
-    position: fixed;
-    left: 10px;
-    bottom: 10px;
-    display: inline-block;
-    padding: 10px;
-    background: orange;
-    color: #fff;
-  }
 }
 @media (max-width: 1310px) {
-  body:before {
-    content: 'Tablet';
-    position: fixed;
-    left: 10px;
-    bottom: 10px;
-    display: inline-block;
-    padding: 10px;
-    background: orange;
-    color: #fff;
-  }
 }
 @media (max-width: 990px) {
-  body:before {
-    content: 'Portreit';
-    position: fixed;
-    left: 10px;
-    bottom: 10px;
-    display: inline-block;
-    padding: 10px;
-    background: orange;
-    color: #fff;
-  }
 }
 @media (max-width: 670px) {
-  body:before {
-    content: 'Mobile';
-    position: fixed;
-    left: 10px;
-    bottom: 10px;
-    display: inline-block;
-    padding: 10px;
-    background: orange;
-    color: #fff;
-  }
 }
 
 /*# sourceMappingURL=../css/app.css.map */

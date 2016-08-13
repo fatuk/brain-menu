@@ -1,6 +1,6 @@
 @btn-bg: #ccc;
 @btn-text: #555;
-@btn-height: 32px;
+@btn-height: 40px;
 
 .btn {
 	background: @btn-bg;
@@ -9,14 +9,16 @@
 	display: inline-block;
 	vertical-align: middle;
 	cursor: pointer;
+	border-radius: 2px;
 	color: @btn-text;
 	transition: background .3s;
 	text-decoration: none;
+	box-shadow: 0 0 4px rgba(0,0,0,.2);
 	&__text {
 		display: inline-block;
 		height: @btn-height;
 		line-height: @btn-height;
-		font-size: 20px;
+		font-size: 12px;
 		vertical-align: middle;
 	}
 	&:hover {
@@ -46,6 +48,17 @@
 	&_transparent {
 		background: none;
 		border: none;
+	}
+	&_red {
+		background: #ee0013;
+		color: #fff;
+		&:hover {
+			.rgba(background, #ee0013, 10%);
+		}
+		&:active {
+			transition: none;
+			background: #ee0013;
+		}
 	}
 	.fa {
 		color: @btn-text;

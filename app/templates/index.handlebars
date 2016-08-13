@@ -18,44 +18,9 @@
 	<div id="brain"></div>
 	<!-- Loader -->
 	<div class="loader js-loader"></div>
-	<!-- Info -->
-	<div class="info">
-		<!-- Rotation X -->
-		<div class="info__row">
-			<div class="info__key">
-				Rotation X:
-			</div>
-			<div class="info__value js-rotationX">
-				0
-			</div>
-		</div>
-		<!-- Rotation Y -->
-		<div class="info__row">
-			<div class="info__key">
-				Rotation Y:
-			</div>
-			<div class="info__value js-rotationY">
-				0
-			</div>
-		</div>
-	</div>
-	<!-- Menu -->
-	<nav class="menu">
-		<ul class="menu__list">
-			<li class="menu__item menu__item_projects js-projects">
-				Проекты
-			</li>
-			<li class="menu__item menu__item_services js-services">
-				Услуги
-			</li>
-			<li class="menu__item menu__item_contacts js-contacts">
-				Контакты
-			</li>
-			<li class="menu__item menu__item_about js-about">
-				О компании
-			</li>
-		</ul>
-	</nav>
+	{{>info}}
+	{{>menu}}
+	{{>modal}}
 	<!--
 	<script src="js/plugins.min.js"></script>
 	<script src="libs/OrbitControls.js?v={{timestamp}}"></script>
