@@ -384,7 +384,7 @@ textarea {
   font-size: 0;
 }
 body {
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 0;
   overflow: hidden;
   background: #2e1711;
@@ -418,6 +418,57 @@ body {
   color: #fff;
   text-shadow: 1px 1px 0 #000;
   display: none;
+}
+.menu__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.menu__item {
+  text-transform: uppercase;
+  position: absolute;
+  color: #e1dfd5;
+  font-size: 12px;
+  font-weight: 300;
+  display: inline-block;
+  cursor: pointer;
+  transition: opacity .3s;
+  z-index: 5;
+}
+.menu__item:hover {
+  opacity: .7;
+}
+.menu__item:active {
+  transition: none;
+  opacity: 1;
+}
+.menu__item_projects {
+  top: 40px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.menu__item_about {
+  right: 5px;
+  top: 50%;
+  -webkit-transform: translateY(-50%) rotate(-90deg);
+  -ms-transform: translateY(-50%) rotate(-90deg);
+  transform: translateY(-50%) rotate(-90deg);
+}
+.menu__item_contacts {
+  bottom: 40px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+}
+.menu__item_services {
+  left: 25px;
+  top: 50%;
+  -webkit-transform: translateY(-50%) rotate(-90deg);
+  -ms-transform: translateY(-50%) rotate(-90deg);
+  transform: translateY(-50%) rotate(-90deg);
 }
 @media (min-width: 1310px) {
   body:before {

@@ -2,7 +2,7 @@
 
 function animate() {
 	requestAnimationFrame(animate);
-	mouseHover();
+	// mouseHover();
 	render();
 }
 'use strict';
@@ -73,7 +73,8 @@ function init() {
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.sortObjects = false;
 
-	document.body.appendChild(renderer.domElement);
+	var container = document.getElementById('brain');
+	container.appendChild(renderer.domElement);
 
 	document.addEventListener('mousedown', onDocumentMouseDown, false);
 	document.addEventListener('touchstart', onDocumentTouchStart, false);
@@ -234,7 +235,7 @@ function loadProgress(loading) {
 
 function modelInit() {
 	var XHRLoader = new THREE.XHRLoader();
-	var jsonUrl = 'models/app.json';
+	var jsonUrl = 'models/app-brain.json';
 
 	XHRLoader.load(jsonUrl, function (text) {
 		var json = JSON.parse(text);

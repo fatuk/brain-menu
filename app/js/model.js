@@ -1,6 +1,6 @@
 function modelInit() {
 	let XHRLoader = new THREE.XHRLoader();
-	let jsonUrl = 'models/app.json';
+	let jsonUrl = 'models/app-brain.json';
 
 	XHRLoader.load(jsonUrl, function (text) {
 		let json = JSON.parse(text);

@@ -1,5 +1,5 @@
 function animate() {
 	requestAnimationFrame(animate);
-	mouseHover();
+	// mouseHover();
 	render();
 }

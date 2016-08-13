@@ -64,7 +64,8 @@ function init() {
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.sortObjects = false;
 
-	document.body.appendChild(renderer.domElement);
+	let container = document.getElementById('brain');
+	container.appendChild(renderer.domElement);
 
 	document.addEventListener('mousedown', onDocumentMouseDown, false);
 	document.addEventListener('touchstart', onDocumentTouchStart, false);
