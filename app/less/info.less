@@ -1,0 +1,27 @@
+.info {
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	background: rgba(255,255,255,0.3);
+	width: 200px;
+	font-size: 10px;
+	padding: 10px;
+	color: #fff;
+	&__row {
+		margin-bottom: 10px;
+		display: inline-block;
+		width: 100%;
+		.clearfix();
+		&:last-child {
+			margin-bottom: 0;
+		}
+	}
+	&__key {
+		width: 30%;
+		float: left;
+	}
+	&__value {
+		width: 70%;
+		float: left;
+	}
+}
