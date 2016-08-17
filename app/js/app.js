@@ -18,7 +18,8 @@ let camera,
 	raycaster,
 	lineContacts,
 	animationLoop,
-	lightHelper2;
+	lightHelper2,
+	myModal;
 let angle = 0;
 let width = window.innerWidth;
 let height = window.innerHeight;
@@ -59,12 +60,12 @@ function init() {
 	modelInit();
 	// mouseHover();
 
-	setTimeout(function () {
+	/*setTimeout(function () {
 		cancelAnimationFrame(animationLoop);
 		setTimeout(function () {
 			animate();
 		}, 2000)
-	}, 10000);
+	}, 10000);*/
 
 	// lines();
 

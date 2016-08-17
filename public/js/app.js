@@ -27,7 +27,8 @@ var camera = void 0,
     raycaster = void 0,
     lineContacts = void 0,
     animationLoop = void 0,
-    lightHelper2 = void 0;
+    lightHelper2 = void 0,
+    myModal = void 0;
 var angle = 0;
 var width = window.innerWidth;
 var height = window.innerHeight;
@@ -68,12 +69,12 @@ function init() {
 	modelInit();
 	// mouseHover();
 
-	setTimeout(function () {
-		cancelAnimationFrame(animationLoop);
-		setTimeout(function () {
-			animate();
-		}, 2000);
-	}, 10000);
+	/*setTimeout(function () {
+ 	cancelAnimationFrame(animationLoop);
+ 	setTimeout(function () {
+ 		animate();
+ 	}, 2000)
+ }, 10000);*/
 
 	// lines();
 
@@ -250,32 +251,131 @@ function loadProgress(loading) {
 'use strict';
 
 function menu() {
-	var $aboutBtn = document.getElementsByClassName('js-about')[0] || {};
-	var $projectsBtn = document.getElementsByClassName('js-projects')[0] || {};
-	var $servicesBtn = document.getElementsByClassName('js-services')[0] || {};
-	var $contactsBtn = document.getElementsByClassName('js-contacts')[0] || {};
+	var $aboutBtn = $('.js-about') || {};
+	var $projectsBtn = $('.js-projects') || {};
+	var $servicesBtn = $('.js-services') || {};
+	var $contactsBtn = $('.js-contacts') || {};
 
-	$aboutBtn.addEventListener('click', function () {
+	$aboutBtn.on('click', function () {
 		console.log('about');
 		var circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
 		targetRotationX = Math.PI * 2 * circleNumber;
 		targetRotationY = 0;
+
+		var data = {
+			id: 'about',
+			title: 'О компании',
+			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
+			link: "#"
+		};
+		myModal.setData(data).open();
 	});
-	$projectsBtn.addEventListener('click', function () {
+	$projectsBtn.on('click', function () {
 		console.log('projects');
 		targetRotationY = 1;
+
+		var data = {
+			id: 'projects',
+			title: 'Проекты',
+			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
+			link: "#"
+		};
+		myModal.setData(data).open();
 	});
-	$servicesBtn.addEventListener('click', function () {
+	$servicesBtn.on('click', function () {
 		console.log('services');
 		var circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
 		targetRotationX = Math.PI * 2 * circleNumber + Math.PI;
 		targetRotationY = 0;
+
+		var data = {
+			id: 'services',
+			title: 'Услуги',
+			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
+			link: "#"
+		};
+		myModal.setData(data).open();
 	});
-	$contactsBtn.addEventListener('click', function () {
+	$contactsBtn.on('click', function () {
 		console.log('contacts');
 		targetRotationY = -0.5;
+
+		var data = {
+			id: 'contacts',
+			title: 'Контакты',
+			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
+			link: "#"
+		};
+		myModal.setData(data).open();
 	});
 }
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Modal = function () {
+	function Modal() {
+		_classCallCheck(this, Modal);
+
+		this.data = this.data || {};
+	}
+
+	_createClass(Modal, [{
+		key: 'setData',
+		value: function setData(data) {
+			this.data = data;
+			return this;
+		}
+	}, {
+		key: 'open',
+		value: function open() {
+			var _this = this;
+
+			var $body = $('body');
+			this.template = '\n<div id="' + this.data.id + '" class="modal js-modal animated fadeIn">\n\t<!-- Modal -->\n\t<h2 class="modal__title">\n\t\t' + this.data.title + '\n\t</h2>\n\t<p class="modal__text">\n\t\t' + this.data.text + '\n\t</p>\n\t<a href="' + this.data.link + '" class="btn btn_red btn_upper">\n\t\t<span class="btn__text">\n\t\t\tПодробнее\n\t\t</span>\n\t</a>\n</div>\n<div class="animated fadeIn overlay js-overlay"></div>\n';
+			if (!$body.find('#' + this.data.id).length) {
+				this.destroy();
+				$body.append(this.template);
+				this.$overlay = $('.js-overlay');
+				this.$modal = $('.js-modal');
+				this.$overlay.on('click', function () {
+					_this.close();
+				});
+			}
+			return this;
+		}
+	}, {
+		key: 'close',
+		value: function close() {
+			var _this2 = this;
+
+			this.$modal.addClass('fadeOut');
+			this.$overlay.addClass('fadeOut');
+
+			setTimeout(function () {
+				_this2.destroy();
+			}, 1000);
+		}
+	}, {
+		key: 'destroy',
+		value: function destroy() {
+			if (this.$overlay && this.$modal) {
+				this.$overlay.off('click');
+				this.$overlay.remove();
+				this.$modal.remove();
+				this.data = {};
+			}
+		}
+	}]);
+
+	return Modal;
+}();
+
+;
+
+myModal = new Modal();
 'use strict';
 
 function modelInit() {
