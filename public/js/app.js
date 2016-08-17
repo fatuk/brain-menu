@@ -29,6 +29,9 @@ var camera = void 0,
     animationLoop = void 0,
     lightHelper2 = void 0,
     myModal = void 0;
+
+var currentState = 'about';
+
 var angle = 0;
 var width = window.innerWidth;
 var height = window.innerHeight;
@@ -255,6 +258,7 @@ function menu() {
 	var $projectsBtn = $('.js-projects') || {};
 	var $servicesBtn = $('.js-services') || {};
 	var $contactsBtn = $('.js-contacts') || {};
+	var delay = 1000;
 
 	$aboutBtn.on('click', function () {
 		console.log('about');
@@ -268,7 +272,11 @@ function menu() {
 			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
 			link: "#"
 		};
-		myModal.setData(data).open();
+
+		setTimeout(function () {
+			cancelAnimationFrame(animationLoop);
+			myModal.setData(data).open();
+		}, delay);
 	});
 	$projectsBtn.on('click', function () {
 		console.log('projects');
@@ -280,7 +288,10 @@ function menu() {
 			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
 			link: "#"
 		};
-		myModal.setData(data).open();
+		setTimeout(function () {
+			cancelAnimationFrame(animationLoop);
+			myModal.setData(data).open();
+		}, delay);
 	});
 	$servicesBtn.on('click', function () {
 		console.log('services');
@@ -294,7 +305,10 @@ function menu() {
 			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
 			link: "#"
 		};
-		myModal.setData(data).open();
+		setTimeout(function () {
+			cancelAnimationFrame(animationLoop);
+			myModal.setData(data).open();
+		}, delay);
 	});
 	$contactsBtn.on('click', function () {
 		console.log('contacts');
@@ -306,7 +320,10 @@ function menu() {
 			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
 			link: "#"
 		};
-		myModal.setData(data).open();
+		setTimeout(function () {
+			cancelAnimationFrame(animationLoop);
+			myModal.setData(data).open();
+		}, delay);
 	});
 }
 'use strict';
@@ -353,6 +370,7 @@ var Modal = function () {
 
 			this.$modal.addClass('fadeOut');
 			this.$overlay.addClass('fadeOut');
+			animate();
 
 			setTimeout(function () {
 				_this2.destroy();

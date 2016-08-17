@@ -3,6 +3,7 @@ function menu () {
 	let $projectsBtn = $('.js-projects') || {};
 	let $servicesBtn = $('.js-services') || {};
 	let $contactsBtn = $('.js-contacts') || {};
+	let delay = 1000;
 
 	$aboutBtn.on('click', () => {
 		console.log('about');
@@ -16,7 +17,11 @@ function menu () {
 			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
 			link: "#"
 		};
-		myModal.setData(data).open();
+
+		setTimeout(() => {
+			cancelAnimationFrame(animationLoop);
+			myModal.setData(data).open();
+		}, delay);
 	});
 	$projectsBtn.on('click', () => {
 		console.log('projects');
@@ -28,7 +33,10 @@ function menu () {
 			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
 			link: "#"
 		};
-		myModal.setData(data).open();
+		setTimeout(() => {
+			cancelAnimationFrame(animationLoop);
+			myModal.setData(data).open();
+		}, delay);
 	});
 	$servicesBtn.on('click', () => {
 		console.log('services');
@@ -42,7 +50,10 @@ function menu () {
 			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
 			link: "#"
 		};
-		myModal.setData(data).open();
+		setTimeout(() => {
+			cancelAnimationFrame(animationLoop);
+			myModal.setData(data).open();
+		}, delay);
 	});
 	$contactsBtn.on('click', () => {
 		console.log('contacts');
@@ -54,6 +65,9 @@ function menu () {
 			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
 			link: "#"
 		};
-		myModal.setData(data).open();
+		setTimeout(() => {
+			cancelAnimationFrame(animationLoop);
+			myModal.setData(data).open();
+		}, delay);
 	});
 }

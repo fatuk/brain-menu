@@ -39,6 +39,7 @@ class Modal {
 	close() {
 		this.$modal.addClass('fadeOut');
 		this.$overlay.addClass('fadeOut');
+		animate();
 
 		setTimeout(() => {
 			this.destroy();

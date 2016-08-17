@@ -20,6 +20,9 @@ let camera,
 	animationLoop,
 	lightHelper2,
 	myModal;
+
+let currentState = 'about';
+
 let angle = 0;
 let width = window.innerWidth;
 let height = window.innerHeight;
