@@ -2,7 +2,7 @@
 
 function animate() {
 	animationLoop = requestAnimationFrame(animate);
-	// mouseHover();
+	mouseHover();
 	render();
 }
 'use strict';
@@ -31,6 +31,8 @@ var camera = void 0,
     myModal = void 0;
 
 var currentState = 'about';
+// Texture images
+var brainTextures = {};
 
 var angle = 0;
 var width = window.innerWidth;
@@ -69,7 +71,7 @@ function init() {
 
 	// lightInit();
 	raycaster = new THREE.Raycaster(); // create once
-	modelInit();
+	// modelInit();
 	// mouseHover();
 
 	/*setTimeout(function () {
@@ -396,19 +398,158 @@ var Modal = function () {
 myModal = new Modal();
 'use strict';
 
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var BrainModel = function () {
+	function BrainModel() {
+		_classCallCheck(this, BrainModel);
+
+		this.imageLoader = new THREE.ImageLoader();
+		this.XHRLoader = new THREE.XHRLoader();
+		this.jsonUrl = 'models/new-brain/test-groups.json';
+		this.loadedImages = [];
+		this.loadImages();
+	}
+
+	_createClass(BrainModel, [{
+		key: 'loadImages',
+		value: function loadImages() {
+			var _this = this;
+
+			var promiseArray = [],
+			    path = 'models/new-brain/';
+
+			var texturesList = [{
+				url: '1_Base_Color-min.png',
+				name: '1_Base_Color'
+			}, {
+				url: '1_Metallic-min.png',
+				name: '1_Metallic'
+			}, {
+				url: '1_Normal_OpenGL-min.png',
+				name: '1_Normal_OpenGL'
+			}, {
+				url: '1_Roughness-min.png',
+				name: '1_Roughness'
+			}, {
+				url: '2_Base_Color-min.png',
+				name: '2_Base_Color'
+			}, {
+				url: '2_Metallic-min.png',
+				name: '2_Metallic'
+			}, {
+				url: '2_Normal_OpenGL-min.png',
+				name: '2_Normal_OpenGL'
+			}, {
+				url: '2_Roughness-min.png',
+				name: '2_Roughness'
+			}, {
+				url: '3_Base_Color-min.png',
+				name: '3_Base_Color'
+			}, {
+				url: '3_Normal_OpenGL-min.png',
+				name: '3_Normal_OpenGL'
+			}, {
+				url: '4_Base_Color-min.png',
+				name: '4_Base_Color'
+			}, {
+				url: '4_Normal_OpenGL-min.png',
+				name: '4_Normal_OpenGL'
+			}];
+
+			texturesList.forEach(function (item, index) {
+
+				/*this.imageLoader.load(url, function (error, text) {
+    	if (error) {
+    		deferred.reject(new Error(error));
+    	} else {
+    		deferred.resolve(text);
+    	}
+    });*/
+
+				promiseArray.push(new Promise(function (resolve, reject) {
+					_this.imageLoader.load(path + item.url, function (image) {
+						_this.loadedImages[item.name] = image;
+						resolve(image);
+					});
+				}));
+			});
+
+			Promise.all(promiseArray).then(function (res) {
+				console.log(_this.loadedImages['3_Normal_OpenGL']);
+			}, function (err) {
+				console.log(err);
+			});
+
+			// console.log(promises);
+			/*Q.allSettled([promises]).then((res) => {
+   	console.log(res);
+   });*/
+			/*deferred[0].promise.then(() => {
+   	console.log(this.loadedImages['1_Base_Color']);
+   });*/
+		}
+	}, {
+		key: 'loadImage',
+		value: function loadImage(url) {
+			/*var deferred = Q.defer();
+   this.imageLoader.load(url, function (error, text) {
+   	if (error) {
+   		deferred.reject(new Error(error));
+   	} else {
+   		deferred.resolve(text);
+   	}
+   });
+   return deferred.promise;*/
+
+			var deferred = Q.defer();
+			this.imageLoader.load(url, function (res, a, b) {
+				console.log(res, a, b);
+				// this.loadedImages[item.name] = res;
+				deferred.resolve(res);
+			}, function (err) {
+				deferred.reject(err);
+			});
+			return deferred.promise;
+		}
+	}, {
+		key: 'loadScene',
+		value: function loadScene() {}
+	}]);
+
+	return BrainModel;
+}();
+
+var brainModel = new BrainModel();
+
 function modelInit() {
 	var XHRLoader = new THREE.XHRLoader();
-	var jsonUrl = 'models/app-brain.json';
+	var jsonUrl = 'models/new-brain/test-groups.json';
 
-	XHRLoader.load(jsonUrl, function (text) {
-		var json = JSON.parse(text);
+	var imageLoader = new THREE.ImageLoader();
+	imageLoader.load(
+	// resource URL
+	'models/new-brain/1_Base_Color-min.png',
+	// Function when resource is loaded
+	function (image) {
+		XHRLoader.load(jsonUrl, function (text) {
+			var json = JSON.parse(text);
 
-		var loader = new THREE.ObjectLoader();
+			var loader = new THREE.ObjectLoader();
 
-		scene = loader.parse(json.scene);
-		cameraInit();
-		mesh = scene.children[3];
-		mesh.rotation.z = 0.1;
+			scene = loader.parse(json.scene);
+			console.log(scene.children[1].children[1]);
+			scene.children[1].children[0].material.map.image = image;
+			scene.children[1].children[1].material.map.image = image;
+
+			cameraInit();
+
+			console.log(scene.children[1].children[0].material.map);
+			mesh = scene.children[1];
+			mesh.rotation.z = 0.1;
+		});
 	});
 }
 "use strict";

@@ -22,6 +22,8 @@ let camera,
 	myModal;
 
 let currentState = 'about';
+// Texture images
+let brainTextures = {};
 
 let angle = 0;
 let width = window.innerWidth;
@@ -60,7 +62,7 @@ function init() {
 
 	// lightInit();
 	raycaster = new THREE.Raycaster(); // create once
-	modelInit();
+	// modelInit();
 	// mouseHover();
 
 	/*setTimeout(function () {
