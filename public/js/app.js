@@ -460,15 +460,6 @@ var BrainModel = function () {
 			}];
 
 			texturesList.forEach(function (item, index) {
-
-				/*this.imageLoader.load(url, function (error, text) {
-    	if (error) {
-    		deferred.reject(new Error(error));
-    	} else {
-    		deferred.resolve(text);
-    	}
-    });*/
-
 				promiseArray.push(new Promise(function (resolve, reject) {
 					_this.imageLoader.load(path + item.url, function (image) {
 						_this.loadedImages[item.name] = image;
@@ -479,44 +470,34 @@ var BrainModel = function () {
 
 			Promise.all(promiseArray).then(function (res) {
 				console.log(_this.loadedImages['3_Normal_OpenGL']);
+				_this.loadScene();
 			}, function (err) {
 				console.log(err);
 			});
-
-			// console.log(promises);
-			/*Q.allSettled([promises]).then((res) => {
-   	console.log(res);
-   });*/
-			/*deferred[0].promise.then(() => {
-   	console.log(this.loadedImages['1_Base_Color']);
-   });*/
-		}
-	}, {
-		key: 'loadImage',
-		value: function loadImage(url) {
-			/*var deferred = Q.defer();
-   this.imageLoader.load(url, function (error, text) {
-   	if (error) {
-   		deferred.reject(new Error(error));
-   	} else {
-   		deferred.resolve(text);
-   	}
-   });
-   return deferred.promise;*/
-
-			var deferred = Q.defer();
-			this.imageLoader.load(url, function (res, a, b) {
-				console.log(res, a, b);
-				// this.loadedImages[item.name] = res;
-				deferred.resolve(res);
-			}, function (err) {
-				deferred.reject(err);
-			});
-			return deferred.promise;
 		}
 	}, {
 		key: 'loadScene',
-		value: function loadScene() {}
+		value: function loadScene() {
+			var _this2 = this;
+
+			var XHRLoader = new THREE.XHRLoader();
+			var jsonUrl = 'models/new-brain/test-groups.json';
+
+			XHRLoader.load(jsonUrl, function (text) {
+				var json = JSON.parse(text);
+				var loader = new THREE.ObjectLoader();
+
+				scene = loader.parse(json.scene);
+				scene.children[1].children[0].material.map.image = _this2.loadedImages['3_Normal_OpenGL'];
+				scene.children[1].children[1].material.map.image = _this2.loadedImages['4_Base_Color'];
+
+				cameraInit();
+
+				// console.log(scene.children[1].children[0].material.map);
+				mesh = scene.children[1];
+				mesh.rotation.z = 0.1;
+			});
+		}
 	}]);
 
 	return BrainModel;
@@ -528,28 +509,20 @@ function modelInit() {
 	var XHRLoader = new THREE.XHRLoader();
 	var jsonUrl = 'models/new-brain/test-groups.json';
 
-	var imageLoader = new THREE.ImageLoader();
-	imageLoader.load(
-	// resource URL
-	'models/new-brain/1_Base_Color-min.png',
-	// Function when resource is loaded
-	function (image) {
-		XHRLoader.load(jsonUrl, function (text) {
-			var json = JSON.parse(text);
+	XHRLoader.load(jsonUrl, function (text) {
+		var json = JSON.parse(text);
+		var loader = new THREE.ObjectLoader();
 
-			var loader = new THREE.ObjectLoader();
+		scene = loader.parse(json.scene);
+		console.log(scene.children[1].children[1]);
+		scene.children[1].children[0].material.map.image = image;
+		scene.children[1].children[1].material.map.image = image;
 
-			scene = loader.parse(json.scene);
-			console.log(scene.children[1].children[1]);
-			scene.children[1].children[0].material.map.image = image;
-			scene.children[1].children[1].material.map.image = image;
+		cameraInit();
 
-			cameraInit();
-
-			console.log(scene.children[1].children[0].material.map);
-			mesh = scene.children[1];
-			mesh.rotation.z = 0.1;
-		});
+		console.log(scene.children[1].children[0].material.map);
+		mesh = scene.children[1];
+		mesh.rotation.z = 0.1;
 	});
 }
 "use strict";
