@@ -2,6 +2,18 @@ function render() {
 	if (mesh) {
 		// mesh.rotation.y += 0.1;
 		// mesh.rotation.z = 0.1;
+
+		// G1
+		brainModel.gearsGroup[0].rotation.z += 0.015 / 4;
+		// G2
+		brainModel.gearsGroup[3].rotation.z -= 0.05 / 4;
+		// G3
+		brainModel.gearsGroup[5].rotation.z -= 0.02 / 4;
+		// G4
+		brainModel.gearsGroup[2].rotation.z += 0.05 / 4;
+		// G5
+		brainModel.gearsGroup[4].rotation.z += 0.05 / 4;
+
 		mesh.rotation.y += (targetRotationX - mesh.rotation.y) * ROTATION_BOUNCE;
 
 		// Rotation info

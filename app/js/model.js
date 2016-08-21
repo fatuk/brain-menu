@@ -96,7 +96,7 @@ class BrainModel {
 			scene = loader.parse(json.scene);
 			let mainGroup = scene.children[1];
 			let brainGroup = mainGroup.children[0];
-			let gearsGroup = mainGroup.children[1].children;
+			this.gearsGroup = mainGroup.children[1].children;
 			let screwGroup = mainGroup.children[2];
 			let brain4 = brainGroup.children[0];
 			let brain3 = brainGroup.children[1];
@@ -104,11 +104,11 @@ class BrainModel {
 			let brain1 = brainGroup.children[3];
 
 			// Gear 0
-			gearsGroup[0].material.map.image = this.loadedImages['gears_Base_Color'];
-			gearsGroup[0].material.normalMap.image = this.loadedImages['gears_Normal_OpenGL'];
-			gearsGroup[0].material.roughnessMap.image = this.loadedImages['gears_Roughness'];
-			gearsGroup[0].material.metalnessMap.image = this.loadedImages['gears_Metallic'];
-			gearsGroup[0].material.envMap.image = this.loadedImages['environment'];
+			this.gearsGroup[0].material.map.image = this.loadedImages['gears_Base_Color'];
+			this.gearsGroup[0].material.normalMap.image = this.loadedImages['gears_Normal_OpenGL'];
+			this.gearsGroup[0].material.roughnessMap.image = this.loadedImages['gears_Roughness'];
+			this.gearsGroup[0].material.metalnessMap.image = this.loadedImages['gears_Metallic'];
+			this.gearsGroup[0].material.envMap.image = this.loadedImages['environment'];
 
 			/*gearsGroup[1].material.map.image = this.loadedImages['gears_Base_Color'];
 			gearsGroup[2].material.map.image = this.loadedImages['gears_Base_Color'];

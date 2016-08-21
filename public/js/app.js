@@ -507,7 +507,7 @@ var BrainModel = function () {
 				scene = loader.parse(json.scene);
 				var mainGroup = scene.children[1];
 				var brainGroup = mainGroup.children[0];
-				var gearsGroup = mainGroup.children[1].children;
+				_this2.gearsGroup = mainGroup.children[1].children;
 				var screwGroup = mainGroup.children[2];
 				var brain4 = brainGroup.children[0];
 				var brain3 = brainGroup.children[1];
@@ -515,11 +515,11 @@ var BrainModel = function () {
 				var brain1 = brainGroup.children[3];
 
 				// Gear 0
-				gearsGroup[0].material.map.image = _this2.loadedImages['gears_Base_Color'];
-				gearsGroup[0].material.normalMap.image = _this2.loadedImages['gears_Normal_OpenGL'];
-				gearsGroup[0].material.roughnessMap.image = _this2.loadedImages['gears_Roughness'];
-				gearsGroup[0].material.metalnessMap.image = _this2.loadedImages['gears_Metallic'];
-				gearsGroup[0].material.envMap.image = _this2.loadedImages['environment'];
+				_this2.gearsGroup[0].material.map.image = _this2.loadedImages['gears_Base_Color'];
+				_this2.gearsGroup[0].material.normalMap.image = _this2.loadedImages['gears_Normal_OpenGL'];
+				_this2.gearsGroup[0].material.roughnessMap.image = _this2.loadedImages['gears_Roughness'];
+				_this2.gearsGroup[0].material.metalnessMap.image = _this2.loadedImages['gears_Metallic'];
+				_this2.gearsGroup[0].material.envMap.image = _this2.loadedImages['environment'];
 
 				/*gearsGroup[1].material.map.image = this.loadedImages['gears_Base_Color'];
     gearsGroup[2].material.map.image = this.loadedImages['gears_Base_Color'];
@@ -630,6 +630,18 @@ function render() {
 	if (mesh) {
 		// mesh.rotation.y += 0.1;
 		// mesh.rotation.z = 0.1;
+
+		// G1
+		brainModel.gearsGroup[0].rotation.z += 0.015 / 4;
+		// G2
+		brainModel.gearsGroup[3].rotation.z -= 0.05 / 4;
+		// G3
+		brainModel.gearsGroup[5].rotation.z -= 0.02 / 4;
+		// G4
+		brainModel.gearsGroup[2].rotation.z += 0.05 / 4;
+		// G5
+		brainModel.gearsGroup[4].rotation.z += 0.05 / 4;
+
 		mesh.rotation.y += (targetRotationX - mesh.rotation.y) * ROTATION_BOUNCE;
 
 		// Rotation info
