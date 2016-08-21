@@ -59,7 +59,7 @@ class BrainModel {
 						this.loadedImages[item.name] = image;
 						resolve(image);
 					}
-				)
+				);
 			}));
 		});
 
