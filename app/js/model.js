@@ -2,7 +2,7 @@ class BrainModel {
 	constructor() {
 		this.imageLoader = new THREE.ImageLoader();
 		this.XHRLoader = new THREE.XHRLoader();
-		this.jsonUrl = 'models/new-brain/test-groups.json';
+		this.jsonUrl = 'models/new-brain.json';
 		this.loadedImages = [];
 		this.loadImages();
 	}
