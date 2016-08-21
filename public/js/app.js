@@ -457,6 +457,9 @@ var BrainModel = function () {
 			}, {
 				url: '4_Normal_OpenGL-min.png',
 				name: '4_Normal_OpenGL'
+			}, {
+				url: 'environment.png',
+				name: 'environment'
 			}];
 
 			texturesList.forEach(function (item, index) {
@@ -469,7 +472,6 @@ var BrainModel = function () {
 			});
 
 			Promise.all(promiseArray).then(function (res) {
-				console.log(_this.loadedImages['3_Normal_OpenGL']);
 				_this.loadScene();
 			}, function (err) {
 				console.log(err);
@@ -481,15 +483,33 @@ var BrainModel = function () {
 			var _this2 = this;
 
 			var XHRLoader = new THREE.XHRLoader();
-			var jsonUrl = 'models/new-brain/test-groups.json';
+			var jsonUrl = 'models/new-brain.json';
 
 			XHRLoader.load(jsonUrl, function (text) {
 				var json = JSON.parse(text);
 				var loader = new THREE.ObjectLoader();
 
 				scene = loader.parse(json.scene);
-				scene.children[1].children[0].material.map.image = _this2.loadedImages['3_Normal_OpenGL'];
-				scene.children[1].children[1].material.map.image = _this2.loadedImages['4_Base_Color'];
+				var mainGroup = scene.children[1];
+				var brainGroup = mainGroup.children[0];
+				var gearsGroup = mainGroup.children[1];
+				var screwGroup = mainGroup.children[2];
+				var brain4 = brainGroup.children[0];
+				var brain3 = brainGroup.children[1];
+				var brain2 = brainGroup.children[2];
+
+				console.log(brain2.material);
+
+				brain2.material.map.image = _this2.loadedImages['2_Base_Color'];
+				brain2.material.normalMap.image = _this2.loadedImages['1_Normal_OpenGL'];
+				brain2.material.roughnessMap.image = _this2.loadedImages['1_Roughness'];
+				brain2.material.metalnessMap.image = _this2.loadedImages['2_Metallic'];
+				brain2.material.envMap.image = _this2.loadedImages['environment'];
+
+				brain3.material.map.image = _this2.loadedImages['3_Base_Color'];
+				brain4.material.map.image = _this2.loadedImages['4_Base_Color'];
+				// scene.children[1].children[0].material.map.image = this.loadedImages['3_Normal_OpenGL'];
+				// scene.children[1].children[1].material.map.image = this.loadedImages['4_Base_Color'];
 
 				cameraInit();
 

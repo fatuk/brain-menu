@@ -9,3 +9,7 @@
 * for develop run `gulp`
 * for build run `gulp build`
 * open in browser `http://localhost:3000/`
+
+## To remove images:
+
+`sed 's/"url.*/===/g' <brain-v1.json >new-brain.json`
