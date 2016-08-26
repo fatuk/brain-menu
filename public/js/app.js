@@ -85,7 +85,7 @@ function init() {
 
 	renderer = new THREE.WebGLRenderer({
 		alpha: true,
-		antialias: true
+		antialias: false
 	});
 	renderer.setSize(window.innerWidth, window.innerHeight);
 	renderer.sortObjects = false;
