@@ -5,7 +5,7 @@ function menu () {
 	let $contactsBtn = $('.js-contacts') || {};
 	let delay = 1000;
 
-	$aboutBtn.on('click', () => {
+	$aboutBtn.on('click tap', () => {
 		console.log('about');
 		let circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
 		targetRotationX = (Math.PI * 2) * circleNumber;
@@ -23,7 +23,7 @@ function menu () {
 			myModal.setData(data).open();
 		}, delay);
 	});
-	$projectsBtn.on('click', () => {
+	$projectsBtn.on('click tap', () => {
 		console.log('projects');
 		targetRotationY = 1;
 
@@ -38,7 +38,7 @@ function menu () {
 			myModal.setData(data).open();
 		}, delay);
 	});
-	$servicesBtn.on('click', () => {
+	$servicesBtn.on('click tap', () => {
 		console.log('services');
 		let circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
 		targetRotationX = (Math.PI * 2) * circleNumber + Math.PI;
@@ -55,7 +55,7 @@ function menu () {
 			myModal.setData(data).open();
 		}, delay);
 	});
-	$contactsBtn.on('click', () => {
+	$contactsBtn.on('click tap', () => {
 		console.log('contacts');
 		targetRotationY = -0.5;
 

@@ -30,7 +30,7 @@ class Modal {
 			$body.append(this.template);
 			this.$overlay = $('.js-overlay');
 			this.$modal = $('.js-modal');
-			this.$overlay.on('click', () => {
+			this.$overlay.on('click tap', () => {
 				this.close();
 			});
 		}
@@ -47,7 +47,7 @@ class Modal {
 	}
 	destroy() {
 		if (this.$overlay && this.$modal) {
-			this.$overlay.off('click');
+			this.$overlay.off('click tap');
 			this.$overlay.remove();
 			this.$modal.remove();
 			this.data = {};

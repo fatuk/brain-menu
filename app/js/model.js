@@ -105,7 +105,7 @@ class BrainModel {
 
 			// Gear 0
 			this.gearsGroup[0].material.map.image = this.loadedImages['gears_Base_Color'];
-			this.gearsGroup[0].material.normalMap.image = this.loadedImages['gears_Normal_OpenGL'];
+			// this.gearsGroup[0].material.normalMap.image = this.loadedImages['gears_Normal_OpenGL'];
 			this.gearsGroup[0].material.roughnessMap.image = this.loadedImages['gears_Roughness'];
 			this.gearsGroup[0].material.metalnessMap.image = this.loadedImages['gears_Metallic'];
 			this.gearsGroup[0].material.envMap.image = this.loadedImages['environment'];
@@ -119,25 +119,25 @@ class BrainModel {
 
 			// Brain 1
 			brain1.material.map.image = this.loadedImages['1_Base_Color'];
-			brain1.material.normalMap.image = this.loadedImages['1_Normal_OpenGL'];
+			// brain1.material.normalMap.image = this.loadedImages['1_Normal_OpenGL'];
 			brain1.material.roughnessMap.image = this.loadedImages['1_Roughness'];
 			brain1.material.metalnessMap.image = this.loadedImages['1_Metallic'];
 			brain1.material.envMap.image = this.loadedImages['environment'];
 
 			// Brain 2
 			brain2.material.map.image = this.loadedImages['2_Base_Color'];
-			brain2.material.normalMap.image = this.loadedImages['2_Normal_OpenGL'];
+			// brain2.material.normalMap.image = this.loadedImages['2_Normal_OpenGL'];
 			brain2.material.roughnessMap.image = this.loadedImages['2_Roughness'];
 			brain2.material.metalnessMap.image = this.loadedImages['2_Metallic'];
 			brain2.material.envMap.image = this.loadedImages['environment'];
 
 			// Brain 3
 			brain3.material.map.image = this.loadedImages['3_Base_Color'];
-			brain3.material.normalMap.image = this.loadedImages['3_Normal_OpenGL'];
+			// brain3.material.normalMap.image = this.loadedImages['3_Normal_OpenGL'];
 
 			// Brain 4
 			brain4.material.map.image = this.loadedImages['4_Base_Color'];
-			brain4.material.normalMap.image = this.loadedImages['4_Normal_OpenGL'];
+			// brain4.material.normalMap.image = this.loadedImages['4_Normal_OpenGL'];
 
 
 			cameraInit();

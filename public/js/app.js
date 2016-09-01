@@ -262,7 +262,7 @@ function menu() {
 	var $contactsBtn = $('.js-contacts') || {};
 	var delay = 1000;
 
-	$aboutBtn.on('click', function () {
+	$aboutBtn.on('click tap', function () {
 		console.log('about');
 		var circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
 		targetRotationX = Math.PI * 2 * circleNumber;
@@ -280,7 +280,7 @@ function menu() {
 			myModal.setData(data).open();
 		}, delay);
 	});
-	$projectsBtn.on('click', function () {
+	$projectsBtn.on('click tap', function () {
 		console.log('projects');
 		targetRotationY = 1;
 
@@ -295,7 +295,7 @@ function menu() {
 			myModal.setData(data).open();
 		}, delay);
 	});
-	$servicesBtn.on('click', function () {
+	$servicesBtn.on('click tap', function () {
 		console.log('services');
 		var circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
 		targetRotationX = Math.PI * 2 * circleNumber + Math.PI;
@@ -312,7 +312,7 @@ function menu() {
 			myModal.setData(data).open();
 		}, delay);
 	});
-	$contactsBtn.on('click', function () {
+	$contactsBtn.on('click tap', function () {
 		console.log('contacts');
 		targetRotationY = -0.5;
 
@@ -359,7 +359,7 @@ var Modal = function () {
 				$body.append(this.template);
 				this.$overlay = $('.js-overlay');
 				this.$modal = $('.js-modal');
-				this.$overlay.on('click', function () {
+				this.$overlay.on('click tap', function () {
 					_this.close();
 				});
 			}
@@ -382,7 +382,7 @@ var Modal = function () {
 		key: 'destroy',
 		value: function destroy() {
 			if (this.$overlay && this.$modal) {
-				this.$overlay.off('click');
+				this.$overlay.off('click tap');
 				this.$overlay.remove();
 				this.$modal.remove();
 				this.data = {};
@@ -516,7 +516,7 @@ var BrainModel = function () {
 
 				// Gear 0
 				_this2.gearsGroup[0].material.map.image = _this2.loadedImages['gears_Base_Color'];
-				_this2.gearsGroup[0].material.normalMap.image = _this2.loadedImages['gears_Normal_OpenGL'];
+				// this.gearsGroup[0].material.normalMap.image = this.loadedImages['gears_Normal_OpenGL'];
 				_this2.gearsGroup[0].material.roughnessMap.image = _this2.loadedImages['gears_Roughness'];
 				_this2.gearsGroup[0].material.metalnessMap.image = _this2.loadedImages['gears_Metallic'];
 				_this2.gearsGroup[0].material.envMap.image = _this2.loadedImages['environment'];
@@ -530,25 +530,26 @@ var BrainModel = function () {
 
 				// Brain 1
 				brain1.material.map.image = _this2.loadedImages['1_Base_Color'];
-				brain1.material.normalMap.image = _this2.loadedImages['1_Normal_OpenGL'];
+				// brain1.material.normalMap.image = this.loadedImages['1_Normal_OpenGL'];
 				brain1.material.roughnessMap.image = _this2.loadedImages['1_Roughness'];
 				brain1.material.metalnessMap.image = _this2.loadedImages['1_Metallic'];
 				brain1.material.envMap.image = _this2.loadedImages['environment'];
 
 				// Brain 2
 				brain2.material.map.image = _this2.loadedImages['2_Base_Color'];
-				brain2.material.normalMap.image = _this2.loadedImages['2_Normal_OpenGL'];
+				// brain2.material.normalMap.image = this.loadedImages['2_Normal_OpenGL'];
 				brain2.material.roughnessMap.image = _this2.loadedImages['2_Roughness'];
 				brain2.material.metalnessMap.image = _this2.loadedImages['2_Metallic'];
 				brain2.material.envMap.image = _this2.loadedImages['environment'];
 
 				// Brain 3
 				brain3.material.map.image = _this2.loadedImages['3_Base_Color'];
-				brain3.material.normalMap.image = _this2.loadedImages['3_Normal_OpenGL'];
+				// brain3.material.normalMap.image = this.loadedImages['3_Normal_OpenGL'];
 
 				// Brain 4
 				brain4.material.map.image = _this2.loadedImages['4_Base_Color'];
-				brain4.material.normalMap.image = _this2.loadedImages['4_Normal_OpenGL'];
+				// brain4.material.normalMap.image = this.loadedImages['4_Normal_OpenGL'];
+
 
 				cameraInit();
 
