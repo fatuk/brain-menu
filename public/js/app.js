@@ -550,13 +550,28 @@ var BrainModel = function () {
 				brain2.material.envMap.image = _this2.loadedImages['environment'];
 
 				// Brain 3
-				brain3.material.map.image = _this2.loadedImages['3_Base_Color'];
-				// brain3.material.normalMap.image = this.loadedImages['3_Normal_OpenGL'];
+				brain3.material.map.image = _this2.loadedImages['2_Base_Color'];
+				brain3.material.normalMap.image = _this2.loadedImages['2_Normal_OpenGL'];
+				brain3.material.roughnessMap.image = _this2.loadedImages['2_Roughness'];
+				brain3.material.metalnessMap.image = _this2.loadedImages['2_Metallic'];
+				brain3.material.envMap.image = _this2.loadedImages['environment'];
 
 				// Brain 4
-				brain4.material.map.image = _this2.loadedImages['4_Base_Color'];
-				// brain4.material.normalMap.image = this.loadedImages['4_Normal_OpenGL'];
+				brain4.material.map.image = _this2.loadedImages['2_Base_Color'];
+				brain4.material.normalMap.image = _this2.loadedImages['2_Normal_OpenGL'];
+				brain4.material.roughnessMap.image = _this2.loadedImages['2_Roughness'];
+				brain4.material.metalnessMap.image = _this2.loadedImages['2_Metallic'];
+				brain4.material.envMap.image = _this2.loadedImages['environment'];
 
+				// Brain 5
+				brain5.material.map.image = _this2.loadedImages['3_Base_Color'];
+				brain5.material.normalMap.image = _this2.loadedImages['3_Normal_OpenGL'];
+				brain5.material.envMap.image = _this2.loadedImages['environment'];
+
+				// Brain 6
+				brain6.material.map.image = _this2.loadedImages['4_Base_Color'];
+				brain6.material.normalMap.image = _this2.loadedImages['4_Normal_OpenGL'];
+				brain6.material.envMap.image = _this2.loadedImages['environment'];
 
 				cameraInit();
 
