@@ -575,7 +575,6 @@ var BrainModel = function () {
 
 				cameraInit();
 
-				// console.log(scene.children[1].children[0].material.map);
 				mesh = scene.children[1];
 				mesh.rotation.z = 0.1;
 				mesh.rotation.y = 2;
@@ -635,11 +634,14 @@ function mouseHover() {
 
 				if (INTERSECTED) {
 					INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+					INTERSECTED.material.emissiveIntensity = 1;
 				}
 
 				INTERSECTED = intersects[0].object;
 				INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-				INTERSECTED.material.emissive.setHex(0xff0000);
+				// INTERSECTED.currentIntensity = INTERSECTED.material.emissiveIntensity;
+				INTERSECTED.material.emissive.setHex(0xCC0000);
+				INTERSECTED.material.emissiveIntensity = 0.2;
 			}
 		} else {
 			if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);

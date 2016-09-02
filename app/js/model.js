@@ -162,10 +162,8 @@ class BrainModel {
 			brain6.material.normalMap.image = this.loadedImages['4_Normal_OpenGL'];
 			brain6.material.envMap.image = this.loadedImages['environment'];
 
-
 			cameraInit();
 
-			// console.log(scene.children[1].children[0].material.map);
 			mesh = scene.children[1];
 			mesh.rotation.z = 0.1;
 			mesh.rotation.y = 2;
