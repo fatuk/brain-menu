@@ -12,6 +12,8 @@ function mouseHover() {
 		// find intersections
 		raycaster.setFromCamera(mouse, camera);
 
+		// console.log(scene.children[1].children[0].children);
+
 		var intersects = raycaster.intersectObjects(scene.children, true);
 
 		if (intersects.length > 0) {

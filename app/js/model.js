@@ -2,7 +2,7 @@ class BrainModel {
 	constructor() {
 		this.imageLoader = new THREE.ImageLoader();
 		this.XHRLoader = new THREE.XHRLoader();
-		this.jsonUrl = 'models/new-brain.json';
+		this.jsonUrl = 'models/new-brain-6.json';
 		this.loadedImages = [];
 		this.loadImages();
 	}
@@ -87,25 +87,32 @@ class BrainModel {
 	}
 	loadScene() {
 		let XHRLoader = new THREE.XHRLoader();
-		let jsonUrl = 'models/new-brain.json';
+		let jsonUrl = this.jsonUrl;
 
 		XHRLoader.load(jsonUrl, (text) => {
+			// console.log(text);
 			let json = JSON.parse(text);
 			let loader = new THREE.ObjectLoader();
 
 			scene = loader.parse(json.scene);
+
+			console.log(scene);
 			let mainGroup = scene.children[1];
 			let brainGroup = mainGroup.children[0];
 			this.gearsGroup = mainGroup.children[1].children;
 			let screwGroup = mainGroup.children[2];
+			let brain1 = brainGroup.children[2];
+			let brain2 = brainGroup.children[1];
+			let brain3 = brainGroup.children[3];
 			let brain4 = brainGroup.children[0];
-			let brain3 = brainGroup.children[1];
-			let brain2 = brainGroup.children[2];
-			let brain1 = brainGroup.children[3];
+			let brain5 = brainGroup.children[4];
+			let brain6 = brainGroup.children[5];
+
+			console.log(brainGroup.children);
 
 			// Gear 0
 			this.gearsGroup[0].material.map.image = this.loadedImages['gears_Base_Color'];
-			// this.gearsGroup[0].material.normalMap.image = this.loadedImages['gears_Normal_OpenGL'];
+			this.gearsGroup[0].material.normalMap.image = this.loadedImages['gears_Normal_OpenGL'];
 			this.gearsGroup[0].material.roughnessMap.image = this.loadedImages['gears_Roughness'];
 			this.gearsGroup[0].material.metalnessMap.image = this.loadedImages['gears_Metallic'];
 			this.gearsGroup[0].material.envMap.image = this.loadedImages['environment'];
@@ -119,16 +126,16 @@ class BrainModel {
 
 			// Brain 1
 			brain1.material.map.image = this.loadedImages['1_Base_Color'];
-			// brain1.material.normalMap.image = this.loadedImages['1_Normal_OpenGL'];
+			brain1.material.normalMap.image = this.loadedImages['1_Normal_OpenGL'];
 			brain1.material.roughnessMap.image = this.loadedImages['1_Roughness'];
 			brain1.material.metalnessMap.image = this.loadedImages['1_Metallic'];
 			brain1.material.envMap.image = this.loadedImages['environment'];
 
 			// Brain 2
-			brain2.material.map.image = this.loadedImages['2_Base_Color'];
-			// brain2.material.normalMap.image = this.loadedImages['2_Normal_OpenGL'];
-			brain2.material.roughnessMap.image = this.loadedImages['2_Roughness'];
-			brain2.material.metalnessMap.image = this.loadedImages['2_Metallic'];
+			brain2.material.map.image = this.loadedImages['1_Base_Color'];
+			brain2.material.normalMap.image = this.loadedImages['1_Normal_OpenGL'];
+			brain2.material.roughnessMap.image = this.loadedImages['1_Roughness'];
+			brain2.material.metalnessMap.image = this.loadedImages['1_Metallic'];
 			brain2.material.envMap.image = this.loadedImages['environment'];
 
 			// Brain 3

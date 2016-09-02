@@ -408,7 +408,7 @@ var BrainModel = function () {
 
 		this.imageLoader = new THREE.ImageLoader();
 		this.XHRLoader = new THREE.XHRLoader();
-		this.jsonUrl = 'models/new-brain.json';
+		this.jsonUrl = 'models/new-brain-6.json';
 		this.loadedImages = [];
 		this.loadImages();
 	}
@@ -498,25 +498,32 @@ var BrainModel = function () {
 			var _this2 = this;
 
 			var XHRLoader = new THREE.XHRLoader();
-			var jsonUrl = 'models/new-brain.json';
+			var jsonUrl = this.jsonUrl;
 
 			XHRLoader.load(jsonUrl, function (text) {
+				// console.log(text);
 				var json = JSON.parse(text);
 				var loader = new THREE.ObjectLoader();
 
 				scene = loader.parse(json.scene);
+
+				console.log(scene);
 				var mainGroup = scene.children[1];
 				var brainGroup = mainGroup.children[0];
 				_this2.gearsGroup = mainGroup.children[1].children;
 				var screwGroup = mainGroup.children[2];
+				var brain1 = brainGroup.children[2];
+				var brain2 = brainGroup.children[1];
+				var brain3 = brainGroup.children[3];
 				var brain4 = brainGroup.children[0];
-				var brain3 = brainGroup.children[1];
-				var brain2 = brainGroup.children[2];
-				var brain1 = brainGroup.children[3];
+				var brain5 = brainGroup.children[4];
+				var brain6 = brainGroup.children[5];
+
+				console.log(brainGroup.children);
 
 				// Gear 0
 				_this2.gearsGroup[0].material.map.image = _this2.loadedImages['gears_Base_Color'];
-				// this.gearsGroup[0].material.normalMap.image = this.loadedImages['gears_Normal_OpenGL'];
+				_this2.gearsGroup[0].material.normalMap.image = _this2.loadedImages['gears_Normal_OpenGL'];
 				_this2.gearsGroup[0].material.roughnessMap.image = _this2.loadedImages['gears_Roughness'];
 				_this2.gearsGroup[0].material.metalnessMap.image = _this2.loadedImages['gears_Metallic'];
 				_this2.gearsGroup[0].material.envMap.image = _this2.loadedImages['environment'];
@@ -530,16 +537,16 @@ var BrainModel = function () {
 
 				// Brain 1
 				brain1.material.map.image = _this2.loadedImages['1_Base_Color'];
-				// brain1.material.normalMap.image = this.loadedImages['1_Normal_OpenGL'];
+				brain1.material.normalMap.image = _this2.loadedImages['1_Normal_OpenGL'];
 				brain1.material.roughnessMap.image = _this2.loadedImages['1_Roughness'];
 				brain1.material.metalnessMap.image = _this2.loadedImages['1_Metallic'];
 				brain1.material.envMap.image = _this2.loadedImages['environment'];
 
 				// Brain 2
-				brain2.material.map.image = _this2.loadedImages['2_Base_Color'];
-				// brain2.material.normalMap.image = this.loadedImages['2_Normal_OpenGL'];
-				brain2.material.roughnessMap.image = _this2.loadedImages['2_Roughness'];
-				brain2.material.metalnessMap.image = _this2.loadedImages['2_Metallic'];
+				brain2.material.map.image = _this2.loadedImages['1_Base_Color'];
+				brain2.material.normalMap.image = _this2.loadedImages['1_Normal_OpenGL'];
+				brain2.material.roughnessMap.image = _this2.loadedImages['1_Roughness'];
+				brain2.material.metalnessMap.image = _this2.loadedImages['1_Metallic'];
 				brain2.material.envMap.image = _this2.loadedImages['environment'];
 
 				// Brain 3
@@ -603,6 +610,8 @@ function mouseHover() {
 		// find intersections
 		raycaster.setFromCamera(mouse, camera);
 
+		// console.log(scene.children[1].children[0].children);
+
 		var intersects = raycaster.intersectObjects(scene.children, true);
 
 		if (intersects.length > 0) {
@@ -635,11 +644,11 @@ function render() {
 		// G1
 		brainModel.gearsGroup[0].rotation.z += 0.015 / 4;
 		// G2
-		brainModel.gearsGroup[3].rotation.z -= 0.05 / 4;
+		brainModel.gearsGroup[2].rotation.z -= 0.05 / 4;
 		// G3
-		brainModel.gearsGroup[5].rotation.z -= 0.02 / 4;
+		brainModel.gearsGroup[1].rotation.z -= 0.02 / 4;
 		// G4
-		brainModel.gearsGroup[2].rotation.z += 0.05 / 4;
+		brainModel.gearsGroup[3].rotation.z += 0.05 / 4;
 		// G5
 		brainModel.gearsGroup[4].rotation.z += 0.05 / 4;
 
