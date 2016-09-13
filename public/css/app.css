@@ -383,7 +383,8 @@ textarea {
 .dibfix {
   font-size: 0;
 }
-body {
+body,
+html {
   font-family: 'Open Sans', sans-serif;
   margin: 0;
   overflow: hidden;

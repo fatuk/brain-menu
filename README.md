@@ -22,11 +22,13 @@ light-group
 main-group
 brain-group
 o-brain-1 g-brain-1 mat-brain-1
-o-brain-2 g-brain-2 mat-brain-1
+o-brain-2 g-brain-2 mat-brain-2
 o-brain-3 g-brain-3 mat-brain-3
 o-brain-4 g-brain-4 mat-brain-4
 o-brain-5 g-brain-5 mat-brain-5
 o-brain-6 g-brain-6 mat-brain-6
+o-brain-7 g-brain-7 mat-brain-7
+o-brain-8 g-brain-8 mat-brain-8
 gears-group
 o-gears-frame g-gears-frame mat-gear
 o-gear-1 g-gear-1 mat-gear

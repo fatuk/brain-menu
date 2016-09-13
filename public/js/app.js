@@ -2,7 +2,7 @@
 
 function animate() {
 	animationLoop = requestAnimationFrame(animate);
-	mouseHover();
+	// mouseHover();
 	render();
 }
 'use strict';
@@ -73,13 +73,6 @@ function init() {
 	raycaster = new THREE.Raycaster(); // create once
 	// modelInit();
 	// mouseHover();
-
-	/*setTimeout(function () {
- 	cancelAnimationFrame(animationLoop);
- 	setTimeout(function () {
- 		animate();
- 	}, 2000)
- }, 10000);*/
 
 	// lines();
 
@@ -408,7 +401,7 @@ var BrainModel = function () {
 
 		this.imageLoader = new THREE.ImageLoader();
 		this.XHRLoader = new THREE.XHRLoader();
-		this.jsonUrl = 'models/new-brain-6.json';
+		this.jsonUrl = 'models/new-brain-8.json';
 		this.loadedImages = [];
 		this.loadImages();
 	}
@@ -434,17 +427,29 @@ var BrainModel = function () {
 				url: '1_Roughness.jpg',
 				name: '1_Roughness'
 			}, {
-				url: '2_Base_Color.jpg',
-				name: '2_Base_Color'
+				url: '2_Base_Color_metal.jpg',
+				name: '2_Base_Color_metal'
 			}, {
-				url: '2_Metallic.jpg',
-				name: '2_Metallic'
+				url: '2_Base_Color_tiles.jpg',
+				name: '2_Base_Color_tiles'
 			}, {
-				url: '2_Normal_OpenGL.jpg',
-				name: '2_Normal_OpenGL'
+				url: '2_Metallic_metal.jpg',
+				name: '2_Metallic_metal'
+			}, {
+				url: '2_Metallic_tiles.jpg',
+				name: '2_Metallic_tiles'
+			}, {
+				url: '2_Normal_OpenGL_metal.jpg',
+				name: '2_Normal_OpenGL_metal'
+			}, {
+				url: '2_Normal_OpenGL_tiles.jpg',
+				name: '2_Normal_OpenGL_tiles'
 			}, {
 				url: '2_Roughness.jpg',
 				name: '2_Roughness'
+			}, {
+				url: '2_roughness_tiles.jpg',
+				name: '2_roughness_tiles'
 			}, {
 				url: '3_Base_Color.jpg',
 				name: '3_Base_Color'
@@ -501,25 +506,21 @@ var BrainModel = function () {
 			var jsonUrl = this.jsonUrl;
 
 			XHRLoader.load(jsonUrl, function (text) {
-				// console.log(text);
 				var json = JSON.parse(text);
 				var loader = new THREE.ObjectLoader();
 
 				scene = loader.parse(json.scene);
 
-				console.log(scene);
 				var mainGroup = scene.children[1];
 				var brainGroup = mainGroup.children[0];
 				_this2.gearsGroup = mainGroup.children[1].children;
 				var screwGroup = mainGroup.children[2];
-				var brain1 = brainGroup.children[2];
-				var brain2 = brainGroup.children[1];
-				var brain3 = brainGroup.children[3];
-				var brain4 = brainGroup.children[0];
-				var brain5 = brainGroup.children[4];
-				var brain6 = brainGroup.children[5];
 
-				console.log(brainGroup.children);
+				var brain = [];
+
+				for (var i = 0; i < brainGroup.children.length; i++) {
+					brain.push(brainGroup.children[i]);
+				}
 
 				// Gear 0
 				_this2.gearsGroup[0].material.map.image = _this2.loadedImages['gears_Base_Color'];
@@ -536,42 +537,56 @@ var BrainModel = function () {
 				// this.setImageToGroup(gearsGroup, this.loadedImages['gears_Base_Color']);
 
 				// Brain 1
-				brain1.material.map.image = _this2.loadedImages['1_Base_Color'];
-				brain1.material.normalMap.image = _this2.loadedImages['1_Normal_OpenGL'];
-				brain1.material.roughnessMap.image = _this2.loadedImages['1_Roughness'];
-				brain1.material.metalnessMap.image = _this2.loadedImages['1_Metallic'];
-				brain1.material.envMap.image = _this2.loadedImages['environment'];
+				brain[0].material.map.image = _this2.loadedImages['1_Base_Color'];
+				brain[0].material.normalMap.image = _this2.loadedImages['1_Normal_OpenGL'];
+				brain[0].material.roughnessMap.image = _this2.loadedImages['1_Roughness'];
+				brain[0].material.metalnessMap.image = _this2.loadedImages['1_Metallic'];
+				brain[0].material.envMap.image = _this2.loadedImages['environment'];
 
 				// Brain 2
-				brain2.material.map.image = _this2.loadedImages['1_Base_Color'];
-				brain2.material.normalMap.image = _this2.loadedImages['1_Normal_OpenGL'];
-				brain2.material.roughnessMap.image = _this2.loadedImages['1_Roughness'];
-				brain2.material.metalnessMap.image = _this2.loadedImages['1_Metallic'];
-				brain2.material.envMap.image = _this2.loadedImages['environment'];
+				brain[1].material.map.image = _this2.loadedImages['1_Base_Color'];
+				brain[1].material.normalMap.image = _this2.loadedImages['1_Normal_OpenGL'];
+				brain[1].material.roughnessMap.image = _this2.loadedImages['1_Roughness'];
+				brain[1].material.metalnessMap.image = _this2.loadedImages['1_Metallic'];
+				brain[1].material.envMap.image = _this2.loadedImages['environment'];
 
 				// Brain 3
-				brain3.material.map.image = _this2.loadedImages['2_Base_Color'];
-				brain3.material.normalMap.image = _this2.loadedImages['2_Normal_OpenGL'];
-				brain3.material.roughnessMap.image = _this2.loadedImages['2_Roughness'];
-				brain3.material.metalnessMap.image = _this2.loadedImages['2_Metallic'];
-				brain3.material.envMap.image = _this2.loadedImages['environment'];
+				brain[2].material.map.image = _this2.loadedImages['2_Base_Color_tiles'];
+				brain[2].material.normalMap.image = _this2.loadedImages['2_Normal_OpenGL_tiles'];
+				brain[2].material.roughnessMap.image = _this2.loadedImages['2_roughness_tiles'];
+				brain[2].material.metalnessMap.image = _this2.loadedImages['2_Metallic_tiles'];
+				brain[2].material.envMap.image = _this2.loadedImages['environment'];
 
 				// Brain 4
-				brain4.material.map.image = _this2.loadedImages['2_Base_Color'];
-				brain4.material.normalMap.image = _this2.loadedImages['2_Normal_OpenGL'];
-				brain4.material.roughnessMap.image = _this2.loadedImages['2_Roughness'];
-				brain4.material.metalnessMap.image = _this2.loadedImages['2_Metallic'];
-				brain4.material.envMap.image = _this2.loadedImages['environment'];
+				brain[3].material.map.image = _this2.loadedImages['2_Base_Color_tiles'];
+				brain[3].material.normalMap.image = _this2.loadedImages['2_Normal_OpenGL_tiles'];
+				brain[3].material.roughnessMap.image = _this2.loadedImages['2_roughness_tiles'];
+				brain[3].material.metalnessMap.image = _this2.loadedImages['2_Metallic_tiles'];
+				brain[3].material.envMap.image = _this2.loadedImages['environment'];
 
 				// Brain 5
-				brain5.material.map.image = _this2.loadedImages['3_Base_Color'];
-				brain5.material.normalMap.image = _this2.loadedImages['3_Normal_OpenGL'];
-				brain5.material.envMap.image = _this2.loadedImages['environment'];
+				brain[4].material.map.image = _this2.loadedImages['1_Base_Color'];
+				brain[4].material.normalMap.image = _this2.loadedImages['1_Normal_OpenGL'];
+				brain[4].material.roughnessMap.image = _this2.loadedImages['1_Roughness'];
+				brain[4].material.metalnessMap.image = _this2.loadedImages['1_Metallic'];
+				brain[4].material.envMap.image = _this2.loadedImages['environment'];
 
 				// Brain 6
-				brain6.material.map.image = _this2.loadedImages['4_Base_Color'];
-				brain6.material.normalMap.image = _this2.loadedImages['4_Normal_OpenGL'];
-				brain6.material.envMap.image = _this2.loadedImages['environment'];
+				brain[5].material.map.image = _this2.loadedImages['1_Base_Color'];
+				brain[5].material.normalMap.image = _this2.loadedImages['1_Normal_OpenGL'];
+				brain[5].material.roughnessMap.image = _this2.loadedImages['1_Roughness'];
+				brain[5].material.metalnessMap.image = _this2.loadedImages['1_Metallic'];
+				brain[5].material.envMap.image = _this2.loadedImages['environment'];
+
+				// Brain 7
+				brain[6].material.map.image = _this2.loadedImages['3_Base_Color'];
+				brain[6].material.normalMap.image = _this2.loadedImages['3_Normal_OpenGL'];
+				brain[6].material.envMap.image = _this2.loadedImages['environment'];
+
+				// Brain 8
+				brain[7].material.map.image = _this2.loadedImages['4_Base_Color'];
+				brain[7].material.normalMap.image = _this2.loadedImages['4_Normal_OpenGL'];
+				brain[7].material.envMap.image = _this2.loadedImages['environment'];
 
 				cameraInit();
 
@@ -634,12 +649,11 @@ function mouseHover() {
 
 				if (INTERSECTED) {
 					INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
-					INTERSECTED.material.emissiveIntensity = 1;
+					INTERSECTED.material.emissiveIntensity = 0;
 				}
 
 				INTERSECTED = intersects[0].object;
 				INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-				// INTERSECTED.currentIntensity = INTERSECTED.material.emissiveIntensity;
 				INTERSECTED.material.emissive.setHex(0xCC0000);
 				INTERSECTED.material.emissiveIntensity = 0.2;
 			}
@@ -657,17 +671,16 @@ function render() {
 	if (mesh) {
 		// mesh.rotation.y += 0.1;
 		// mesh.rotation.z = 0.1;
-
 		// G1
-		brainModel.gearsGroup[0].rotation.z += 0.015 / 4;
+		brainModel.gearsGroup[1].rotation.z += 0.015 / 4;
 		// G2
 		brainModel.gearsGroup[2].rotation.z -= 0.05 / 4;
 		// G3
-		brainModel.gearsGroup[1].rotation.z -= 0.02 / 4;
+		brainModel.gearsGroup[3].rotation.z -= 0.02 / 4;
 		// G4
-		brainModel.gearsGroup[3].rotation.z += 0.05 / 4;
-		// G5
 		brainModel.gearsGroup[4].rotation.z += 0.05 / 4;
+		// G5
+		brainModel.gearsGroup[5].rotation.z += 0.05 / 4;
 
 		mesh.rotation.y += (targetRotationX - mesh.rotation.y) * ROTATION_BOUNCE;
 

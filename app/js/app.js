@@ -65,13 +65,6 @@ function init() {
 	// modelInit();
 	// mouseHover();
 
-	/*setTimeout(function () {
-		cancelAnimationFrame(animationLoop);
-		setTimeout(function () {
-			animate();
-		}, 2000)
-	}, 10000);*/
-
 	// lines();
 
 	renderer = new THREE.WebGLRenderer({

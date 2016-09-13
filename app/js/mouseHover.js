@@ -22,12 +22,11 @@ function mouseHover() {
 
 				if (INTERSECTED) {
 					INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
-					INTERSECTED.material.emissiveIntensity = 1;
+					INTERSECTED.material.emissiveIntensity = 0;
 				}
 
 				INTERSECTED = intersects[0].object;
 				INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-				// INTERSECTED.currentIntensity = INTERSECTED.material.emissiveIntensity;
 				INTERSECTED.material.emissive.setHex(0xCC0000);
 				INTERSECTED.material.emissiveIntensity = 0.2;
 

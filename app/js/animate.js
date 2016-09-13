@@ -1,5 +1,5 @@
 function animate() {
 	animationLoop = requestAnimationFrame(animate);
-	mouseHover();
+	// mouseHover();
 	render();
 }
