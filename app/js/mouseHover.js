@@ -21,6 +21,7 @@ function mouseHover() {
 			if (INTERSECTED != intersects[0].object) {
 
 				if (INTERSECTED) {
+					console.log(INTERSECTED.name);
 					INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 					INTERSECTED.material.emissiveIntensity = 0;
 				}

@@ -2,7 +2,7 @@
 
 function animate() {
 	animationLoop = requestAnimationFrame(animate);
-	// mouseHover();
+	mouseHover();
 	render();
 }
 'use strict';
@@ -648,6 +648,7 @@ function mouseHover() {
 			if (INTERSECTED != intersects[0].object) {
 
 				if (INTERSECTED) {
+					console.log(INTERSECTED.name);
 					INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 					INTERSECTED.material.emissiveIntensity = 0;
 				}
@@ -669,8 +670,6 @@ function mouseHover() {
 
 function render() {
 	if (mesh) {
-		// mesh.rotation.y += 0.1;
-		// mesh.rotation.z = 0.1;
 		// G1
 		brainModel.gearsGroup[1].rotation.z += 0.015 / 4;
 		// G2
@@ -687,12 +686,6 @@ function render() {
 		// Rotation info
 		$rotationInfoX.textContent = Math.round(mesh.rotation.x * 100) / 100;
 		$rotationInfoY.textContent = Math.round(mesh.rotation.y * 100) / 100;
-
-		/*if (mesh.rotation.y > Math.PI * 2) {
-  	console.log('more');
-  	mesh.rotation.y = 1;
-  	targetRotationY = 1;
-  }*/
 
 		finalRotationY = targetRotationY - mesh.rotation.x;
 		if (mesh.rotation.x <= 1 && mesh.rotation.x >= -1) {
