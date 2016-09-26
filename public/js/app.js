@@ -463,9 +463,6 @@ var BrainModel = function () {
 				url: 'gears_Base_Color.jpg',
 				name: 'gears_Base_Color'
 			}, {
-				url: 'gears_Height.jpg',
-				name: 'gears_Height'
-			}, {
 				url: 'gears_Metallic.jpg',
 				name: 'gears_Metallic'
 			}, {
@@ -512,17 +509,28 @@ var BrainModel = function () {
 				scene = loader.parse(json.scene);
 
 				var mainGroup = scene.children[1];
-				var brainGroup = mainGroup.children[0];
+				_this2.brainGroup = mainGroup.children[0];
 				_this2.gearsGroup = mainGroup.children[1].children;
-				var flames = mainGroup.children[2];
-				flames.visible = false;
-
-				console.log(brainGroup);
+				_this2.flames = mainGroup.children[2];
+				_this2.flames.children[0].visible = false;
+				_this2.flames.children[0].visible = true;
+				_this2.flames.children[1].visible = false;
+				_this2.flames.children[2].visible = false;
+				_this2.flames.children[3].visible = false;
+				_this2.flames.children[4].visible = false;
+				_this2.flames.children[5].visible = false;
+				_this2.flames.children[6].visible = false;
 
 				var brain = [];
 
-				for (var i = 0; i < brainGroup.children.length; i++) {
-					brain.push(brainGroup.children[i]);
+				for (var i = 0; i < _this2.brainGroup.children.length; i++) {
+					brain.push(_this2.brainGroup.children[i]);
+				}
+
+				// Update material for flames
+				for (var _i = 0; _i < _this2.flames.children.length; _i++) {
+					_this2.flames.children[0].material.map.image = _this2.loadedImages['flame_color'];
+					_this2.flames.children[0].material.alphaMap.image = _this2.loadedImages['flame_alpha'];
 				}
 
 				// Gear 0
@@ -531,14 +539,11 @@ var BrainModel = function () {
 				_this2.gearsGroup[0].material.roughnessMap.image = _this2.loadedImages['gears_Roughness'];
 				_this2.gearsGroup[0].material.metalnessMap.image = _this2.loadedImages['gears_Metallic'];
 				_this2.gearsGroup[0].material.envMap.image = _this2.loadedImages['environment'];
-				console.log(_this2.gearsGroup[6].name);
 
-				/*gearsGroup[1].material.map.image = this.loadedImages['gears_Base_Color'];
-    gearsGroup[2].material.map.image = this.loadedImages['gears_Base_Color'];
-    gearsGroup[3].material.map.image = this.loadedImages['gears_Base_Color'];
-    gearsGroup[4].material.map.image = this.loadedImages['gears_Base_Color'];
-    console.log(gearsGroup[4]);*/
-				// this.setImageToGroup(gearsGroup, this.loadedImages['gears_Base_Color']);
+				// Glass
+				_this2.gearsGroup[6].material.alphaMap.image = _this2.loadedImages['glass_alpha'];
+				_this2.gearsGroup[6].material.metalnessMap.image = _this2.loadedImages['glass_metallic'];
+				_this2.gearsGroup[6].material.envMap.image = _this2.loadedImages['environment'];
 
 				// Brain 1
 				brain[0].material.map.image = _this2.loadedImages['1_Base_Color'];
@@ -613,27 +618,6 @@ var BrainModel = function () {
 }();
 
 var brainModel = new BrainModel();
-
-function modelInit() {
-	var XHRLoader = new THREE.XHRLoader();
-	var jsonUrl = 'models/new-brain/test-groups.json';
-
-	XHRLoader.load(jsonUrl, function (text) {
-		var json = JSON.parse(text);
-		var loader = new THREE.ObjectLoader();
-
-		scene = loader.parse(json.scene);
-		console.log(scene.children[1].children[1]);
-		scene.children[1].children[0].material.map.image = image;
-		scene.children[1].children[1].material.map.image = image;
-
-		cameraInit();
-
-		console.log(scene.children[1].children[0].material.map);
-		mesh = scene.children[1];
-		mesh.rotation.z = 0.1;
-	});
-}
 "use strict";
 
 function mouseHover() {
@@ -651,24 +635,46 @@ function mouseHover() {
 
 		// console.log(scene.children[1].children[0].children);
 
-		var intersects = raycaster.intersectObjects(scene.children, true);
+		// var intersects = raycaster.intersectObjects(scene.children, true);
+		var intersects = raycaster.intersectObjects(brainModel.brainGroup.children, true);
 
 		if (intersects.length > 0) {
 
 			if (INTERSECTED != intersects[0].object) {
 
 				if (INTERSECTED) {
+					/*switch (INTERSECTED.name) {
+     	case 'o-brain-1':
+     		brainModel.flames.children[1].visible = true;
+     		break;
+     	case 'o-brain-2':
+     		brainModel.flames.children[0].visible = true;
+     		break;
+     	case 'o-brain-3':
+     		brainModel.flames.children[2].visible = true;
+     		break;
+     }*/
 					console.log(INTERSECTED.name);
+					// console.log(brainModel.brainGroup.children);
 					INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 					INTERSECTED.material.emissiveIntensity = 0;
 				}
 
 				INTERSECTED = intersects[0].object;
-				INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-				INTERSECTED.material.emissive.setHex(0xCC0000);
-				INTERSECTED.material.emissiveIntensity = 0.2;
+				// INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+				// INTERSECTED.material.emissive.setHex(0xCC0000);
+				// INTERSECTED.material.emissiveIntensity = 0.2;
+
+				// brainModel.flames.children[0].visible = true;
 			}
 		} else {
+			/*brainModel.flames.children[0].visible = false;
+   brainModel.flames.children[1].visible = false;
+   brainModel.flames.children[2].visible = false;
+   brainModel.flames.children[3].visible = false;
+   brainModel.flames.children[4].visible = false;
+   brainModel.flames.children[5].visible = false;
+   brainModel.flames.children[6].visible = false;*/
 			if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 			INTERSECTED = null;
 		}

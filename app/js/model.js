@@ -59,9 +59,6 @@ class BrainModel {
 			url: 'gears_Base_Color.jpg',
 			name: 'gears_Base_Color'
 		}, {
-			url: 'gears_Height.jpg',
-			name: 'gears_Height'
-		}, {
 			url: 'gears_Metallic.jpg',
 			name: 'gears_Metallic'
 		}, {
@@ -108,17 +105,28 @@ class BrainModel {
 			scene = loader.parse(json.scene);
 
 			let mainGroup = scene.children[1];
-			let brainGroup = mainGroup.children[0];
+			this.brainGroup = mainGroup.children[0];
 			this.gearsGroup = mainGroup.children[1].children;
-			let flames = mainGroup.children[2];
-			flames.visible = false;
-
-			console.log(brainGroup);
+			this.flames = mainGroup.children[2];
+			this.flames.children[0].visible = false;
+			this.flames.children[0].visible = true;
+			this.flames.children[1].visible = false;
+			this.flames.children[2].visible = false;
+			this.flames.children[3].visible = false;
+			this.flames.children[4].visible = false;
+			this.flames.children[5].visible = false;
+			this.flames.children[6].visible = false;
 
 			let brain = [];
 
-			for (let i = 0; i < brainGroup.children.length; i++) {
-				brain.push(brainGroup.children[i]);
+			for (let i = 0; i < this.brainGroup.children.length; i++) {
+				brain.push(this.brainGroup.children[i]);
+			}
+
+			// Update material for flames
+			for (let i = 0; i < this.flames.children.length; i++) {
+				this.flames.children[0].material.map.image = this.loadedImages['flame_color'];
+				this.flames.children[0].material.alphaMap.image = this.loadedImages['flame_alpha'];
 			}
 
 			// Gear 0
@@ -127,14 +135,11 @@ class BrainModel {
 			this.gearsGroup[0].material.roughnessMap.image = this.loadedImages['gears_Roughness'];
 			this.gearsGroup[0].material.metalnessMap.image = this.loadedImages['gears_Metallic'];
 			this.gearsGroup[0].material.envMap.image = this.loadedImages['environment'];
-			console.log(this.gearsGroup[6].name);
 
-			/*gearsGroup[1].material.map.image = this.loadedImages['gears_Base_Color'];
-			gearsGroup[2].material.map.image = this.loadedImages['gears_Base_Color'];
-			gearsGroup[3].material.map.image = this.loadedImages['gears_Base_Color'];
-			gearsGroup[4].material.map.image = this.loadedImages['gears_Base_Color'];
-			console.log(gearsGroup[4]);*/
-			// this.setImageToGroup(gearsGroup, this.loadedImages['gears_Base_Color']);
+			// Glass
+			this.gearsGroup[6].material.alphaMap.image = this.loadedImages['glass_alpha'];
+			this.gearsGroup[6].material.metalnessMap.image = this.loadedImages['glass_metallic'];
+			this.gearsGroup[6].material.envMap.image = this.loadedImages['environment'];
 
 			// Brain 1
 			brain[0].material.map.image = this.loadedImages['1_Base_Color'];
@@ -206,27 +211,3 @@ class BrainModel {
 }
 
 var brainModel = new BrainModel();
-
-
-
-function modelInit() {
-	let XHRLoader = new THREE.XHRLoader();
-	let jsonUrl = 'models/new-brain/test-groups.json';
-
-	XHRLoader.load(jsonUrl, function (text) {
-		let json = JSON.parse(text);
-		let loader = new THREE.ObjectLoader();
-
-		scene = loader.parse(json.scene);
-		console.log(scene.children[1].children[1]);
-		scene.children[1].children[0].material.map.image = image;
-		scene.children[1].children[1].material.map.image = image;
-
-		cameraInit();
-
-		console.log(scene.children[1].children[0].material.map);
-		mesh = scene.children[1];
-		mesh.rotation.z = 0.1;
-	});
-
-}

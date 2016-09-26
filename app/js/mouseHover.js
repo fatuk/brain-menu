@@ -14,26 +14,48 @@ function mouseHover() {
 
 		// console.log(scene.children[1].children[0].children);
 
-		var intersects = raycaster.intersectObjects(scene.children, true);
+		// var intersects = raycaster.intersectObjects(scene.children, true);
+		var intersects = raycaster.intersectObjects(brainModel.brainGroup.children, true);
 
 		if (intersects.length > 0) {
 
 			if (INTERSECTED != intersects[0].object) {
 
 				if (INTERSECTED) {
+					/*switch (INTERSECTED.name) {
+						case 'o-brain-1':
+							brainModel.flames.children[1].visible = true;
+							break;
+						case 'o-brain-2':
+							brainModel.flames.children[0].visible = true;
+							break;
+						case 'o-brain-3':
+							brainModel.flames.children[2].visible = true;
+							break;
+					}*/
 					console.log(INTERSECTED.name);
+					// console.log(brainModel.brainGroup.children);
 					INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 					INTERSECTED.material.emissiveIntensity = 0;
 				}
 
 				INTERSECTED = intersects[0].object;
-				INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-				INTERSECTED.material.emissive.setHex(0xCC0000);
-				INTERSECTED.material.emissiveIntensity = 0.2;
+				// INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+				// INTERSECTED.material.emissive.setHex(0xCC0000);
+				// INTERSECTED.material.emissiveIntensity = 0.2;
+
+				// brainModel.flames.children[0].visible = true;
 
 			}
 
 		} else {
+			/*brainModel.flames.children[0].visible = false;
+			brainModel.flames.children[1].visible = false;
+			brainModel.flames.children[2].visible = false;
+			brainModel.flames.children[3].visible = false;
+			brainModel.flames.children[4].visible = false;
+			brainModel.flames.children[5].visible = false;
+			brainModel.flames.children[6].visible = false;*/
 			if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 			INTERSECTED = null;
 		}
