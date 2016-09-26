@@ -2,7 +2,7 @@ class BrainModel {
 	constructor() {
 		this.imageLoader = new THREE.ImageLoader();
 		this.XHRLoader = new THREE.XHRLoader();
-		this.jsonUrl = 'models/new-brain-8.json';
+		this.jsonUrl = 'models/lite-brain.json';
 		this.loadedImages = [];
 		this.loadImages();
 	}
@@ -17,38 +17,26 @@ class BrainModel {
 			url: '1_Metallic.jpg',
 			name: '1_Metallic'
 		}, {
+			url: '1_Mixed_AO.jpg',
+			name: '1_Mixed_AO'
+		}, {
 			url: '1_Normal_OpenGL.jpg',
 			name: '1_Normal_OpenGL'
 		}, {
 			url: '1_Roughness.jpg',
 			name: '1_Roughness'
 		}, {
-			url: '2_Base_Color_metal.jpg',
-			name: '2_Base_Color_metal'
+			url: '2_Base_Color.jpg',
+			name: '2_Base_Color'
 		}, {
-			url: '2_Base_Color_tiles.jpg',
-			name: '2_Base_Color_tiles'
-		}, {
-			url: '2_Metallic_metal.jpg',
-			name: '2_Metallic_metal'
-		}, {
-			url: '2_Metallic_tiles.jpg',
-			name: '2_Metallic_tiles'
-		}, {
-			url: '2_Normal_OpenGL_metal.jpg',
-			name: '2_Normal_OpenGL_metal'
-		}, {
-			url: '2_Normal_OpenGL_tiles.jpg',
-			name: '2_Normal_OpenGL_tiles'
-		}, {
-			url: '2_Roughness.jpg',
-			name: '2_Roughness'
-		}, {
-			url: '2_roughness_tiles.jpg',
-			name: '2_roughness_tiles'
+			url: '2_Metallic.jpg',
+			name: '2_Metallic'
 		}, {
 			url: '3_Base_Color.jpg',
 			name: '3_Base_Color'
+		}, {
+			url: '3_Metallic.jpg',
+			name: '3_Metallic'
 		}, {
 			url: '3_Normal_OpenGL.jpg',
 			name: '3_Normal_OpenGL'
@@ -61,6 +49,12 @@ class BrainModel {
 		}, {
 			url: 'environment.png',
 			name: 'environment'
+		}, {
+			url: 'flame_alpha.jpg',
+			name: 'flame_alpha'
+		}, {
+			url: 'flame_color.jpg',
+			name: 'flame_color'
 		}, {
 			url: 'gears_Base_Color.jpg',
 			name: 'gears_Base_Color'
@@ -76,6 +70,12 @@ class BrainModel {
 		}, {
 			url: 'gears_Roughness.jpg',
 			name: 'gears_Roughness'
+		}, {
+			url: 'glass_alpha.jpg',
+			name: 'glass_alpha'
+		}, {
+			url: 'glass_metallic.jpg',
+			name: 'glass_metallic'
 		}];
 
 		texturesList.forEach((item, index) => {
@@ -110,7 +110,10 @@ class BrainModel {
 			let mainGroup = scene.children[1];
 			let brainGroup = mainGroup.children[0];
 			this.gearsGroup = mainGroup.children[1].children;
-			let screwGroup = mainGroup.children[2];
+			let flames = mainGroup.children[2];
+			flames.visible = false;
+
+			console.log(brainGroup);
 
 			let brain = [];
 
@@ -124,6 +127,7 @@ class BrainModel {
 			this.gearsGroup[0].material.roughnessMap.image = this.loadedImages['gears_Roughness'];
 			this.gearsGroup[0].material.metalnessMap.image = this.loadedImages['gears_Metallic'];
 			this.gearsGroup[0].material.envMap.image = this.loadedImages['environment'];
+			console.log(this.gearsGroup[6].name);
 
 			/*gearsGroup[1].material.map.image = this.loadedImages['gears_Base_Color'];
 			gearsGroup[2].material.map.image = this.loadedImages['gears_Base_Color'];
@@ -138,6 +142,7 @@ class BrainModel {
 			brain[0].material.roughnessMap.image = this.loadedImages['1_Roughness'];
 			brain[0].material.metalnessMap.image = this.loadedImages['1_Metallic'];
 			brain[0].material.envMap.image = this.loadedImages['environment'];
+			brain[0].material.emissiveMap.image = this.loadedImages['1_Mixed_AO'];
 
 			// Brain 2
 			brain[1].material.map.image = this.loadedImages['1_Base_Color'];
@@ -145,19 +150,16 @@ class BrainModel {
 			brain[1].material.roughnessMap.image = this.loadedImages['1_Roughness'];
 			brain[1].material.metalnessMap.image = this.loadedImages['1_Metallic'];
 			brain[1].material.envMap.image = this.loadedImages['environment'];
+			brain[1].material.emissiveMap.image = this.loadedImages['1_Mixed_AO'];
 
 			// Brain 3
-			brain[2].material.map.image = this.loadedImages['2_Base_Color_tiles'];
-			brain[2].material.normalMap.image = this.loadedImages['2_Normal_OpenGL_tiles'];
-			brain[2].material.roughnessMap.image = this.loadedImages['2_roughness_tiles'];
-			brain[2].material.metalnessMap.image = this.loadedImages['2_Metallic_tiles'];
+			brain[2].material.map.image = this.loadedImages['2_Base_Color'];
+			brain[2].material.metalnessMap.image = this.loadedImages['2_Metallic'];
 			brain[2].material.envMap.image = this.loadedImages['environment'];
 
 			// Brain 4
-			brain[3].material.map.image = this.loadedImages['2_Base_Color_tiles'];
-			brain[3].material.normalMap.image = this.loadedImages['2_Normal_OpenGL_tiles'];
-			brain[3].material.roughnessMap.image = this.loadedImages['2_roughness_tiles'];
-			brain[3].material.metalnessMap.image = this.loadedImages['2_Metallic_tiles'];
+			brain[3].material.map.image = this.loadedImages['2_Base_Color'];
+			brain[3].material.metalnessMap.image = this.loadedImages['2_Metallic'];
 			brain[3].material.envMap.image = this.loadedImages['environment'];
 
 			// Brain 5
@@ -166,23 +168,31 @@ class BrainModel {
 			brain[4].material.roughnessMap.image = this.loadedImages['1_Roughness'];
 			brain[4].material.metalnessMap.image = this.loadedImages['1_Metallic'];
 			brain[4].material.envMap.image = this.loadedImages['environment'];
+			brain[4].material.emissiveMap.image = this.loadedImages['1_Mixed_AO'];
 
 			// Brain 6
-			brain[5].material.map.image = this.loadedImages['1_Base_Color'];
-			brain[5].material.normalMap.image = this.loadedImages['1_Normal_OpenGL'];
-			brain[5].material.roughnessMap.image = this.loadedImages['1_Roughness'];
-			brain[5].material.metalnessMap.image = this.loadedImages['1_Metallic'];
+			brain[5].material.map.image = this.loadedImages['3_Base_Color'];
+			brain[5].material.normalMap.image = this.loadedImages['3_Normal_OpenGL'];
+			brain[5].material.metalnessMap.image = this.loadedImages['3_Metallic'];
 			brain[5].material.envMap.image = this.loadedImages['environment'];
 
 			// Brain 7
-			brain[6].material.map.image = this.loadedImages['3_Base_Color'];
-			brain[6].material.normalMap.image = this.loadedImages['3_Normal_OpenGL'];
+			brain[6].material.map.image = this.loadedImages['1_Base_Color'];
+			brain[6].material.normalMap.image = this.loadedImages['1_Normal_OpenGL'];
+			brain[6].material.roughnessMap.image = this.loadedImages['1_Roughness'];
+			brain[6].material.metalnessMap.image = this.loadedImages['1_Metallic'];
 			brain[6].material.envMap.image = this.loadedImages['environment'];
+			brain[6].material.emissiveMap.image = this.loadedImages['1_Mixed_AO'];
 
 			// Brain 8
-			brain[7].material.map.image = this.loadedImages['4_Base_Color'];
-			brain[7].material.normalMap.image = this.loadedImages['4_Normal_OpenGL'];
+			brain[7].material.map.image = this.loadedImages['3_Base_Color'];
+			brain[7].material.normalMap.image = this.loadedImages['3_Normal_OpenGL'];
+			brain[7].material.metalnessMap.image = this.loadedImages['3_Metallic'];
 			brain[7].material.envMap.image = this.loadedImages['environment'];
+
+			// Brain 9
+			brain[8].material.map.image = this.loadedImages['4_Base_Color'];
+			brain[8].material.normalMap.image = this.loadedImages['4_Normal_OpenGL'];
 
 			cameraInit();
 
