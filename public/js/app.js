@@ -401,7 +401,7 @@ var BrainModel = function () {
 
 		this.imageLoader = new THREE.ImageLoader();
 		this.XHRLoader = new THREE.XHRLoader();
-		this.jsonUrl = 'models/lite-brain-min.json';
+		this.jsonUrl = 'models/lite-brain-2.json';
 		this.loadedImages = [];
 		this.loadImages();
 	}
@@ -690,13 +690,13 @@ function render() {
 		// G1
 		brainModel.gearsGroup[0].rotation.z += 0.015 / 4;
 		// G2
-		// brainModel.gearsGroup[1].rotation.z -= 0.05 / 4;
+		brainModel.gearsGroup[1].rotation.z -= 0.05 / 4;
 		// G3
 		brainModel.gearsGroup[4].rotation.z -= 0.02 / 4;
 		// G4
 		brainModel.gearsGroup[2].rotation.z += 0.05 / 4;
 		// G5
-		brainModel.gearsGroup[3].rotation.z += 0.05 / 4;
+		brainModel.gearsGroup[3].rotation.z -= 0.05 / 4;
 
 		mesh.rotation.y += (targetRotationX - mesh.rotation.y) * ROTATION_BOUNCE;
 
