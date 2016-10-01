@@ -109,7 +109,7 @@ class BrainModel {
 			this.gearsGroup = mainGroup.children[1].children;
 			this.flames = mainGroup.children[2];
 			this.flames.children[0].visible = false;
-			this.flames.children[0].visible = true;
+			this.flames.children[0].visible = false;
 			this.flames.children[1].visible = false;
 			this.flames.children[2].visible = false;
 			this.flames.children[3].visible = false;
