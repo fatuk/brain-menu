@@ -1,26 +1,16 @@
 function mouseHover() {
-
-
-	// var intersects = raycaster.intersectObjects( scene.children[3].children );
 	if (scene) {
 		camera.updateMatrixWorld();
 
-		/*scene.children[3].children[0].position.x += 0.01;
-		scene.children[3].children[1].position.x += -0.01;
-		scene.children[3].children[2].position.y += 0.01;
-		scene.children[3].children[3].position.z += 0.01;*/
 		// find intersections
 		raycaster.setFromCamera(mouse, camera);
 
-		// console.log(scene.children[1].children[0].children);
-
-		// var intersects = raycaster.intersectObjects(scene.children, true);
 		var intersects = raycaster.intersectObjects(brainModel.brainGroup.children, true);
 
 		if (intersects.length > 0) {
 
 			if (INTERSECTED != intersects[0].object) {
-				switch (intersects[0].object.name) {
+				/*switch (intersects[0].object.name) {
 					case 'o-brain-1':
 						brainModel.flames.children[0].visible = true;
 						break;
@@ -48,22 +38,19 @@ function mouseHover() {
 					case 'o-brain-7':
 						brainModel.flames.children[6].visible = true;
 						break;
-				}
+				}*/
 
 				if (INTERSECTED) {
-					// console.log(INTERSECTED.name);
-					// console.log(brainModel.brainGroup.children);
+					// To reset after changing hover object
 					INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 					INTERSECTED.material.emissiveIntensity = 0;
 				}
 
 				INTERSECTED = intersects[0].object;
-				// INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-				// INTERSECTED.material.emissive.setHex(0xCC0000);
-				// INTERSECTED.material.emissiveIntensity = 0.2;
-
-				// brainModel.flames.children[0].visible = true;
-
+				INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
+				console.log(INTERSECTED);
+				INTERSECTED.material.emissive.setHex(0xFF491C);
+				INTERSECTED.material.emissiveIntensity = 1;
 			}
 
 		} else {
@@ -74,7 +61,10 @@ function mouseHover() {
 			brainModel.flames.children[4].visible = false;
 			brainModel.flames.children[5].visible = false;
 			brainModel.flames.children[6].visible = false;
-			if (INTERSECTED) INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+			if (INTERSECTED) {
+				INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
+				INTERSECTED.material.emissiveIntensity = 0;
+			}
 			INTERSECTED = null;
 		}
 
