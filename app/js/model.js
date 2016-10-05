@@ -171,6 +171,7 @@ class BrainModel {
 			brain[0].material.metalnessMap.image = this.loadedImages['1_Metallic'];
 			brain[0].material.envMap.image = this.loadedImages['environment'];
 			brain[0].material.emissiveMap.image = this.loadedImages['1_Mixed_AO'];
+			brain[0].material.emissiveIntensity = 0;
 
 			// Brain 2
 			// o-brain-2
@@ -180,6 +181,7 @@ class BrainModel {
 			brain[1].material.metalnessMap.image = this.loadedImages['1_Metallic'];
 			brain[1].material.envMap.image = this.loadedImages['environment'];
 			brain[1].material.emissiveMap.image = this.loadedImages['1_Mixed_AO'];
+			brain[1].material.emissiveIntensity = 0;
 
 			// Brain 3
 			// o-brain-3
@@ -187,6 +189,7 @@ class BrainModel {
 			brain[2].material.metalnessMap.image = this.loadedImages['2_Metallic'];
 			brain[2].material.envMap.image = this.loadedImages['environment'];
 			brain[2].material.emissiveMap.image = this.loadedImages['2_Mixed_AO'];
+			brain[2].material.emissiveIntensity = 0;
 
 			// Brain 4
 			// o-brain-4
@@ -194,6 +197,7 @@ class BrainModel {
 			brain[3].material.metalnessMap.image = this.loadedImages['2_Metallic'];
 			brain[3].material.envMap.image = this.loadedImages['environment'];
 			brain[3].material.emissiveMap.image = this.loadedImages['2_Mixed_AO'];
+			brain[3].material.emissiveIntensity = 0;
 
 			// Brain 5
 			// o-brain-5_1
@@ -203,6 +207,7 @@ class BrainModel {
 			brain[4].material.metalnessMap.image = this.loadedImages['1_Metallic'];
 			brain[4].material.envMap.image = this.loadedImages['environment'];
 			brain[4].material.emissiveMap.image = this.loadedImages['1_Mixed_AO'];
+			brain[4].material.emissiveIntensity = 0;
 
 			// Brain 6
 			// o-brain-5_2
@@ -211,6 +216,7 @@ class BrainModel {
 			brain[5].material.metalnessMap.image = this.loadedImages['3_Metallic'];
 			brain[5].material.envMap.image = this.loadedImages['environment'];
 			brain[5].material.emissiveMap.image = this.loadedImages['3_Mixed_AO'];
+			brain[5].material.emissiveIntensity = 0;
 
 			// Brain 7
 			// o-brain-6_1
@@ -220,6 +226,7 @@ class BrainModel {
 			brain[6].material.metalnessMap.image = this.loadedImages['1_Metallic'];
 			brain[6].material.envMap.image = this.loadedImages['environment'];
 			brain[6].material.emissiveMap.image = this.loadedImages['1_Mixed_AO'];
+			brain[6].material.emissiveIntensity = 0;
 
 			// Brain 8
 			// o-brain-6_2
@@ -228,12 +235,14 @@ class BrainModel {
 			brain[7].material.metalnessMap.image = this.loadedImages['3_Metallic'];
 			brain[7].material.envMap.image = this.loadedImages['environment'];
 			brain[7].material.emissiveMap.image = this.loadedImages['3_Mixed_AO'];
+			brain[7].material.emissiveIntensity = 0;
 
 			// Brain 9
 			// o-brain-7
 			brain[8].material.map.image = this.loadedImages['4_Base_Color'];
 			brain[8].material.normalMap.image = this.loadedImages['4_Normal_OpenGL'];
 			brain[8].material.emissiveMap.image = this.loadedImages['4_Mixed_AO'];
+			brain[8].material.emissiveIntensity = 0;
 
 			cameraInit();
 

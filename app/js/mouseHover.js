@@ -42,14 +42,11 @@ function mouseHover() {
 
 				if (INTERSECTED) {
 					// To reset after changing hover object
-					INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 					INTERSECTED.material.emissiveIntensity = 0;
 				}
 
 				INTERSECTED = intersects[0].object;
-				INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
 				console.log(INTERSECTED.name);
-				INTERSECTED.material.emissive.setHex(0xFF491C);
 				INTERSECTED.material.emissiveIntensity = 1;
 			}
 
@@ -62,7 +59,6 @@ function mouseHover() {
 			brainModel.flames.children[5].visible = false;
 			brainModel.flames.children[6].visible = false;
 			if (INTERSECTED) {
-				INTERSECTED.material.emissive.setHex(INTERSECTED.currentHex);
 				INTERSECTED.material.emissiveIntensity = 0;
 			}
 			INTERSECTED = null;
