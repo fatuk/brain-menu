@@ -46,7 +46,8 @@ function mouseHover() {
 				}
 
 				INTERSECTED = intersects[0].object;
-				console.log(INTERSECTED.name);
+				// console.log(INTERSECTED.name);
+				currentPart = INTERSECTED.name;
 				INTERSECTED.material.emissiveIntensity = 1;
 			}
 

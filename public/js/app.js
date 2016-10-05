@@ -56,15 +56,63 @@ var mouseYOnMouseDown = 0;
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 
+var currentPart = null;
+
 var finalRotationY = void 0;
 var ROTATION_BOUNCE = 0.05;
 var MOUSE_ROTATION_SPEED = 0.008;
 var TOUCH_ROTATION_SPEED = 0.008;
 
 var mouse = new THREE.Vector2(); // create once
+var circleNumber = void 0;
 
 init();
 animate();
+
+function goTo(part) {
+
+	switch (part) {
+		case 'o-brain-1':
+			console.log('o-brain-1');
+			circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
+			targetRotationX = Math.PI * 1 * circleNumber || Math.PI;
+			console.log(circleNumber, targetRotationX);
+			targetRotationY = 0;
+			break;
+		case 'o-brain-2':
+			console.log('o-brain-2');
+			circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
+			targetRotationX = Math.PI * 2 * circleNumber;
+			console.log(circleNumber, targetRotationX);
+			targetRotationY = 0;
+			break;
+		case 'o-brain-3':
+			console.log('o-brain-3');
+			break;
+		case 'o-brain-4':
+			console.log('o-brain-4');
+			break;
+		case 'o-brain-5_1':
+			console.log('o-brain-5_1');
+			break;
+		case 'o-brain-5_2':
+			console.log('o-brain-5_2');
+			break;
+		case 'o-brain-6_1':
+			console.log('o-brain-6_1');
+			break;
+		case 'o-brain-6_2':
+			console.log('o-brain-6_2');
+			break;
+		case 'o-brain-7':
+			console.log('o-brain-7');
+			break;
+	}
+}
+
+document.addEventListener('mousedown', function () {
+	goTo(currentPart);
+}, false);
 
 function init() {
 	// scene = new THREE.Scene();
@@ -713,7 +761,8 @@ function mouseHover() {
 				}
 
 				INTERSECTED = intersects[0].object;
-				console.log(INTERSECTED.name);
+				// console.log(INTERSECTED.name);
+				currentPart = INTERSECTED.name;
 				INTERSECTED.material.emissiveIntensity = 1;
 			}
 		} else {
