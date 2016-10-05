@@ -48,7 +48,7 @@ function mouseHover() {
 
 				INTERSECTED = intersects[0].object;
 				INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-				console.log(INTERSECTED);
+				console.log(INTERSECTED.name);
 				INTERSECTED.material.emissive.setHex(0xFF491C);
 				INTERSECTED.material.emissiveIntensity = 1;
 			}

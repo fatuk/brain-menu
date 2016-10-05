@@ -14,10 +14,10 @@ import notify from 'gulp-notify';
 import babel from 'gulp-babel';
 import templateData from './app/data/data.json';
 import mainBowerFiles from 'main-bower-files';
-let bowerFiles = mainBowerFiles();
+import imagemin from 'gulp-imagemin';
 
 console.info('********** Bower Files **********');
-console.info(bowerFiles);
+console.info(mainBowerFiles());
 
 /******************************
  * Default task
@@ -44,6 +44,16 @@ gulp.task('build', [
 ]);
 
 /******************************
+ * Image min
+ ******************************/
+gulp.task('imagemin', () => {
+	return gulp.src(['assets/models/textures/*'])
+		.pipe(plumber())
+		.pipe(imagemin())
+		.pipe(gulp.dest('assets/models/textures-min'))
+});
+
+/******************************
  * Copy assets to public
  ******************************/
 gulp.task('copyAssets', () => {
@@ -68,7 +78,7 @@ gulp.task('handlebars', () => {
 			},
 			batch: ['./app/templates/partials'],
 			helpers: {
-				capitals: function (str) {
+				capitals: function(str) {
 					return str.fn(this).toUpperCase();
 				}
 			}
@@ -83,7 +93,7 @@ gulp.task('handlebars', () => {
  * JS plugins
  ******************************/
 gulp.task('pluginsConcat', () => {
-	return gulp.src(bowerFiles)
+	return gulp.src(mainBowerFiles())
 		.pipe(plumber())
 		.pipe(concat('plugins.min.js'))
 		.pipe(gulp.dest('public/js'));
@@ -93,7 +103,7 @@ gulp.task('pluginsConcat', () => {
  * JS plugins build
  ******************************/
 gulp.task('pluginsConcatBuild', () => {
-	return gulp.src(bowerFiles)
+	return gulp.src(mainBowerFiles())
 		.pipe(plumber())
 		.pipe(concat('plugins.min.js'))
 		.pipe(uglify())
@@ -109,7 +119,7 @@ gulp.task('jsConcat', () => {
 		.pipe(sourcemaps.init())
 		.pipe(babel())
 		.pipe(concat('app.js'))
-		.on('error', notify.onError(function (error) {
+		.on('error', notify.onError(function(error) {
 			return '\nAn error occurred while uglifying js.\nLook in the console for details.\n' + error;
 		}))
 		.pipe(sourcemaps.write('../js'))
@@ -126,7 +136,7 @@ gulp.task('jsConcatBuild', () => {
 		.pipe(babel())
 		.pipe(concat('app.js'))
 		.pipe(uglify())
-		.on('error', notify.onError(function (error) {
+		.on('error', notify.onError(function(error) {
 			return '\nAn error occurred while uglifying js.\nLook in the console for details.\n' + error;
 		}))
 		.pipe(sourcemaps.write('../js'))
@@ -150,7 +160,7 @@ gulp.task('browser-sync', () => {
 		open: false,
 		middleware: [{
 			route: 'blob:*',
-			handle: function (req, res, next) {
+			handle: function(req, res, next) {
 				console.log(req, res, next);
 			}
 		}],
@@ -179,7 +189,7 @@ gulp.task('less', () => {
 		.pipe(plumber())
 		.pipe(sourcemaps.init())
 		.pipe(less())
-		.on('error', notify.onError(function (error) {
+		.on('error', notify.onError(function(error) {
 			return '\nAn error occurred while compiling css.\nLook in the console for details.\n' + error;
 		}))
 		.pipe(autoprefixer({
@@ -197,7 +207,7 @@ gulp.task('lessBuild', () => {
 	return gulp.src('app/less/app.less')
 		.pipe(plumber())
 		.pipe(less())
-		.on('error', notify.onError(function (error) {
+		.on('error', notify.onError(function(error) {
 			return '\nAn error occurred while compiling css.\nLook in the console for details.\n' + error;
 		}))
 		.pipe(autoprefixer({

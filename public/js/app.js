@@ -346,7 +346,7 @@ var Modal = function () {
 			var _this = this;
 
 			var $body = $('body');
-			this.template = '\n<div id="' + this.data.id + '" class="modal js-modal animated fadeIn">\n\t<!-- Modal -->\n\t<h2 class="modal__title">\n\t\t' + this.data.title + '\n\t</h2>\n\t<p class="modal__text">\n\t\t' + this.data.text + '\n\t</p>\n\t<a href="' + this.data.link + '" class="btn btn_red btn_upper">\n\t\t<span class="btn__text">\n\t\t\tПодробнее\n\t\t</span>\n\t</a>\n</div>\n<div class="animated fadeIn overlay js-overlay"></div>\n';
+			this.template = '\n<div id="' + this.data.id + '" class="modal js-modal animated fadeIn">\n\t<!-- Modal -->\n\t<h2 class="modal__title">\n\t\t' + this.data.title + '\n\t</h2>\n\t<p class="modal__text">\n\t\t' + this.data.text + '\n\t</p>\n\t<a href="' + this.data.link + '" class="btn btn_red btn_upper">\n\t\t<span class="btn__text">\n\t\t\t\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435\n\t\t</span>\n\t</a>\n</div>\n<div class="animated fadeIn overlay js-overlay"></div>\n';
 			if (!$body.find('#' + this.data.id).length) {
 				this.destroy();
 				$body.append(this.template);
@@ -401,7 +401,7 @@ var BrainModel = function () {
 
 		this.imageLoader = new THREE.ImageLoader();
 		this.XHRLoader = new THREE.XHRLoader();
-		this.jsonUrl = 'models/lite-brain-2.json';
+		this.jsonUrl = 'models/lite-brain-3.json';
 		this.loadedImages = [];
 		this.loadImages();
 	}
@@ -436,11 +436,23 @@ var BrainModel = function () {
 				url: '2_Metallic.jpg',
 				name: '2_Metallic'
 			}, {
+				url: '2_Mixed_AO.jpg',
+				name: '2_Mixed_AO'
+			}, {
+				url: '2_Normal_OpenGL.jpg',
+				name: '2_Normal_OpenGL'
+			}, {
+				url: '2_Roughness.jpg',
+				name: '2_Roughness'
+			}, {
 				url: '3_Base_Color.jpg',
 				name: '3_Base_Color'
 			}, {
 				url: '3_Metallic.jpg',
 				name: '3_Metallic'
+			}, {
+				url: '3_Mixed_AO.jpg',
+				name: '3_Mixed_AO'
 			}, {
 				url: '3_Normal_OpenGL.jpg',
 				name: '3_Normal_OpenGL'
@@ -448,8 +460,14 @@ var BrainModel = function () {
 				url: '4_Base_Color.jpg',
 				name: '4_Base_Color'
 			}, {
+				url: '4_Mixed_AO.jpg',
+				name: '4_Mixed_AO'
+			}, {
 				url: '4_Normal_OpenGL.jpg',
 				name: '4_Normal_OpenGL'
+			}, {
+				url: 'emission_black.jpg',
+				name: 'emission_black'
 			}, {
 				url: 'environment.png',
 				name: 'environment'
@@ -462,6 +480,9 @@ var BrainModel = function () {
 			}, {
 				url: 'gears_Base_Color.jpg',
 				name: 'gears_Base_Color'
+			}, {
+				url: 'gears_Height.jpg',
+				name: 'gears_Height'
 			}, {
 				url: 'gears_Metallic.jpg',
 				name: 'gears_Metallic'
@@ -539,6 +560,7 @@ var BrainModel = function () {
 				_this2.gearsGroup[0].material.roughnessMap.image = _this2.loadedImages['gears_Roughness'];
 				_this2.gearsGroup[0].material.metalnessMap.image = _this2.loadedImages['gears_Metallic'];
 				_this2.gearsGroup[0].material.envMap.image = _this2.loadedImages['environment'];
+				_this2.gearsGroup[0].material.emissiveMap.image = _this2.loadedImages['emission_black'];
 
 				// Glass
 				_this2.gearsGroup[6].material.alphaMap.image = _this2.loadedImages['glass_alpha'];
@@ -546,6 +568,7 @@ var BrainModel = function () {
 				_this2.gearsGroup[6].material.envMap.image = _this2.loadedImages['environment'];
 
 				// Brain 1
+				// o-brain-1
 				brain[0].material.map.image = _this2.loadedImages['1_Base_Color'];
 				brain[0].material.normalMap.image = _this2.loadedImages['1_Normal_OpenGL'];
 				brain[0].material.roughnessMap.image = _this2.loadedImages['1_Roughness'];
@@ -554,6 +577,7 @@ var BrainModel = function () {
 				brain[0].material.emissiveMap.image = _this2.loadedImages['1_Mixed_AO'];
 
 				// Brain 2
+				// o-brain-2
 				brain[1].material.map.image = _this2.loadedImages['1_Base_Color'];
 				brain[1].material.normalMap.image = _this2.loadedImages['1_Normal_OpenGL'];
 				brain[1].material.roughnessMap.image = _this2.loadedImages['1_Roughness'];
@@ -562,16 +586,21 @@ var BrainModel = function () {
 				brain[1].material.emissiveMap.image = _this2.loadedImages['1_Mixed_AO'];
 
 				// Brain 3
+				// o-brain-3
 				brain[2].material.map.image = _this2.loadedImages['2_Base_Color'];
 				brain[2].material.metalnessMap.image = _this2.loadedImages['2_Metallic'];
 				brain[2].material.envMap.image = _this2.loadedImages['environment'];
+				brain[2].material.emissiveMap.image = _this2.loadedImages['2_Mixed_AO'];
 
 				// Brain 4
+				// o-brain-4
 				brain[3].material.map.image = _this2.loadedImages['2_Base_Color'];
 				brain[3].material.metalnessMap.image = _this2.loadedImages['2_Metallic'];
 				brain[3].material.envMap.image = _this2.loadedImages['environment'];
+				brain[3].material.emissiveMap.image = _this2.loadedImages['2_Mixed_AO'];
 
 				// Brain 5
+				// o-brain-5_1
 				brain[4].material.map.image = _this2.loadedImages['1_Base_Color'];
 				brain[4].material.normalMap.image = _this2.loadedImages['1_Normal_OpenGL'];
 				brain[4].material.roughnessMap.image = _this2.loadedImages['1_Roughness'];
@@ -580,12 +609,15 @@ var BrainModel = function () {
 				brain[4].material.emissiveMap.image = _this2.loadedImages['1_Mixed_AO'];
 
 				// Brain 6
+				// o-brain-5_2
 				brain[5].material.map.image = _this2.loadedImages['3_Base_Color'];
 				brain[5].material.normalMap.image = _this2.loadedImages['3_Normal_OpenGL'];
 				brain[5].material.metalnessMap.image = _this2.loadedImages['3_Metallic'];
 				brain[5].material.envMap.image = _this2.loadedImages['environment'];
+				brain[5].material.emissiveMap.image = _this2.loadedImages['3_Mixed_AO'];
 
 				// Brain 7
+				// o-brain-6_1
 				brain[6].material.map.image = _this2.loadedImages['1_Base_Color'];
 				brain[6].material.normalMap.image = _this2.loadedImages['1_Normal_OpenGL'];
 				brain[6].material.roughnessMap.image = _this2.loadedImages['1_Roughness'];
@@ -594,14 +626,18 @@ var BrainModel = function () {
 				brain[6].material.emissiveMap.image = _this2.loadedImages['1_Mixed_AO'];
 
 				// Brain 8
+				// o-brain-6_2
 				brain[7].material.map.image = _this2.loadedImages['3_Base_Color'];
 				brain[7].material.normalMap.image = _this2.loadedImages['3_Normal_OpenGL'];
 				brain[7].material.metalnessMap.image = _this2.loadedImages['3_Metallic'];
 				brain[7].material.envMap.image = _this2.loadedImages['environment'];
+				brain[7].material.emissiveMap.image = _this2.loadedImages['3_Mixed_AO'];
 
 				// Brain 9
+				// o-brain-7
 				brain[8].material.map.image = _this2.loadedImages['4_Base_Color'];
 				brain[8].material.normalMap.image = _this2.loadedImages['4_Normal_OpenGL'];
+				brain[8].material.emissiveMap.image = _this2.loadedImages['4_Mixed_AO'];
 
 				cameraInit();
 
@@ -670,7 +706,7 @@ function mouseHover() {
 
 				INTERSECTED = intersects[0].object;
 				INTERSECTED.currentHex = INTERSECTED.material.emissive.getHex();
-				console.log(INTERSECTED);
+				console.log(INTERSECTED.name);
 				INTERSECTED.material.emissive.setHex(0xFF491C);
 				INTERSECTED.material.emissiveIntensity = 1;
 			}
