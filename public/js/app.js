@@ -72,45 +72,95 @@ animate();
 function goTo(part) {
 	switch (part) {
 		case 'o-brain-1':
-			console.log('o-brain-1');
-			circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
-			targetRotationX = Math.PI * 1 * circleNumber || Math.PI;
+			console.log('[0] o-brain-1');
+			circleNumber = Math.floor(mesh.rotation.y / (Math.PI * 2));
+			targetRotationY = 0.84;
+			targetRotationX = 3.32 + circleNumber * Math.PI * 2;
 			resetAll();
 			brainModel.flames.children[0].visible = true;
 			brainModel.brain[0].material.emissiveIntensity = 1;
 			brainModel.brain[0].selected = true;
-			targetRotationY = 1;
 			break;
 		case 'o-brain-2':
-			console.log('o-brain-2');
+			console.log('[1] o-brain-2');
 			circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
-			targetRotationX = Math.PI * 2 * circleNumber;
+			targetRotationY = 0.75;
+			targetRotationX = -0.2 + circleNumber * Math.PI * 2;
 			resetAll();
 			brainModel.flames.children[1].visible = true;
 			brainModel.brain[1].material.emissiveIntensity = 1;
 			brainModel.brain[1].selected = true;
-			targetRotationY = 1;
 			break;
 		case 'o-brain-3':
-			console.log('o-brain-3');
+			console.log('[2] o-brain-3');
+			circleNumber = Math.floor(mesh.rotation.y / (Math.PI * 2));
+			targetRotationY = -0.23;
+			targetRotationX = 2.15 + circleNumber * Math.PI * 2;
+			resetAll();
+			brainModel.flames.children[2].visible = true;
+			brainModel.brain[2].material.emissiveIntensity = 1;
+			brainModel.brain[2].selected = true;
 			break;
 		case 'o-brain-4':
-			console.log('o-brain-4');
+			console.log('[3] o-brain-4');
+			circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
+			targetRotationY = -0.4;
+			targetRotationX = 0.79 + circleNumber * Math.PI * 2;
+			resetAll();
+			brainModel.flames.children[3].visible = true;
+			brainModel.brain[3].material.emissiveIntensity = 1;
+			brainModel.brain[3].selected = true;
 			break;
 		case 'o-brain-5_1':
-			console.log('o-brain-5_1');
+			console.log('[4] o-brain-5_1');
+			circleNumber = Math.floor(mesh.rotation.y / (Math.PI * 2));
+			targetRotationY = -0.5;
+			targetRotationX = 3.57 + circleNumber * Math.PI * 2;
+			resetAll();
+			brainModel.flames.children[4].visible = true;
+			brainModel.brain[4].material.emissiveIntensity = 1;
+			brainModel.brain[5].material.emissiveIntensity = 1;
+			brainModel.brain[4].selected = true;
+			brainModel.brain[5].selected = true;
 			break;
 		case 'o-brain-5_2':
-			console.log('o-brain-5_2');
+			console.log('[5] o-brain-5_2');
+			circleNumber = Math.floor(mesh.rotation.y / (Math.PI * 2));
+			targetRotationY = -0.5;
+			targetRotationX = 3.57 + circleNumber * Math.PI * 2;
+			resetAll();
+			brainModel.flames.children[4].visible = true;
+			brainModel.brain[4].material.emissiveIntensity = 1;
+			brainModel.brain[5].material.emissiveIntensity = 1;
+			brainModel.brain[4].selected = true;
+			brainModel.brain[5].selected = true;
 			break;
 		case 'o-brain-6_1':
-			console.log('o-brain-6_1');
+			console.log('[6] o-brain-6_1');
+			circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
+			targetRotationY = -0.5;
+			targetRotationX = -0.59 + circleNumber * Math.PI * 2;
+			resetAll();
+			brainModel.flames.children[5].visible = true;
+			brainModel.brain[6].material.emissiveIntensity = 1;
+			brainModel.brain[7].material.emissiveIntensity = 1;
+			brainModel.brain[6].selected = true;
+			brainModel.brain[7].selected = true;
 			break;
 		case 'o-brain-6_2':
-			console.log('o-brain-6_2');
+			console.log('[7] o-brain-6_2');
+			circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
+			targetRotationY = -0.5;
+			targetRotationX = -0.59 + circleNumber * Math.PI * 2;
+			resetAll();
+			brainModel.flames.children[5].visible = true;
+			brainModel.brain[6].material.emissiveIntensity = 1;
+			brainModel.brain[7].material.emissiveIntensity = 1;
+			brainModel.brain[6].selected = true;
+			brainModel.brain[7].selected = true;
 			break;
 		case 'o-brain-7':
-			console.log('o-brain-7');
+			console.log('[8] o-brain-7');
 			break;
 		default:
 			resetAll();
@@ -130,25 +180,14 @@ function resetFlames() {
 }
 
 function resetSelection() {
-	for (var i = 0; i < 7; i++) {
+	for (var i = 0; i < 8; i++) {
 		brainModel.brain[i].selected = false;
 		brainModel.brain[i].material.emissiveIntensity = 0;
 	}
 }
 
-document.addEventListener('mousedown', function () {
-	goTo(currentPart);
-}, false);
-
 function init() {
-	// scene = new THREE.Scene();
-
-	// lightInit();
 	raycaster = new THREE.Raycaster(); // create once
-	// modelInit();
-	// mouseHover();
-
-	// lines();
 
 	renderer = new THREE.WebGLRenderer({
 		alpha: true,
@@ -171,6 +210,10 @@ function init() {
 
 	// when the mouse moves, call the given function
 	document.addEventListener('mousemove', onMouseHover, false);
+
+	document.addEventListener('mousedown', function () {
+		goTo(currentPart);
+	}, false);
 }
 'use strict';
 
