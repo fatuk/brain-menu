@@ -42,7 +42,10 @@ function mouseHover() {
 
 				if (INTERSECTED) {
 					// To reset after changing hover object
-					INTERSECTED.material.emissiveIntensity = 0;
+					if (!INTERSECTED.selected) {
+						INTERSECTED.material.emissiveIntensity = 0;
+					}
+					currentPart = null;
 				}
 
 				INTERSECTED = intersects[0].object;
@@ -52,15 +55,11 @@ function mouseHover() {
 			}
 
 		} else {
-			brainModel.flames.children[0].visible = false;
-			brainModel.flames.children[1].visible = false;
-			brainModel.flames.children[2].visible = false;
-			brainModel.flames.children[3].visible = false;
-			brainModel.flames.children[4].visible = false;
-			brainModel.flames.children[5].visible = false;
-			brainModel.flames.children[6].visible = false;
 			if (INTERSECTED) {
-				INTERSECTED.material.emissiveIntensity = 0;
+				if (!INTERSECTED.selected) {
+					INTERSECTED.material.emissiveIntensity = 0;
+				}
+				currentPart = null;
 			}
 			INTERSECTED = null;
 		}
