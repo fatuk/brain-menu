@@ -10,46 +10,26 @@ function mouseHover() {
 		if (intersects.length > 0) {
 
 			if (INTERSECTED != intersects[0].object) {
-				/*switch (intersects[0].object.name) {
-					case 'o-brain-1':
-						brainModel.flames.children[0].visible = true;
-						break;
-					case 'o-brain-2':
-						brainModel.flames.children[1].visible = true;
-						break;
-					case 'o-brain-3':
-						brainModel.flames.children[2].visible = true;
-						break;
-					case 'o-brain-4':
-						brainModel.flames.children[3].visible = true;
-						break;
-					case 'o-brain-5_1':
-						brainModel.flames.children[4].visible = true;
-						break;
-					case 'o-brain-5_2':
-						brainModel.flames.children[5].visible = true;
-						break;
-					case 'o-brain-6_1':
-						brainModel.flames.children[5].visible = true;
-						break;
-					case 'o-brain-6_2':
-						brainModel.flames.children[5].visible = true;
-						break;
-					case 'o-brain-7':
-						brainModel.flames.children[6].visible = true;
-						break;
-				}*/
 
 				if (INTERSECTED) {
 					// To reset after changing hover object
 					if (!INTERSECTED.selected) {
-						INTERSECTED.material.emissiveIntensity = 0;
+						resetSelection();
 					}
 					currentPart = null;
 				}
 
 				INTERSECTED = intersects[0].object;
-				// console.log(INTERSECTED.name);
+				console.log(INTERSECTED.name);
+				// Balls union
+				if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
+					brainModel.brain[4].material.emissiveIntensity = 1;
+					brainModel.brain[5].material.emissiveIntensity = 1;
+				}
+				if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
+					brainModel.brain[6].material.emissiveIntensity = 1;
+					brainModel.brain[7].material.emissiveIntensity = 1;
+				}
 				currentPart = INTERSECTED.name;
 				INTERSECTED.material.emissiveIntensity = 1;
 			}
@@ -57,7 +37,7 @@ function mouseHover() {
 		} else {
 			if (INTERSECTED) {
 				if (!INTERSECTED.selected) {
-					INTERSECTED.material.emissiveIntensity = 0;
+					resetSelection();
 				}
 				currentPart = null;
 			}

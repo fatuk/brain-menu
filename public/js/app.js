@@ -69,6 +69,37 @@ var circleNumber = void 0;
 init();
 animate();
 
+function init() {
+	raycaster = new THREE.Raycaster(); // create once
+
+	renderer = new THREE.WebGLRenderer({
+		alpha: true,
+		antialias: false
+	});
+	renderer.setSize(window.innerWidth, window.innerHeight);
+	renderer.sortObjects = false;
+
+	var container = document.getElementById('brain');
+	container.appendChild(renderer.domElement);
+
+	document.addEventListener('mousedown', onDocumentMouseDown, false);
+	document.addEventListener('touchstart', onDocumentTouchStart, false);
+	document.addEventListener('touchmove', onDocumentTouchMove, false);
+	window.addEventListener('resize', onWindowResize, false);
+	document.addEventListener('DOMContentLoaded', onDocumentReady);
+
+	// initialize object to perform world/screen calculations
+	projector = new THREE.Projector();
+
+	// when the mouse moves, call the given function
+	document.addEventListener('mousemove', onMouseHover, false);
+
+	document.addEventListener('mousedown', function () {
+		goTo(currentPart);
+	}, false);
+}
+'use strict';
+
 function goTo(part) {
 	switch (part) {
 		case 'o-brain-1':
@@ -180,40 +211,10 @@ function resetFlames() {
 }
 
 function resetSelection() {
-	for (var i = 0; i < 8; i++) {
+	for (var i = 0; i < 9; i++) {
 		brainModel.brain[i].selected = false;
 		brainModel.brain[i].material.emissiveIntensity = 0;
 	}
-}
-
-function init() {
-	raycaster = new THREE.Raycaster(); // create once
-
-	renderer = new THREE.WebGLRenderer({
-		alpha: true,
-		antialias: false
-	});
-	renderer.setSize(window.innerWidth, window.innerHeight);
-	renderer.sortObjects = false;
-
-	var container = document.getElementById('brain');
-	container.appendChild(renderer.domElement);
-
-	document.addEventListener('mousedown', onDocumentMouseDown, false);
-	document.addEventListener('touchstart', onDocumentTouchStart, false);
-	document.addEventListener('touchmove', onDocumentTouchMove, false);
-	window.addEventListener('resize', onWindowResize, false);
-	document.addEventListener('DOMContentLoaded', onDocumentReady);
-
-	// initialize object to perform world/screen calculations
-	projector = new THREE.Projector();
-
-	// when the mouse moves, call the given function
-	document.addEventListener('mousemove', onMouseHover, false);
-
-	document.addEventListener('mousedown', function () {
-		goTo(currentPart);
-	}, false);
 }
 'use strict';
 
@@ -780,7 +781,7 @@ var BrainModel = function () {
 }();
 
 var brainModel = new BrainModel();
-"use strict";
+'use strict';
 
 function mouseHover() {
 	if (scene) {
@@ -794,53 +795,33 @@ function mouseHover() {
 		if (intersects.length > 0) {
 
 			if (INTERSECTED != intersects[0].object) {
-				/*switch (intersects[0].object.name) {
-    	case 'o-brain-1':
-    		brainModel.flames.children[0].visible = true;
-    		break;
-    	case 'o-brain-2':
-    		brainModel.flames.children[1].visible = true;
-    		break;
-    	case 'o-brain-3':
-    		brainModel.flames.children[2].visible = true;
-    		break;
-    	case 'o-brain-4':
-    		brainModel.flames.children[3].visible = true;
-    		break;
-    	case 'o-brain-5_1':
-    		brainModel.flames.children[4].visible = true;
-    		break;
-    	case 'o-brain-5_2':
-    		brainModel.flames.children[5].visible = true;
-    		break;
-    	case 'o-brain-6_1':
-    		brainModel.flames.children[5].visible = true;
-    		break;
-    	case 'o-brain-6_2':
-    		brainModel.flames.children[5].visible = true;
-    		break;
-    	case 'o-brain-7':
-    		brainModel.flames.children[6].visible = true;
-    		break;
-    }*/
 
 				if (INTERSECTED) {
 					// To reset after changing hover object
 					if (!INTERSECTED.selected) {
-						INTERSECTED.material.emissiveIntensity = 0;
+						resetSelection();
 					}
 					currentPart = null;
 				}
 
 				INTERSECTED = intersects[0].object;
-				// console.log(INTERSECTED.name);
+				console.log(INTERSECTED.name);
+				// Balls union
+				if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
+					brainModel.brain[4].material.emissiveIntensity = 1;
+					brainModel.brain[5].material.emissiveIntensity = 1;
+				}
+				if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
+					brainModel.brain[6].material.emissiveIntensity = 1;
+					brainModel.brain[7].material.emissiveIntensity = 1;
+				}
 				currentPart = INTERSECTED.name;
 				INTERSECTED.material.emissiveIntensity = 1;
 			}
 		} else {
 			if (INTERSECTED) {
 				if (!INTERSECTED.selected) {
-					INTERSECTED.material.emissiveIntensity = 0;
+					resetSelection();
 				}
 				currentPart = null;
 			}
