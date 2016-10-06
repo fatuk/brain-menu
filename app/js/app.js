@@ -85,7 +85,7 @@ function init() {
 	// when the mouse moves, call the given function
 	document.addEventListener('mousemove', onMouseHover, false);
 
-	document.addEventListener( 'mousedown', function () {
+	document.addEventListener('mousedown', function () {
 		goTo(currentPart);
 	}, false);
 }

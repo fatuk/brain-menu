@@ -799,7 +799,16 @@ function mouseHover() {
 				if (INTERSECTED) {
 					// To reset after changing hover object
 					if (!INTERSECTED.selected) {
-						resetSelection();
+						INTERSECTED.material.emissiveIntensity = 0;
+						// Balls reset
+						if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
+							brainModel.brain[4].material.emissiveIntensity = 0;
+							brainModel.brain[5].material.emissiveIntensity = 0;
+						}
+						if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
+							brainModel.brain[6].material.emissiveIntensity = 0;
+							brainModel.brain[7].material.emissiveIntensity = 0;
+						}
 					}
 					currentPart = null;
 				}
@@ -821,7 +830,16 @@ function mouseHover() {
 		} else {
 			if (INTERSECTED) {
 				if (!INTERSECTED.selected) {
-					resetSelection();
+					INTERSECTED.material.emissiveIntensity = 0;
+					// Balls reset
+					if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
+						brainModel.brain[4].material.emissiveIntensity = 0;
+						brainModel.brain[5].material.emissiveIntensity = 0;
+					}
+					if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
+						brainModel.brain[6].material.emissiveIntensity = 0;
+						brainModel.brain[7].material.emissiveIntensity = 0;
+					}
 				}
 				currentPart = null;
 			}
@@ -835,7 +853,6 @@ function mouseHover() {
 
 function render() {
 	if (mesh) {
-		// debugger;
 		// G1
 		brainModel.gearsGroup[0].rotation.z += 0.015 / 4;
 		// G2
@@ -865,23 +882,6 @@ function render() {
 		if (mesh.rotation.x < -0.5) {
 			mesh.rotation.x = -0.5;
 		}
-
-		/*var vectorServices = mesh.geometry.vertices[500].clone();
-  vectorServices.applyMatrix4(mesh.matrixWorld);
-  lineServices.geometry.vertices[1] = vectorServices;
-  lineServices.geometry.verticesNeedUpdate = true;
-  	var vectorContacts = mesh.geometry.vertices[100].clone();
-  vectorContacts.applyMatrix4(mesh.matrixWorld);
-  lineContacts.geometry.vertices[1] = vectorContacts;
-  lineContacts.geometry.verticesNeedUpdate = true;
-  	var vectorProjects = mesh.geometry.vertices[2000].clone();
-  vectorProjects.applyMatrix4(mesh.matrixWorld);
-  lineProjects.geometry.vertices[1] = vectorProjects;
-  lineProjects.geometry.verticesNeedUpdate = true;
-  	var vectorAbout = mesh.geometry.vertices[1000].clone();
-  vectorAbout.applyMatrix4(mesh.matrixWorld);
-  lineAbout.geometry.vertices[1] = vectorAbout;
-  lineAbout.geometry.verticesNeedUpdate = true;*/
 	}
 
 	if (scene) {

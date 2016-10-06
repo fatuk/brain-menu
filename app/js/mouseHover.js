@@ -14,7 +14,16 @@ function mouseHover() {
 				if (INTERSECTED) {
 					// To reset after changing hover object
 					if (!INTERSECTED.selected) {
-						resetSelection();
+						INTERSECTED.material.emissiveIntensity = 0;
+						// Balls reset
+					if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
+						brainModel.brain[4].material.emissiveIntensity = 0;
+						brainModel.brain[5].material.emissiveIntensity = 0;
+					}
+					if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
+						brainModel.brain[6].material.emissiveIntensity = 0;
+						brainModel.brain[7].material.emissiveIntensity = 0;
+					}
 					}
 					currentPart = null;
 				}
@@ -37,7 +46,16 @@ function mouseHover() {
 		} else {
 			if (INTERSECTED) {
 				if (!INTERSECTED.selected) {
-					resetSelection();
+					INTERSECTED.material.emissiveIntensity = 0;
+					// Balls reset
+					if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
+						brainModel.brain[4].material.emissiveIntensity = 0;
+						brainModel.brain[5].material.emissiveIntensity = 0;
+					}
+					if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
+						brainModel.brain[6].material.emissiveIntensity = 0;
+						brainModel.brain[7].material.emissiveIntensity = 0;
+					}
 				}
 				currentPart = null;
 			}

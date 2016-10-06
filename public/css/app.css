@@ -454,6 +454,9 @@ html {
   text-shadow: 1px 1px 0 #000;
   display: none;
 }
+.menu {
+  display: none;
+}
 .menu__list {
   list-style: none;
   padding: 0;
@@ -515,6 +518,7 @@ html {
   font-size: 10px;
   padding: 10px;
   color: #fff;
+  display: none;
 }
 .info__row {
   margin-bottom: 10px;
@@ -643,6 +647,14 @@ html {
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
   z-index: 6;
+}
+.logo {
+  position: absolute;
+  top: 5px;
+  left: 32px;
+}
+.logo__img {
+  width: 117px;
 }
 @media (min-width: 1310px) {
 }
