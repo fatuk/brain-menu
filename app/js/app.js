@@ -19,6 +19,7 @@ let camera,
 	lineContacts,
 	animationLoop,
 	lightHelper2,
+	myHint,
 	myModal;
 
 let currentState = 'about';
@@ -85,7 +86,10 @@ function init() {
 	// when the mouse moves, call the given function
 	document.addEventListener('mousemove', onMouseHover, false);
 
-	document.addEventListener('mousedown', function () {
-		goTo(currentPart);
+	document.addEventListener('mousedown', function (e) {
+		console.log(e.target.className);
+		if (e.target.className !== 'hint__menu-link') {
+			goTo(currentPart);
+		}
 	}, false);
 }

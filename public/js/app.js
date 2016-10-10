@@ -28,6 +28,7 @@ var camera = void 0,
     lineContacts = void 0,
     animationLoop = void 0,
     lightHelper2 = void 0,
+    myHint = void 0,
     myModal = void 0;
 
 var currentState = 'about';
@@ -94,13 +95,17 @@ function init() {
 	// when the mouse moves, call the given function
 	document.addEventListener('mousemove', onMouseHover, false);
 
-	document.addEventListener('mousedown', function () {
-		goTo(currentPart);
+	document.addEventListener('mousedown', function (e) {
+		console.log(e.target.className);
+		if (e.target.className !== 'hint__menu-link') {
+			goTo(currentPart);
+		}
 	}, false);
 }
 'use strict';
 
 function goTo(part) {
+	var data = void 0;
 	switch (part) {
 		case 'o-brain-1':
 			console.log('[0] o-brain-1');
@@ -111,6 +116,25 @@ function goTo(part) {
 			brainModel.flames.children[0].visible = true;
 			brainModel.brain[0].material.emissiveIntensity = 1;
 			brainModel.brain[0].selected = true;
+
+			data = {
+				id: 'about',
+				title: 'О компании',
+				menu: [{
+					text: 'История',
+					url: '#'
+				}, {
+					text: 'Менеджмент',
+					url: '#'
+				}, {
+					text: 'Наша жизнь',
+					url: '#'
+				}]
+			};
+
+			setTimeout(function () {
+				myHint.setData(data).open();
+			}, 500);
 			break;
 		case 'o-brain-2':
 			console.log('[1] o-brain-2');
@@ -121,6 +145,25 @@ function goTo(part) {
 			brainModel.flames.children[1].visible = true;
 			brainModel.brain[1].material.emissiveIntensity = 1;
 			brainModel.brain[1].selected = true;
+
+			data = {
+				id: 'servises',
+				title: 'Услуги',
+				menu: [{
+					text: 'История',
+					url: '#'
+				}, {
+					text: 'Менеджмент',
+					url: '#'
+				}, {
+					text: 'Наша жизнь',
+					url: '#'
+				}]
+			};
+
+			setTimeout(function () {
+				myHint.setData(data).open();
+			}, 500);
 			break;
 		case 'o-brain-3':
 			console.log('[2] o-brain-3');
@@ -131,6 +174,25 @@ function goTo(part) {
 			brainModel.flames.children[2].visible = true;
 			brainModel.brain[2].material.emissiveIntensity = 1;
 			brainModel.brain[2].selected = true;
+
+			data = {
+				id: 'projects',
+				title: 'Проекты',
+				menu: [{
+					text: 'История',
+					url: '#'
+				}, {
+					text: 'Менеджмент',
+					url: '#'
+				}, {
+					text: 'Наша жизнь',
+					url: '#'
+				}]
+			};
+
+			setTimeout(function () {
+				myHint.setData(data).open();
+			}, 500);
 			break;
 		case 'o-brain-4':
 			console.log('[3] o-brain-4');
@@ -141,6 +203,25 @@ function goTo(part) {
 			brainModel.flames.children[3].visible = true;
 			brainModel.brain[3].material.emissiveIntensity = 1;
 			brainModel.brain[3].selected = true;
+
+			data = {
+				id: 'career',
+				title: 'Карьера',
+				menu: [{
+					text: 'История',
+					url: '#'
+				}, {
+					text: 'Менеджмент',
+					url: '#'
+				}, {
+					text: 'Наша жизнь',
+					url: '#'
+				}]
+			};
+
+			setTimeout(function () {
+				myHint.setData(data).open();
+			}, 500);
 			break;
 		case 'o-brain-5_1':
 			console.log('[4] o-brain-5_1');
@@ -153,6 +234,25 @@ function goTo(part) {
 			brainModel.brain[5].material.emissiveIntensity = 1;
 			brainModel.brain[4].selected = true;
 			brainModel.brain[5].selected = true;
+
+			data = {
+				id: 'news',
+				title: 'Новости',
+				menu: [{
+					text: 'История',
+					url: '#'
+				}, {
+					text: 'Менеджмент',
+					url: '#'
+				}, {
+					text: 'Наша жизнь',
+					url: '#'
+				}]
+			};
+
+			setTimeout(function () {
+				myHint.setData(data).open();
+			}, 500);
 			break;
 		case 'o-brain-5_2':
 			console.log('[5] o-brain-5_2');
@@ -165,6 +265,25 @@ function goTo(part) {
 			brainModel.brain[5].material.emissiveIntensity = 1;
 			brainModel.brain[4].selected = true;
 			brainModel.brain[5].selected = true;
+
+			data = {
+				id: 'news',
+				title: 'Новости',
+				menu: [{
+					text: 'История',
+					url: '#'
+				}, {
+					text: 'Менеджмент',
+					url: '#'
+				}, {
+					text: 'Наша жизнь',
+					url: '#'
+				}]
+			};
+
+			setTimeout(function () {
+				myHint.setData(data).open();
+			}, 500);
 			break;
 		case 'o-brain-6_1':
 			console.log('[6] o-brain-6_1');
@@ -177,6 +296,25 @@ function goTo(part) {
 			brainModel.brain[7].material.emissiveIntensity = 1;
 			brainModel.brain[6].selected = true;
 			brainModel.brain[7].selected = true;
+
+			data = {
+				id: 'contacts',
+				title: 'Контакты',
+				menu: [{
+					text: 'История',
+					url: 'http://ya.ru'
+				}, {
+					text: 'Менеджмент',
+					url: '#'
+				}, {
+					text: 'Наша жизнь',
+					url: '#'
+				}]
+			};
+
+			setTimeout(function () {
+				myHint.setData(data).open();
+			}, 500);
 			break;
 		case 'o-brain-6_2':
 			console.log('[7] o-brain-6_2');
@@ -189,12 +327,32 @@ function goTo(part) {
 			brainModel.brain[7].material.emissiveIntensity = 1;
 			brainModel.brain[6].selected = true;
 			brainModel.brain[7].selected = true;
+
+			data = {
+				id: 'contacts',
+				title: 'Контакты',
+				menu: [{
+					text: 'История',
+					url: 'http://ya.ru'
+				}, {
+					text: 'Менеджмент',
+					url: '#'
+				}, {
+					text: 'Наша жизнь',
+					url: '#'
+				}]
+			};
+
+			setTimeout(function () {
+				myHint.setData(data).open();
+			}, 500);
 			break;
 		case 'o-brain-7':
 			console.log('[8] o-brain-7');
 			break;
 		default:
 			resetAll();
+			myHint.close();
 			break;
 	}
 }
@@ -296,6 +454,74 @@ function cameraInit() {
 	camera.position.z = 10.85;
 	scene.add(camera);
 }
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Hint = function () {
+	function Hint() {
+		_classCallCheck(this, Hint);
+
+		this.data = this.data || {};
+		this.$body = $('body');
+	}
+
+	_createClass(Hint, [{
+		key: 'setData',
+		value: function setData(data) {
+			this.data = data;
+			return this;
+		}
+	}, {
+		key: 'getMenu',
+		value: function getMenu(data) {
+			var menuHtml = '';
+			for (var item in data) {
+				menuHtml += '\n<li class="hint__menu-item">\n\t<a href="' + data[item].url + '" class="hint__menu-link">\n\t\t' + data[item].text + '\n\t</a>\n</li>\n';
+			}
+			this.menuTemplate = '\n<ul class="hint__menu">\n\t' + menuHtml + '\n</ul>\n';
+			return this.menuTemplate;
+		}
+	}, {
+		key: 'open',
+		value: function open() {
+			this.$body = $('body');
+			this.template = '\n<div id="' + this.data.id + '" class="hint js-hint animated fadeIn">\n\t<!-- Hint -->\n\t<img src="/img/hint.svg" alt="" class="hint__background">\n\t<div class="hint__container">\n\t\t<h2 class="hint__title">\n\t\t\t' + this.data.title + '\n\t\t</h2>\n\t\t' + this.getMenu(this.data.menu) + '\n\t</div>\n</div>\n';
+			if (!this.$body.find('#' + this.data.id).length) {
+				this.destroy();
+				this.$body.append(this.template);
+				this.$hint = $('.js-hint');
+			}
+			return this;
+		}
+	}, {
+		key: 'close',
+		value: function close() {
+			if (this.$hint) {
+				this.$hint.addClass('fadeOut');
+				// setTimeout(() => {
+				this.destroy();
+				// }, 0);
+			}
+		}
+	}, {
+		key: 'destroy',
+		value: function destroy() {
+			if (this.$hint) {
+				this.$hint.remove();
+				this.data = {};
+			}
+		}
+	}]);
+
+	return Hint;
+}();
+
+;
+
+myHint = new Hint();
 "use strict";
 
 function lightInit() {
@@ -814,7 +1040,7 @@ function mouseHover() {
 				}
 
 				INTERSECTED = intersects[0].object;
-				console.log(INTERSECTED.name);
+				// console.log(INTERSECTED.name);
 				// Balls union
 				if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
 					brainModel.brain[4].material.emissiveIntensity = 1;

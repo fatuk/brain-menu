@@ -29,7 +29,7 @@ function mouseHover() {
 				}
 
 				INTERSECTED = intersects[0].object;
-				console.log(INTERSECTED.name);
+				// console.log(INTERSECTED.name);
 				// Balls union
 				if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
 					brainModel.brain[4].material.emissiveIntensity = 1;
