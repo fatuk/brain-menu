@@ -70,6 +70,41 @@ var circleNumber = void 0;
 init();
 animate();
 
+var fadeMe = {};
+
+// function fade(obj, start, end, speed) {
+function fadeIntense(data) {
+	var obj = data.obj;
+	var start = data.start;
+	var end = data.end;
+	var speed = data.speed;
+
+
+	if (speed > 0) {
+		if (obj && obj.material.emissiveIntensity <= end) {
+			console.log(obj);
+			if (Array.isArray(obj)) {
+				console.log(obj);
+				obj[0].material.emissiveIntensity += speed;
+				obj[1].material.emissiveIntensity += speed;
+			} else {
+				obj.material.emissiveIntensity += speed;
+			}
+			// console.log(obj.material.emissiveIntensity);
+		}
+	} else {
+		if (obj && obj.material.emissiveIntensity >= 0) {
+			if (Array.isArray(obj)) {
+				obj[0].material.emissiveIntensity += speed;
+				obj[1].material.emissiveIntensity += speed;
+			} else {
+				obj.material.emissiveIntensity += speed;
+			}
+			// console.log(obj.material.emissiveIntensity);
+		}
+	}
+}
+
 function init() {
 	raycaster = new THREE.Raycaster(); // create once
 
@@ -143,7 +178,13 @@ function goTo(part) {
 			targetRotationX = -0.2 + circleNumber * Math.PI * 2;
 			resetAll();
 			brainModel.flames.children[1].visible = true;
-			brainModel.brain[1].material.emissiveIntensity = 1;
+			// brainModel.brain[1].material.emissiveIntensity = 1;
+			fadeMe = {
+				obj: brainModel.brain[1],
+				start: 0,
+				end: 2,
+				speed: 0.1
+			};
 			brainModel.brain[1].selected = true;
 
 			data = {
@@ -371,7 +412,13 @@ function resetFlames() {
 function resetSelection() {
 	for (var i = 0; i < 9; i++) {
 		brainModel.brain[i].selected = false;
-		brainModel.brain[i].material.emissiveIntensity = 0;
+		// brainModel.brain[i].material.emissiveIntensity = 0;
+		fadeMe = {
+			obj: brainModel.brain[i],
+			start: 2,
+			end: 0,
+			speed: -0.1
+		};
 	}
 }
 'use strict';
@@ -1021,8 +1068,8 @@ function mouseHover() {
 		if (intersects.length > 0) {
 
 			if (INTERSECTED != intersects[0].object) {
-
 				if (INTERSECTED) {
+
 					// To reset after changing hover object
 					if (!INTERSECTED.selected) {
 						INTERSECTED.material.emissiveIntensity = 0;
@@ -1035,6 +1082,12 @@ function mouseHover() {
 							brainModel.brain[6].material.emissiveIntensity = 0;
 							brainModel.brain[7].material.emissiveIntensity = 0;
 						}
+						/*fadeMe = {
+      	obj: INTERSECTED,
+      	start: 2,
+      	end: 0,
+      	speed: -0.2
+      }*/
 					}
 					currentPart = null;
 				}
@@ -1043,29 +1096,65 @@ function mouseHover() {
 				// console.log(INTERSECTED.name);
 				// Balls union
 				if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
-					brainModel.brain[4].material.emissiveIntensity = 1;
-					brainModel.brain[5].material.emissiveIntensity = 1;
+					// brainModel.brain[4].material.emissiveIntensity = 1;
+					// brainModel.brain[5].material.emissiveIntensity = 1;
+					fadeMe = {
+						obj: [brainModel.brain[4], brainModel.brain[5]],
+						start: 0,
+						end: 2,
+						speed: 0.1
+					};
 				}
 				if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
-					brainModel.brain[6].material.emissiveIntensity = 1;
-					brainModel.brain[7].material.emissiveIntensity = 1;
+					// brainModel.brain[6].material.emissiveIntensity = 1;
+					// brainModel.brain[7].material.emissiveIntensity = 1;
+					fadeMe = {
+						obj: [brainModel.brain[6], brainModel.brain[7]],
+						start: 0,
+						end: 2,
+						speed: 0.1
+					};
 				}
 				currentPart = INTERSECTED.name;
-				INTERSECTED.material.emissiveIntensity = 1;
+				// INTERSECTED.material.emissiveIntensity = 1;
+				fadeMe = {
+					obj: INTERSECTED,
+					start: 0,
+					end: 2,
+					speed: 0.1
+				};
 			}
 		} else {
 			if (INTERSECTED) {
 				if (!INTERSECTED.selected) {
-					INTERSECTED.material.emissiveIntensity = 0;
+					// INTERSECTED.material.emissiveIntensity = 0;
 					// Balls reset
 					if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
-						brainModel.brain[4].material.emissiveIntensity = 0;
-						brainModel.brain[5].material.emissiveIntensity = 0;
+						// brainModel.brain[4].material.emissiveIntensity = 0;
+						// brainModel.brain[5].material.emissiveIntensity = 0;
+						fadeMe = {
+							obj: [brainModel.brain[4], brainModel.brain[5]],
+							start: 2,
+							end: 0,
+							speed: -0.1
+						};
 					}
 					if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
-						brainModel.brain[6].material.emissiveIntensity = 0;
-						brainModel.brain[7].material.emissiveIntensity = 0;
+						// brainModel.brain[6].material.emissiveIntensity = 0;
+						// brainModel.brain[7].material.emissiveIntensity = 0;
+						fadeMe = {
+							obj: [brainModel.brain[6], brainModel.brain[7]],
+							start: 2,
+							end: 0,
+							speed: -0.1
+						};
 					}
+					fadeMe = {
+						obj: INTERSECTED,
+						start: 2,
+						end: 0,
+						speed: -0.1
+					};
 				}
 				currentPart = null;
 			}
@@ -1095,6 +1184,8 @@ function render() {
 		// Rotation info
 		$rotationInfoX.textContent = Math.round(mesh.rotation.x * 100) / 100;
 		$rotationInfoY.textContent = Math.round(mesh.rotation.y * 100) / 100;
+
+		fadeIntense(fadeMe);
 
 		finalRotationY = targetRotationY - mesh.rotation.x;
 		if (mesh.rotation.x <= 1 && mesh.rotation.x >= -1) {

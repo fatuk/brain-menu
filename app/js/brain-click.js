@@ -37,7 +37,13 @@ function goTo(part) {
 			targetRotationX = -0.2 + (circleNumber * Math.PI * 2);
 			resetAll();
 			brainModel.flames.children[1].visible = true;
-			brainModel.brain[1].material.emissiveIntensity = 1;
+			// brainModel.brain[1].material.emissiveIntensity = 1;
+			fadeMe = {
+				obj: brainModel.brain[1],
+				start: 0,
+				end: 2,
+				speed: 0.1
+			}
 			brainModel.brain[1].selected = true;
 
 			data = {
@@ -265,6 +271,12 @@ function resetFlames() {
 function resetSelection() {
 	for (let i = 0; i < 9; i++) {
 		brainModel.brain[i].selected = false;
-		brainModel.brain[i].material.emissiveIntensity = 0;
+		// brainModel.brain[i].material.emissiveIntensity = 0;
+		fadeMe = {
+			obj: brainModel.brain[i],
+			start: 2,
+			end: 0,
+			speed: -0.1
+		}
 	}
 }

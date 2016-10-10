@@ -17,6 +17,8 @@ function render() {
 		$rotationInfoX.textContent = Math.round(mesh.rotation.x * 100) / 100;
 		$rotationInfoY.textContent = Math.round(mesh.rotation.y * 100) / 100;
 
+		fadeIntense(fadeMe);
+
 		finalRotationY = (targetRotationY - mesh.rotation.x);
 		if (mesh.rotation.x <= 1 && mesh.rotation.x >= -1) {
 			mesh.rotation.x += finalRotationY * ROTATION_BOUNCE;
