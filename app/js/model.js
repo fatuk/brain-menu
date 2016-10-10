@@ -2,7 +2,7 @@ class BrainModel {
 	constructor() {
 		this.imageLoader = new THREE.ImageLoader();
 		this.XHRLoader = new THREE.XHRLoader();
-		this.jsonUrl = 'models/lite-brain-3.json';
+		this.jsonUrl = 'models/lite-brain-4.json';
 		this.loadedImages = [];
 		this.loadImages();
 	}
@@ -186,7 +186,7 @@ class BrainModel {
 			// Brain 3
 			// o-brain-3
 			this.brain[2].material.map.image = this.loadedImages['2_Base_Color'];
-			this.brain[2].material.metalnessMap.image = this.loadedImages['2_Metallic'];
+			this.brain[2].material.normalMap.image = this.loadedImages['2_Normal_OpenGL'];
 			this.brain[2].material.envMap.image = this.loadedImages['environment'];
 			this.brain[2].material.emissiveMap.image = this.loadedImages['2_Mixed_AO'];
 			this.brain[2].material.emissiveIntensity = 0;
@@ -194,7 +194,7 @@ class BrainModel {
 			// Brain 4
 			// o-brain-4
 			this.brain[3].material.map.image = this.loadedImages['2_Base_Color'];
-			this.brain[3].material.metalnessMap.image = this.loadedImages['2_Metallic'];
+			this.brain[3].material.normalMap.image = this.loadedImages['2_Normal_OpenGL'];
 			this.brain[3].material.envMap.image = this.loadedImages['environment'];
 			this.brain[3].material.emissiveMap.image = this.loadedImages['2_Mixed_AO'];
 			this.brain[3].material.emissiveIntensity = 0;

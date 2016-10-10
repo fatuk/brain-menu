@@ -12,7 +12,7 @@
 
 ## To remove images:
 
-`sed 's/"url.*/===/g' <brain-v1.json >new-brain.json`
+`sed 's/"url.*/===/g' <app.json >new-brain.json`
 
 
 ## Scene structure
