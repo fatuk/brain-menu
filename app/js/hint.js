@@ -30,7 +30,7 @@ class Hint {
 		this.template = `
 <div id="${this.data.id}" class="hint js-hint animated fadeIn">
 	<!-- Hint -->
-	<img src="/img/hint.svg" alt="" class="hint__background">
+	<img src="./img/hint.svg" alt="" class="hint__background">
 	<div class="hint__container">
 		<h2 class="hint__title">
 			${this.data.title}
