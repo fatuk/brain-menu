@@ -66,6 +66,7 @@ let fadeTime = 0.5; // seconds
 // Hover config
 let isHover = false;
 let isMoving = false;
+let isMovingLocked = false;
 
 init();
 animate();
@@ -127,15 +128,19 @@ function init() {
 	document.addEventListener('mousemove', onMouseHover, false);
 
 	document.addEventListener('mousedown', function (e) {
-		if (e.target.className !== 'hint__menu-link') {
+		isMovingLocked = true;
+	}, false);
+
+	document.addEventListener('mouseup', function (e) {
+		if (e.target.className !== 'hint__menu-link' && !isMoving) {
 			goTo(currentPart);
 		}
 	}, false);
 
-	document.addEventListener('mouseup', function (e) {
+	/*document.addEventListener('mouseup', function (e) {
 		if (e.target.className !== 'hint__menu-link' && !isHover) {
 			resetAll();
 			myHint.close();
 		}
-	}, false);
+	}, false);*/
 }
