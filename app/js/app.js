@@ -63,6 +63,10 @@ let minIntense = 0;
 let maxIntense = 3;
 let fadeTime = 0.5; // seconds
 
+// Hover config
+let isHover = false;
+let isMoving = false;
+
 init();
 animate();
 
@@ -125,6 +129,13 @@ function init() {
 	document.addEventListener('mousedown', function (e) {
 		if (e.target.className !== 'hint__menu-link') {
 			goTo(currentPart);
+		}
+	}, false);
+
+	document.addEventListener('mouseup', function (e) {
+		if (e.target.className !== 'hint__menu-link' && !isHover) {
+			resetAll();
+			myHint.close();
 		}
 	}, false);
 }

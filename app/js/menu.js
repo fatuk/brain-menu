@@ -15,7 +15,7 @@ function menu () {
 			id: 'about',
 			title: 'О компании',
 			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
-			link: "#"
+			link: "http://ya.ru"
 		};
 
 		setTimeout(() => {
@@ -31,7 +31,7 @@ function menu () {
 			id: 'projects',
 			title: 'Проекты',
 			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
-			link: "#"
+			link: "http://ya.ru"
 		};
 		setTimeout(() => {
 			cancelAnimationFrame(animationLoop);
@@ -48,7 +48,7 @@ function menu () {
 			id: 'services',
 			title: 'Услуги',
 			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
-			link: "#"
+			link: "http://ya.ru"
 		};
 		setTimeout(() => {
 			cancelAnimationFrame(animationLoop);
@@ -63,7 +63,7 @@ function menu () {
 			id: 'contacts',
 			title: 'Контакты',
 			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
-			link: "#"
+			link: "http://ya.ru"
 		};
 		setTimeout(() => {
 			cancelAnimationFrame(animationLoop);

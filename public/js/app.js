@@ -72,6 +72,10 @@ var minIntense = 0;
 var maxIntense = 3;
 var fadeTime = 0.5; // seconds
 
+// Hover config
+var isHover = false;
+var isMoving = false;
+
 init();
 animate();
 
@@ -140,6 +144,13 @@ function init() {
 			goTo(currentPart);
 		}
 	}, false);
+
+	document.addEventListener('mouseup', function (e) {
+		if (e.target.className !== 'hint__menu-link' && !isHover) {
+			resetAll();
+			myHint.close();
+		}
+	}, false);
 }
 'use strict';
 
@@ -153,7 +164,6 @@ function goTo(part) {
 			targetRotationX = 3.32 + circleNumber * Math.PI * 2;
 			resetAll();
 			brainModel.flames.children[0].visible = true;
-			// brainModel.brain[0].material.emissiveIntensity = 1;
 			fadeIn(brainModel.brain[0]);
 			brainModel.brain[0].selected = true;
 
@@ -162,13 +172,13 @@ function goTo(part) {
 				title: 'О компании',
 				menu: [{
 					text: 'История',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Менеджмент',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Наша жизнь',
-					url: '#'
+					url: 'http://ya.ru'
 				}]
 			};
 
@@ -192,13 +202,13 @@ function goTo(part) {
 				title: 'Услуги',
 				menu: [{
 					text: 'История',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Менеджмент',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Наша жизнь',
-					url: '#'
+					url: 'http://ya.ru'
 				}]
 			};
 
@@ -222,13 +232,13 @@ function goTo(part) {
 				title: 'Проекты',
 				menu: [{
 					text: 'История',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Менеджмент',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Наша жизнь',
-					url: '#'
+					url: 'http://ya.ru'
 				}]
 			};
 
@@ -252,13 +262,13 @@ function goTo(part) {
 				title: 'Карьера',
 				menu: [{
 					text: 'История',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Менеджмент',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Наша жизнь',
-					url: '#'
+					url: 'http://ya.ru'
 				}]
 			};
 
@@ -285,13 +295,13 @@ function goTo(part) {
 				title: 'Новости',
 				menu: [{
 					text: 'История',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Менеджмент',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Наша жизнь',
-					url: '#'
+					url: 'http://ya.ru'
 				}]
 			};
 
@@ -318,13 +328,13 @@ function goTo(part) {
 				title: 'Новости',
 				menu: [{
 					text: 'История',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Менеджмент',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Наша жизнь',
-					url: '#'
+					url: 'http://ya.ru'
 				}]
 			};
 
@@ -354,10 +364,10 @@ function goTo(part) {
 					url: 'http://ya.ru'
 				}, {
 					text: 'Менеджмент',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Наша жизнь',
-					url: '#'
+					url: 'http://ya.ru'
 				}]
 			};
 
@@ -387,10 +397,10 @@ function goTo(part) {
 					url: 'http://ya.ru'
 				}, {
 					text: 'Менеджмент',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Наша жизнь',
-					url: '#'
+					url: 'http://ya.ru'
 				}]
 			};
 
@@ -411,6 +421,7 @@ function goTo(part) {
 function resetAll() {
 	resetFlames();
 	resetSelection();
+	resetIntense();
 }
 
 function resetFlames() {
@@ -422,6 +433,11 @@ function resetFlames() {
 function resetSelection() {
 	for (var i = 0; i < 9; i++) {
 		brainModel.brain[i].selected = false;
+	}
+}
+
+function resetIntense() {
+	for (var i = 0; i < 9; i++) {
 		if (brainModel.brain[i].material.emissiveIntensity === maxIntense) {
 			fadeOut(brainModel.brain[i]);
 		}
@@ -461,6 +477,8 @@ function onMouseHover(event) {
 }
 
 function onDocumentMouseMove(event) {
+	console.log('moving');
+	isMoving = true;
 	mouseX = event.clientX - windowHalfX;
 	mouseY = event.clientY - windowHalfY;
 	targetRotationY = targetRotationOnMouseDownY + (mouseY - mouseYOnMouseDown) * MOUSE_ROTATION_SPEED;
@@ -662,7 +680,7 @@ function menu() {
 			id: 'about',
 			title: 'О компании',
 			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
-			link: "#"
+			link: "http://ya.ru"
 		};
 
 		setTimeout(function () {
@@ -678,7 +696,7 @@ function menu() {
 			id: 'projects',
 			title: 'Проекты',
 			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
-			link: "#"
+			link: "http://ya.ru"
 		};
 		setTimeout(function () {
 			cancelAnimationFrame(animationLoop);
@@ -695,7 +713,7 @@ function menu() {
 			id: 'services',
 			title: 'Услуги',
 			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
-			link: "#"
+			link: "http://ya.ru"
 		};
 		setTimeout(function () {
 			cancelAnimationFrame(animationLoop);
@@ -710,7 +728,7 @@ function menu() {
 			id: 'contacts',
 			title: 'Контакты',
 			text: 'Компания сцециализируется на предоставлении комплекса<br> услуг, необходимых для эффективной работы<br> с компаниями Китая',
-			link: "#"
+			link: "http://ya.ru"
 		};
 		setTimeout(function () {
 			cancelAnimationFrame(animationLoop);
@@ -1110,66 +1128,52 @@ function mouseHover() {
                 if (INTERSECTED) {
                     // To reset after changing hover object
                     if (!INTERSECTED.selected) {
-                        // INTERSECTED.material.emissiveIntensity = 0;
                         fadeOut(INTERSECTED);
                         // Balls reset
                         if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
-                            // brainModel.brain[4].material.emissiveIntensity = 0;
-                            // brainModel.brain[5].material.emissiveIntensity = 0;
                             fadeOut(brainModel.brain[4]);
                             fadeOut(brainModel.brain[5]);
                         }
                         if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
-                            // brainModel.brain[6].material.emissiveIntensity = 0;
-                            // brainModel.brain[7].material.emissiveIntensity = 0;
                             fadeOut(brainModel.brain[6]);
                             fadeOut(brainModel.brain[7]);
                         }
                     }
+                    isHover = false;
                     currentPart = null;
                 }
 
                 INTERSECTED = intersects[0].object;
-                // console.log(INTERSECTED.name);
                 // Balls union
                 if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
-                    // brainModel.brain[4].material.emissiveIntensity = 1;
-                    // brainModel.brain[5].material.emissiveIntensity = 1;
                     fadeIn(brainModel.brain[4]);
                     fadeIn(brainModel.brain[5]);
                 }
                 if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
-                    // brainModel.brain[6].material.emissiveIntensity = 1;
-                    // brainModel.brain[7].material.emissiveIntensity = 1;
                     fadeIn(brainModel.brain[6]);
                     fadeIn(brainModel.brain[7]);
                 }
                 currentPart = INTERSECTED.name;
-                // INTERSECTED.material.emissiveIntensity = 1;
-                console.log(INTERSECTED.material.emissiveIntensity);
-                if (INTERSECTED.material.emissiveIntensity !== 3) {
+                if (INTERSECTED.material.emissiveIntensity !== maxIntense) {
                     fadeIn(INTERSECTED);
                 }
+                isHover = true;
             }
         } else {
             if (INTERSECTED) {
                 if (!INTERSECTED.selected) {
-                    // INTERSECTED.material.emissiveIntensity = 0;
                     fadeOut(INTERSECTED);
                     // Balls reset
                     if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
-                        // brainModel.brain[4].material.emissiveIntensity = 0;
-                        // brainModel.brain[5].material.emissiveIntensity = 0;
                         fadeOut(brainModel.brain[4]);
                         fadeOut(brainModel.brain[5]);
                     }
                     if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
-                        // brainModel.brain[6].material.emissiveIntensity = 0;
-                        // brainModel.brain[7].material.emissiveIntensity = 0;
                         fadeOut(brainModel.brain[6]);
                         fadeOut(brainModel.brain[7]);
                     }
                 }
+                isHover = false;
                 currentPart = null;
             }
             INTERSECTED = null;
@@ -1193,13 +1197,27 @@ function render() {
 		// G5
 		brainModel.gearsGroup[3].rotation.z -= 0.05 / 4;
 
+		var prevAngle = mesh.rotation.y;
+
 		mesh.rotation.y += (targetRotationX - mesh.rotation.y) * ROTATION_BOUNCE;
+
+		var prevRot = Math.floor(prevAngle * 100) / 100;
+		var currentRot = Math.floor(mesh.rotation.y * 100) / 100;
+		// console.log(prevRot, currentRot);
+		if (prevRot === currentRot) {
+			// console.log('stop moving');
+			isMoving = false;
+		}
+
+		if (isMoving) {
+			resetSelection();
+			resetFlames();
+			myHint.close();
+		}
 
 		// Rotation info
 		$rotationInfoX.textContent = Math.round(mesh.rotation.x * 100) / 100;
 		$rotationInfoY.textContent = Math.round(mesh.rotation.y * 100) / 100;
-
-		fadeIntense(fadeMe);
 
 		finalRotationY = targetRotationY - mesh.rotation.x;
 		if (mesh.rotation.x <= 1 && mesh.rotation.x >= -1) {

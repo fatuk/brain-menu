@@ -663,6 +663,7 @@ html {
   top: 40%;
   width: 507px;
   height: 140px;
+  pointer-events: none;
   z-index: 100;
 }
 .hint:before {
@@ -707,6 +708,7 @@ html {
   list-style: none;
   padding: 0;
   margin: 0;
+  pointer-events: all;
   zoom: 1;
 }
 .hint__menu:before,

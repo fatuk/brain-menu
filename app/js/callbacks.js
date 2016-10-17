@@ -30,6 +30,8 @@ function onMouseHover (event) {
 }
 
 function onDocumentMouseMove(event) {
+	console.log('moving');
+	isMoving = true;
 	mouseX = event.clientX - windowHalfX;
 	mouseY = event.clientY - windowHalfY;
 	targetRotationY = targetRotationOnMouseDownY + (mouseY - mouseYOnMouseDown) * MOUSE_ROTATION_SPEED;

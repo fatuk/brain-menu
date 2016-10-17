@@ -8,7 +8,6 @@ function goTo(part) {
 			targetRotationX = 3.32 + (circleNumber * Math.PI * 2);
 			resetAll();
 			brainModel.flames.children[0].visible = true;
-			// brainModel.brain[0].material.emissiveIntensity = 1;
 			fadeIn(brainModel.brain[0]);
 			brainModel.brain[0].selected = true;
 
@@ -17,13 +16,13 @@ function goTo(part) {
 				title: 'О компании',
 				menu: [{
 					text: 'История',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Менеджмент',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Наша жизнь',
-					url: '#'
+					url: 'http://ya.ru'
 				}]
 			};
 
@@ -47,13 +46,13 @@ function goTo(part) {
 				title: 'Услуги',
 				menu: [{
 					text: 'История',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Менеджмент',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Наша жизнь',
-					url: '#'
+					url: 'http://ya.ru'
 				}]
 			};
 
@@ -77,13 +76,13 @@ function goTo(part) {
 				title: 'Проекты',
 				menu: [{
 					text: 'История',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Менеджмент',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Наша жизнь',
-					url: '#'
+					url: 'http://ya.ru'
 				}]
 			};
 
@@ -107,13 +106,13 @@ function goTo(part) {
 				title: 'Карьера',
 				menu: [{
 					text: 'История',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Менеджмент',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Наша жизнь',
-					url: '#'
+					url: 'http://ya.ru'
 				}]
 			};
 
@@ -140,13 +139,13 @@ function goTo(part) {
 				title: 'Новости',
 				menu: [{
 					text: 'История',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Менеджмент',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Наша жизнь',
-					url: '#'
+					url: 'http://ya.ru'
 				}]
 			};
 
@@ -173,13 +172,13 @@ function goTo(part) {
 				title: 'Новости',
 				menu: [{
 					text: 'История',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Менеджмент',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Наша жизнь',
-					url: '#'
+					url: 'http://ya.ru'
 				}]
 			};
 
@@ -209,10 +208,10 @@ function goTo(part) {
 					url: 'http://ya.ru'
 				}, {
 					text: 'Менеджмент',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Наша жизнь',
-					url: '#'
+					url: 'http://ya.ru'
 				}]
 			};
 
@@ -242,10 +241,10 @@ function goTo(part) {
 					url: 'http://ya.ru'
 				}, {
 					text: 'Менеджмент',
-					url: '#'
+					url: 'http://ya.ru'
 				}, {
 					text: 'Наша жизнь',
-					url: '#'
+					url: 'http://ya.ru'
 				}]
 			};
 
@@ -266,6 +265,7 @@ function goTo(part) {
 function resetAll() {
 	resetFlames();
 	resetSelection();
+	resetIntense();
 }
 
 function resetFlames() {
@@ -277,6 +277,11 @@ function resetFlames() {
 function resetSelection() {
 	for (let i = 0; i < 9; i++) {
 		brainModel.brain[i].selected = false;
+	}
+}
+
+function resetIntense() {
+	for (let i = 0; i < 9; i++) {
 		if (brainModel.brain[i].material.emissiveIntensity === maxIntense) {
 			fadeOut(brainModel.brain[i]);
 		}

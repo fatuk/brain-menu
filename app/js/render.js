@@ -11,13 +11,28 @@ function render() {
 		// G5
 		brainModel.gearsGroup[3].rotation.z -= 0.05 / 4;
 
+		let prevAngle = mesh.rotation.y;
+
 		mesh.rotation.y += (targetRotationX - mesh.rotation.y) * ROTATION_BOUNCE;
+
+
+		let prevRot = Math.floor(prevAngle * 100) / 100;
+		let currentRot = Math.floor(mesh.rotation.y * 100) / 100;
+		// console.log(prevRot, currentRot);
+		if (prevRot === currentRot) {
+			// console.log('stop moving');
+			isMoving = false;
+		}
+
+		if (isMoving) {
+			resetSelection();
+			resetFlames();
+			myHint.close();
+		}
 
 		// Rotation info
 		$rotationInfoX.textContent = Math.round(mesh.rotation.x * 100) / 100;
 		$rotationInfoY.textContent = Math.round(mesh.rotation.y * 100) / 100;
-
-		fadeIntense(fadeMe);
 
 		finalRotationY = (targetRotationY - mesh.rotation.x);
 		if (mesh.rotation.x <= 1 && mesh.rotation.x >= -1) {
