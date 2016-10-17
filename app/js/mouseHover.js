@@ -6,14 +6,15 @@ function fadeIn(obj) {
         params.intense = maxIntense;
     }
 
-    TweenLite.to(params, fadeTime, {
+    TweenMax.to(params, fadeTime, {
         intense: maxIntense,
         ease: Power1.easeOut,
-        onUpdate: function () {
-        	obj.material.emissiveIntensity = params.intense;
+        onUpdate: function() {
+            obj.material.emissiveIntensity = params.intense;
         }
     });
 }
+
 function fadeOut(obj) {
     let params = {};
     if (obj.material.emissiveIntensity !== minIntense) {
@@ -22,11 +23,45 @@ function fadeOut(obj) {
         params.intense = minIntense;
     }
 
-    TweenLite.to(params, fadeTime, {
+    TweenMax.to(params, fadeTime, {
         intense: minIntense,
         ease: Power1.easeOut,
+        onUpdate: function() {
+            obj.material.emissiveIntensity = params.intense;
+        }
+    });
+}
+
+function flamePulsing(obj) {
+    let params = {
+        offset: 0,
+        opacity: 1
+    };
+
+    TweenMax.to(params, 7, {
+        offset: 0.2,
+        ease: Power1.easeInOut,
+        repeat: -1,
+        yoyo: true,
+        onUpdate: function() {
+            obj.material.map.offset.x = params.offset;
+        }
+    });
+
+    TweenMax.to(params, 10, {
+        opacity: 0.3,
+        ease: RoughEase.ease.config({
+            template: Power0.easeNone,
+            strength: 1,
+            points: 20,
+            taper: 'none',
+            randomize: true,
+            clamp: false
+        }),
+        repeat: -1,
+        yoyo: true,
         onUpdate: function () {
-        	obj.material.emissiveIntensity = params.intense;
+            obj.material.opacity = params.opacity;
         }
     });
 }
@@ -73,7 +108,7 @@ function mouseHover() {
                 }
                 currentPart = INTERSECTED.name;
                 if (INTERSECTED.material.emissiveIntensity !== maxIntense) {
-                	fadeIn(INTERSECTED);
+                    fadeIn(INTERSECTED);
                 }
                 isHover = true;
             }

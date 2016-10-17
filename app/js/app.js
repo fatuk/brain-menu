@@ -67,6 +67,7 @@ let fadeTime = 0.5; // seconds
 let isHover = false;
 let isMoving = false;
 let isMovingLocked = false;
+let isSelected = false;
 
 init();
 animate();

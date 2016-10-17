@@ -18,9 +18,7 @@ function render() {
 
 		let prevRot = Math.floor(prevAngle * 100) / 100;
 		let currentRot = Math.floor(mesh.rotation.y * 100) / 100;
-		// console.log(prevRot, currentRot);
 		if (prevRot === currentRot) {
-			// console.log('stop moving');
 			isMoving = false;
 		}
 

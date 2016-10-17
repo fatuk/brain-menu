@@ -76,6 +76,7 @@ var fadeTime = 0.5; // seconds
 var isHover = false;
 var isMoving = false;
 var isMovingLocked = false;
+var isSelected = false;
 
 init();
 animate();
@@ -161,6 +162,7 @@ function init() {
 
 function goTo(part) {
 	var data = void 0;
+	isSelected = true;
 	switch (part) {
 		case 'o-brain-1':
 			console.log('[0] o-brain-1');
@@ -198,7 +200,9 @@ function goTo(part) {
 			targetRotationX = -0.2 + circleNumber * Math.PI * 2;
 			resetAll();
 			brainModel.flames.children[1].visible = true;
-			// brainModel.brain[1].material.emissiveIntensity = 1;
+			// brainModel.flames.children[1].material.alphaTest = 0.05;
+			flamePulsing(brainModel.flames.children[1]);
+			// console.log(brainModel.flames.children[1]);
 			fadeIn(brainModel.brain[1]);
 			brainModel.brain[1].selected = true;
 
@@ -228,7 +232,6 @@ function goTo(part) {
 			targetRotationX = 2.15 + circleNumber * Math.PI * 2;
 			resetAll();
 			brainModel.flames.children[2].visible = true;
-			// brainModel.brain[2].material.emissiveIntensity = 1;
 			fadeIn(brainModel.brain[2]);
 			brainModel.brain[2].selected = true;
 
@@ -258,7 +261,6 @@ function goTo(part) {
 			targetRotationX = 0.79 + circleNumber * Math.PI * 2;
 			resetAll();
 			brainModel.flames.children[3].visible = true;
-			// brainModel.brain[3].material.emissiveIntensity = 1;
 			fadeIn(brainModel.brain[3]);
 			brainModel.brain[3].selected = true;
 
@@ -288,8 +290,6 @@ function goTo(part) {
 			targetRotationX = 3.57 + circleNumber * Math.PI * 2;
 			resetAll();
 			brainModel.flames.children[4].visible = true;
-			// brainModel.brain[4].material.emissiveIntensity = 1;
-			// brainModel.brain[5].material.emissiveIntensity = 1;
 			fadeIn(brainModel.brain[4]);
 			fadeIn(brainModel.brain[5]);
 			brainModel.brain[4].selected = true;
@@ -321,8 +321,6 @@ function goTo(part) {
 			targetRotationX = 3.57 + circleNumber * Math.PI * 2;
 			resetAll();
 			brainModel.flames.children[4].visible = true;
-			// brainModel.brain[4].material.emissiveIntensity = 1;
-			// brainModel.brain[5].material.emissiveIntensity = 1;
 			fadeIn(brainModel.brain[4]);
 			fadeIn(brainModel.brain[5]);
 			brainModel.brain[4].selected = true;
@@ -354,8 +352,6 @@ function goTo(part) {
 			targetRotationX = -0.59 + circleNumber * Math.PI * 2;
 			resetAll();
 			brainModel.flames.children[5].visible = true;
-			// brainModel.brain[6].material.emissiveIntensity = 1;
-			// brainModel.brain[7].material.emissiveIntensity = 1;
 			fadeIn(brainModel.brain[6]);
 			fadeIn(brainModel.brain[7]);
 			brainModel.brain[6].selected = true;
@@ -387,8 +383,6 @@ function goTo(part) {
 			targetRotationX = -0.59 + circleNumber * Math.PI * 2;
 			resetAll();
 			brainModel.flames.children[5].visible = true;
-			// brainModel.brain[6].material.emissiveIntensity = 1;
-			// brainModel.brain[7].material.emissiveIntensity = 1;
 			fadeIn(brainModel.brain[6]);
 			fadeIn(brainModel.brain[7]);
 			brainModel.brain[6].selected = true;
@@ -417,6 +411,7 @@ function goTo(part) {
 			console.log('[8] o-brain-7');
 			break;
 		default:
+			isSelected = false;
 			resetAll();
 			myHint.close();
 			break;
@@ -482,7 +477,6 @@ function onMouseHover(event) {
 }
 
 function onDocumentMouseMove(event) {
-	console.log('moving');
 	isMoving = true;
 	mouseX = event.clientX - windowHalfX;
 	mouseY = event.clientY - windowHalfY;
@@ -1093,7 +1087,7 @@ function fadeIn(obj) {
         params.intense = maxIntense;
     }
 
-    TweenLite.to(params, fadeTime, {
+    TweenMax.to(params, fadeTime, {
         intense: maxIntense,
         ease: Power1.easeOut,
         onUpdate: function onUpdate() {
@@ -1101,6 +1095,7 @@ function fadeIn(obj) {
         }
     });
 }
+
 function fadeOut(obj) {
     var params = {};
     if (obj.material.emissiveIntensity !== minIntense) {
@@ -1109,11 +1104,45 @@ function fadeOut(obj) {
         params.intense = minIntense;
     }
 
-    TweenLite.to(params, fadeTime, {
+    TweenMax.to(params, fadeTime, {
         intense: minIntense,
         ease: Power1.easeOut,
         onUpdate: function onUpdate() {
             obj.material.emissiveIntensity = params.intense;
+        }
+    });
+}
+
+function flamePulsing(obj) {
+    var params = {
+        offset: 0,
+        opacity: 1
+    };
+
+    TweenMax.to(params, 7, {
+        offset: 0.2,
+        ease: Power1.easeInOut,
+        repeat: -1,
+        yoyo: true,
+        onUpdate: function onUpdate() {
+            obj.material.map.offset.x = params.offset;
+        }
+    });
+
+    TweenMax.to(params, 10, {
+        opacity: 0.3,
+        ease: RoughEase.ease.config({
+            template: Power0.easeNone,
+            strength: 1,
+            points: 20,
+            taper: 'none',
+            randomize: true,
+            clamp: false
+        }),
+        repeat: -1,
+        yoyo: true,
+        onUpdate: function onUpdate() {
+            obj.material.opacity = params.opacity;
         }
     });
 }
@@ -1208,9 +1237,7 @@ function render() {
 
 		var prevRot = Math.floor(prevAngle * 100) / 100;
 		var currentRot = Math.floor(mesh.rotation.y * 100) / 100;
-		// console.log(prevRot, currentRot);
 		if (prevRot === currentRot) {
-			// console.log('stop moving');
 			isMoving = false;
 		}
 
