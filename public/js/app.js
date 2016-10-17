@@ -67,6 +67,11 @@ var TOUCH_ROTATION_SPEED = 0.008;
 var mouse = new THREE.Vector2(); // create once
 var circleNumber = void 0;
 
+// Fade config
+var minIntense = 0;
+var maxIntense = 3;
+var fadeTime = 0.5; // seconds
+
 init();
 animate();
 
@@ -131,7 +136,6 @@ function init() {
 	document.addEventListener('mousemove', onMouseHover, false);
 
 	document.addEventListener('mousedown', function (e) {
-		console.log(e.target.className);
 		if (e.target.className !== 'hint__menu-link') {
 			goTo(currentPart);
 		}
@@ -418,8 +422,9 @@ function resetFlames() {
 function resetSelection() {
 	for (var i = 0; i < 9; i++) {
 		brainModel.brain[i].selected = false;
-		// brainModel.brain[i].material.emissiveIntensity = 0;
-		fadeOut(brainModel.brain[i]);
+		if (brainModel.brain[i].material.emissiveIntensity === maxIntense) {
+			fadeOut(brainModel.brain[i]);
+		}
 	}
 }
 'use strict';
@@ -1058,11 +1063,15 @@ var brainModel = new BrainModel();
 'use strict';
 
 function fadeIn(obj) {
-    var params = {
-        intense: 0
-    };
-    TweenLite.to(params, 0.5, {
-        intense: 3,
+    var params = {};
+    if (obj.material.emissiveIntensity !== maxIntense) {
+        params.intense = minIntense;
+    } else {
+        params.intense = maxIntense;
+    }
+
+    TweenLite.to(params, fadeTime, {
+        intense: maxIntense,
         ease: Power1.easeOut,
         onUpdate: function onUpdate() {
             obj.material.emissiveIntensity = params.intense;
@@ -1070,11 +1079,15 @@ function fadeIn(obj) {
     });
 }
 function fadeOut(obj) {
-    var params = {
-        intense: 3
-    };
-    TweenLite.to(params, 0.5, {
-        intense: 0,
+    var params = {};
+    if (obj.material.emissiveIntensity !== minIntense) {
+        params.intense = maxIntense;
+    } else {
+        params.intense = minIntense;
+    }
+
+    TweenLite.to(params, fadeTime, {
+        intense: minIntense,
         ease: Power1.easeOut,
         onUpdate: function onUpdate() {
             obj.material.emissiveIntensity = params.intense;

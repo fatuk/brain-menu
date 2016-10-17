@@ -58,6 +58,11 @@ const TOUCH_ROTATION_SPEED = 0.008;
 let mouse = new THREE.Vector2(); // create once
 let circleNumber;
 
+// Fade config
+let minIntense = 0;
+let maxIntense = 3;
+let fadeTime = 0.5; // seconds
+
 init();
 animate();
 
@@ -118,7 +123,6 @@ function init() {
 	document.addEventListener('mousemove', onMouseHover, false);
 
 	document.addEventListener('mousedown', function (e) {
-		console.log(e.target.className);
 		if (e.target.className !== 'hint__menu-link') {
 			goTo(currentPart);
 		}

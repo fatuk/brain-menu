@@ -1,9 +1,13 @@
 function fadeIn(obj) {
-    let params = {
-        intense: 0
-    };
-    TweenLite.to(params, 0.5, {
-        intense: 3,
+    let params = {};
+    if (obj.material.emissiveIntensity !== maxIntense) {
+        params.intense = minIntense;
+    } else {
+        params.intense = maxIntense;
+    }
+
+    TweenLite.to(params, fadeTime, {
+        intense: maxIntense,
         ease: Power1.easeOut,
         onUpdate: function () {
         	obj.material.emissiveIntensity = params.intense;
@@ -11,11 +15,15 @@ function fadeIn(obj) {
     });
 }
 function fadeOut(obj) {
-    let params = {
-        intense: 3
-    };
-    TweenLite.to(params, 0.5, {
-        intense: 0,
+    let params = {};
+    if (obj.material.emissiveIntensity !== minIntense) {
+        params.intense = maxIntense;
+    } else {
+        params.intense = minIntense;
+    }
+
+    TweenLite.to(params, fadeTime, {
+        intense: minIntense,
         ease: Power1.easeOut,
         onUpdate: function () {
         	obj.material.emissiveIntensity = params.intense;

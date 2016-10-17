@@ -277,7 +277,8 @@ function resetFlames() {
 function resetSelection() {
 	for (let i = 0; i < 9; i++) {
 		brainModel.brain[i].selected = false;
-		// brainModel.brain[i].material.emissiveIntensity = 0;
-		fadeOut(brainModel.brain[i]);
+		if (brainModel.brain[i].material.emissiveIntensity === maxIntense) {
+			fadeOut(brainModel.brain[i]);
+		}
 	}
 }
