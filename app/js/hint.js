@@ -49,9 +49,9 @@ class Hint {
 	close() {
 		if (this.$hint) {
 			this.$hint.addClass('fadeOut');
-			// setTimeout(() => {
-			this.destroy();
-			// }, 0);
+			setTimeout(() => {
+				this.destroy();
+			}, 1000);
 		}
 	}
 	destroy() {

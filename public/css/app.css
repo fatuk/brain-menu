@@ -656,6 +656,14 @@ html {
 .logo__img {
   width: 117px;
 }
+.animated.fadeOut {
+  -webkit-animation-duration: .3s;
+  animation-duration: .3s;
+}
+.animated.fadeIn {
+  -webkit-animation-duration: .3s;
+  animation-duration: .3s;
+}
 .hint {
   font-family: 'Roboto Condensed', sans-serif;
   position: fixed;

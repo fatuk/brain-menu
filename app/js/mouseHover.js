@@ -1,33 +1,33 @@
-function fadeIn(obj) {
+function fadeIn(obj, attr, min = 0, max = 3) {
     let params = {};
-    if (obj.material.emissiveIntensity !== maxIntense) {
-        params.intense = minIntense;
+    if (obj.material[attr] !== max) {
+        params.intense = min;
     } else {
-        params.intense = maxIntense;
+        params.intense = max;
     }
 
     TweenMax.to(params, fadeTime, {
-        intense: maxIntense,
+        intense: max,
         ease: Power1.easeOut,
         onUpdate: function() {
-            obj.material.emissiveIntensity = params.intense;
+            obj.material[attr] = params.intense;
         }
     });
 }
 
-function fadeOut(obj) {
+function fadeOut(obj, attr, min = 0, max = 3) {
     let params = {};
-    if (obj.material.emissiveIntensity !== minIntense) {
-        params.intense = maxIntense;
+    if (obj.material[attr] !== min) {
+        params.intense = max;
     } else {
-        params.intense = minIntense;
+        params.intense = min;
     }
 
     TweenMax.to(params, fadeTime, {
-        intense: minIntense,
+        intense: min,
         ease: Power1.easeOut,
         onUpdate: function() {
-            obj.material.emissiveIntensity = params.intense;
+            obj.material[attr] = params.intense;
         }
     });
 }
@@ -48,7 +48,7 @@ function flamePulsing(obj) {
         }
     });
 
-    TweenMax.to(params, 10, {
+    var opacityAnimation = TweenMax.to(params, 10, {
         opacity: 0.3,
         ease: RoughEase.ease.config({
             template: Power0.easeNone,
@@ -64,6 +64,7 @@ function flamePulsing(obj) {
             obj.material.opacity = params.opacity;
         }
     });
+    return opacityAnimation;
 }
 
 function mouseHover() {
@@ -81,15 +82,15 @@ function mouseHover() {
                 if (INTERSECTED) {
                     // To reset after changing hover object
                     if (!INTERSECTED.selected) {
-                        fadeOut(INTERSECTED);
+                        fadeOut(INTERSECTED, 'emissiveIntensity');
                         // Balls reset
                         if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
-                            fadeOut(brainModel.brain[4]);
-                            fadeOut(brainModel.brain[5]);
+                            fadeOut(brainModel.brain[4], 'emissiveIntensity');
+                            fadeOut(brainModel.brain[5], 'emissiveIntensity');
                         }
                         if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
-                            fadeOut(brainModel.brain[6]);
-                            fadeOut(brainModel.brain[7]);
+                            fadeOut(brainModel.brain[6], 'emissiveIntensity');
+                            fadeOut(brainModel.brain[7], 'emissiveIntensity');
                         }
                     }
                     isHover = false;
@@ -99,16 +100,16 @@ function mouseHover() {
                 INTERSECTED = intersects[0].object;
                 // Balls union
                 if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
-                    fadeIn(brainModel.brain[4]);
-                    fadeIn(brainModel.brain[5]);
+                    fadeIn(brainModel.brain[4], 'emissiveIntensity');
+                    fadeIn(brainModel.brain[5], 'emissiveIntensity');
                 }
                 if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
-                    fadeIn(brainModel.brain[6]);
-                    fadeIn(brainModel.brain[7]);
+                    fadeIn(brainModel.brain[6], 'emissiveIntensity');
+                    fadeIn(brainModel.brain[7], 'emissiveIntensity');
                 }
                 currentPart = INTERSECTED.name;
                 if (INTERSECTED.material.emissiveIntensity !== maxIntense) {
-                    fadeIn(INTERSECTED);
+                    fadeIn(INTERSECTED, 'emissiveIntensity');
                 }
                 isHover = true;
             }
@@ -116,15 +117,15 @@ function mouseHover() {
         } else {
             if (INTERSECTED) {
                 if (!INTERSECTED.selected) {
-                    fadeOut(INTERSECTED);
+                    fadeOut(INTERSECTED, 'emissiveIntensity');
                     // Balls reset
                     if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
-                        fadeOut(brainModel.brain[4]);
-                        fadeOut(brainModel.brain[5]);
+                        fadeOut(brainModel.brain[4], 'emissiveIntensity');
+                        fadeOut(brainModel.brain[5], 'emissiveIntensity');
                     }
                     if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
-                        fadeOut(brainModel.brain[6]);
-                        fadeOut(brainModel.brain[7]);
+                        fadeOut(brainModel.brain[6], 'emissiveIntensity');
+                        fadeOut(brainModel.brain[7], 'emissiveIntensity');
                     }
                 }
                 isHover = false;

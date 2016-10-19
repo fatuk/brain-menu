@@ -129,14 +129,13 @@ class BrainModel {
 			this.brainGroup = mainGroup.children[0];
 			this.gearsGroup = mainGroup.children[1].children;
 			this.flames = mainGroup.children[2];
-			this.flames.children[0].visible = false;
-			this.flames.children[0].visible = false;
-			this.flames.children[1].visible = false;
-			this.flames.children[2].visible = false;
-			this.flames.children[3].visible = false;
-			this.flames.children[4].visible = false;
-			this.flames.children[5].visible = false;
-			this.flames.children[6].visible = false;
+			this.flames.children[0].material.opacity = 0;
+			this.flames.children[1].material.opacity = 0;
+			this.flames.children[2].material.opacity = 0;
+			this.flames.children[3].material.opacity = 0;
+			this.flames.children[4].material.opacity = 0;
+			this.flames.children[5].material.opacity = 0;
+			this.flames.children[6].material.opacity = 0;
 
 			this.brain = [];
 

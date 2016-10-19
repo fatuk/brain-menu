@@ -1,5 +1,6 @@
 function goTo(part) {
 	let data;
+	let hintDelay = 1000;
 	isSelected = true;
 	switch (part) {
 		case 'o-brain-1':
@@ -8,8 +9,7 @@ function goTo(part) {
 			targetRotationY = 0.84;
 			targetRotationX = 3.32 + (circleNumber * Math.PI * 2);
 			resetAll();
-			brainModel.flames.children[0].visible = true;
-			fadeIn(brainModel.brain[0]);
+			fadeIn(brainModel.brain[0], 'emissiveIntensity');
 			brainModel.brain[0].selected = true;
 
 			data = {
@@ -26,10 +26,11 @@ function goTo(part) {
 					url: 'http://ya.ru'
 				}]
 			};
-
+			myHint.close();
 			setTimeout(() => {
+				fadeIn(brainModel.flames.children[0], 'opacity', 0, 0.7);
 				myHint.setData(data).open();
-			}, 500);
+			}, hintDelay);
 			break;
 		case 'o-brain-2':
 			console.log('[1] o-brain-2');
@@ -37,11 +38,7 @@ function goTo(part) {
 			targetRotationY = 0.75;
 			targetRotationX = -0.2 + (circleNumber * Math.PI * 2);
 			resetAll();
-			brainModel.flames.children[1].visible = true;
-			// brainModel.flames.children[1].material.alphaTest = 0.05;
-			flamePulsing(brainModel.flames.children[1]);
-			// console.log(brainModel.flames.children[1]);
-			fadeIn(brainModel.brain[1]);
+			fadeIn(brainModel.brain[1], 'emissiveIntensity');
 			brainModel.brain[1].selected = true;
 
 			data = {
@@ -59,9 +56,11 @@ function goTo(part) {
 				}]
 			};
 
+			myHint.close();
 			setTimeout(() => {
+				fadeIn(brainModel.flames.children[1], 'opacity', 0, 0.7);
 				myHint.setData(data).open();
-			}, 500);
+			}, hintDelay);
 			break;
 		case 'o-brain-3':
 			console.log('[2] o-brain-3');
@@ -69,8 +68,7 @@ function goTo(part) {
 			targetRotationY = -0.23;
 			targetRotationX = 2.15 + (circleNumber * Math.PI * 2);
 			resetAll();
-			brainModel.flames.children[2].visible = true;
-			fadeIn(brainModel.brain[2]);
+			fadeIn(brainModel.brain[2], 'emissiveIntensity');
 			brainModel.brain[2].selected = true;
 
 			data = {
@@ -87,10 +85,11 @@ function goTo(part) {
 					url: 'http://ya.ru'
 				}]
 			};
-
+			myHint.close();
 			setTimeout(() => {
+				fadeIn(brainModel.flames.children[2], 'opacity', 0, 0.7);
 				myHint.setData(data).open();
-			}, 500);
+			}, hintDelay);
 			break;
 		case 'o-brain-4':
 			console.log('[3] o-brain-4');
@@ -98,8 +97,7 @@ function goTo(part) {
 			targetRotationY = -0.4;
 			targetRotationX = 0.79 + (circleNumber * Math.PI * 2);
 			resetAll();
-			brainModel.flames.children[3].visible = true;
-			fadeIn(brainModel.brain[3]);
+			fadeIn(brainModel.brain[3], 'emissiveIntensity');
 			brainModel.brain[3].selected = true;
 
 			data = {
@@ -116,10 +114,11 @@ function goTo(part) {
 					url: 'http://ya.ru'
 				}]
 			};
-
+			myHint.close();
 			setTimeout(() => {
+				fadeIn(brainModel.flames.children[3], 'opacity', 0, 0.7);
 				myHint.setData(data).open();
-			}, 500);
+			}, hintDelay);
 			break;
 		case 'o-brain-5_1':
 			console.log('[4] o-brain-5_1');
@@ -127,9 +126,8 @@ function goTo(part) {
 			targetRotationY = -0.5;
 			targetRotationX = 3.57 + (circleNumber * Math.PI * 2);
 			resetAll();
-			brainModel.flames.children[4].visible = true;
-			fadeIn(brainModel.brain[4]);
-			fadeIn(brainModel.brain[5]);
+			fadeIn(brainModel.brain[4], 'emissiveIntensity');
+			fadeIn(brainModel.brain[5], 'emissiveIntensity');
 			brainModel.brain[4].selected = true;
 			brainModel.brain[5].selected = true;
 
@@ -147,10 +145,11 @@ function goTo(part) {
 					url: 'http://ya.ru'
 				}]
 			};
-
+			myHint.close();
 			setTimeout(() => {
+				fadeIn(brainModel.flames.children[4], 'opacity', 0, 0.7);
 				myHint.setData(data).open();
-			}, 500);
+			}, hintDelay);
 			break;
 		case 'o-brain-5_2':
 			console.log('[5] o-brain-5_2');
@@ -158,9 +157,8 @@ function goTo(part) {
 			targetRotationY = -0.5;
 			targetRotationX = 3.57 + (circleNumber * Math.PI * 2);
 			resetAll();
-			brainModel.flames.children[4].visible = true;
-			fadeIn(brainModel.brain[4]);
-			fadeIn(brainModel.brain[5]);
+			fadeIn(brainModel.brain[4], 'emissiveIntensity');
+			fadeIn(brainModel.brain[5], 'emissiveIntensity');
 			brainModel.brain[4].selected = true;
 			brainModel.brain[5].selected = true;
 
@@ -178,10 +176,11 @@ function goTo(part) {
 					url: 'http://ya.ru'
 				}]
 			};
-
+			myHint.close();
 			setTimeout(() => {
+				fadeIn(brainModel.flames.children[4], 'opacity', 0, 0.7);
 				myHint.setData(data).open();
-			}, 500);
+			}, hintDelay);
 			break;
 		case 'o-brain-6_1':
 			console.log('[6] o-brain-6_1');
@@ -189,9 +188,8 @@ function goTo(part) {
 			targetRotationY = -0.5;
 			targetRotationX = -0.59 + (circleNumber * Math.PI * 2);
 			resetAll();
-			brainModel.flames.children[5].visible = true;
-			fadeIn(brainModel.brain[6]);
-			fadeIn(brainModel.brain[7]);
+			fadeIn(brainModel.brain[6], 'emissiveIntensity');
+			fadeIn(brainModel.brain[7], 'emissiveIntensity');
 			brainModel.brain[6].selected = true;
 			brainModel.brain[7].selected = true;
 
@@ -209,10 +207,11 @@ function goTo(part) {
 					url: 'http://ya.ru'
 				}]
 			};
-
+			myHint.close();
 			setTimeout(() => {
+				fadeIn(brainModel.flames.children[5], 'opacity', 0, 0.7);
 				myHint.setData(data).open();
-			}, 500);
+			}, hintDelay);
 			break;
 		case 'o-brain-6_2':
 			console.log('[7] o-brain-6_2');
@@ -220,9 +219,8 @@ function goTo(part) {
 			targetRotationY = -0.5;
 			targetRotationX = -0.59 + (circleNumber * Math.PI * 2);
 			resetAll();
-			brainModel.flames.children[5].visible = true;
-			fadeIn(brainModel.brain[6]);
-			fadeIn(brainModel.brain[7]);
+			fadeIn(brainModel.brain[6], 'emissiveIntensity');
+			fadeIn(brainModel.brain[7], 'emissiveIntensity');
 			brainModel.brain[6].selected = true;
 			brainModel.brain[7].selected = true;
 
@@ -240,10 +238,11 @@ function goTo(part) {
 					url: 'http://ya.ru'
 				}]
 			};
-
+			myHint.close();
 			setTimeout(() => {
+				fadeIn(brainModel.flames.children[5], 'opacity', 0, 0.7);
 				myHint.setData(data).open();
-			}, 500);
+			}, hintDelay);
 			break;
 		case 'o-brain-7':
 			console.log('[8] o-brain-7');
@@ -264,7 +263,7 @@ function resetAll() {
 
 function resetFlames() {
 	for (let i = 0; i < 7; i++) {
-		brainModel.flames.children[i].visible = false;
+		fadeOut(brainModel.flames.children[i], 'opacity', 0, 0.7);
 	}
 }
 
@@ -277,7 +276,7 @@ function resetSelection() {
 function resetIntense() {
 	for (let i = 0; i < 9; i++) {
 		if (brainModel.brain[i].material.emissiveIntensity === maxIntense) {
-			fadeOut(brainModel.brain[i]);
+			fadeOut(brainModel.brain[i], 'emissiveIntensity');
 		}
 	}
 }

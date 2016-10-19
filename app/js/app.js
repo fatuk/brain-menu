@@ -68,38 +68,22 @@ let isHover = false;
 let isMoving = false;
 let isMovingLocked = false;
 let isSelected = false;
+let isStoped;
 
 init();
 animate();
 
 let fadeMe = {};
+let hasStoped = new Event('hasStoped');
 
-// function fade(obj, start, end, speed) {
-function fadeIntense(data) {
-	var {obj, start, end, speed} = data;
+window.addEventListener('hasStoped', function (e) {
+	console.log('stoped');
+}, false);
 
-	if (speed > 0) {
-		if (obj && obj.material.emissiveIntensity <= end) {
-			console.log(obj);
-			if (Array.isArray(obj)) {
-				console.log(obj);
-				obj[0].material.emissiveIntensity += speed;
-				obj[1].material.emissiveIntensity += speed;
-			} else {
-				obj.material.emissiveIntensity += speed;
-			}
-			// console.log(obj.material.emissiveIntensity);
-		}
-	} else {
-		if (obj && obj.material.emissiveIntensity >= 0) {
-			if (Array.isArray(obj)) {
-				obj[0].material.emissiveIntensity += speed;
-				obj[1].material.emissiveIntensity += speed;
-			} else {
-				obj.material.emissiveIntensity += speed;
-			}
-			// console.log(obj.material.emissiveIntensity);
-		}
+function isStopedFn() {
+	if (!isStoped) {
+		isStoped = true;
+		window.dispatchEvent(hasStoped);
 	}
 }
 
