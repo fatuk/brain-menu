@@ -48,7 +48,7 @@ function flamePulsing(obj) {
         }
     });
 
-    var opacityAnimation = TweenMax.to(params, 10, {
+    /*TweenMax.to(params, 10, {
         opacity: 0.3,
         ease: RoughEase.ease.config({
             template: Power0.easeNone,
@@ -63,8 +63,7 @@ function flamePulsing(obj) {
         onUpdate: function () {
             obj.material.opacity = params.opacity;
         }
-    });
-    return opacityAnimation;
+    });*/
 }
 
 function mouseHover() {

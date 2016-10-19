@@ -144,6 +144,7 @@ function goTo(part) {
 	var data = void 0;
 	var hintDelay = 1000;
 	isSelected = true;
+	startFlamesPulsing();
 	switch (part) {
 		case 'o-brain-1':
 			console.log('[0] o-brain-1');
@@ -420,6 +421,12 @@ function resetIntense() {
 		if (brainModel.brain[i].material.emissiveIntensity === maxIntense) {
 			fadeOut(brainModel.brain[i], 'emissiveIntensity');
 		}
+	}
+}
+
+function startFlamesPulsing() {
+	for (var i = 0; i < 7; i++) {
+		flamePulsing(brainModel.flames.children[i]);
 	}
 }
 'use strict';
@@ -1115,7 +1122,7 @@ function flamePulsing(obj) {
         }
     });
 
-    var opacityAnimation = TweenMax.to(params, 10, {
+    /*TweenMax.to(params, 10, {
         opacity: 0.3,
         ease: RoughEase.ease.config({
             template: Power0.easeNone,
@@ -1127,11 +1134,10 @@ function flamePulsing(obj) {
         }),
         repeat: -1,
         yoyo: true,
-        onUpdate: function onUpdate() {
+        onUpdate: function () {
             obj.material.opacity = params.opacity;
         }
-    });
-    return opacityAnimation;
+    });*/
 }
 
 function mouseHover() {

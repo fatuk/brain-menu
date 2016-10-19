@@ -2,6 +2,7 @@ function goTo(part) {
 	let data;
 	let hintDelay = 1000;
 	isSelected = true;
+	startFlamesPulsing();
 	switch (part) {
 		case 'o-brain-1':
 			console.log('[0] o-brain-1');
@@ -278,5 +279,11 @@ function resetIntense() {
 		if (brainModel.brain[i].material.emissiveIntensity === maxIntense) {
 			fadeOut(brainModel.brain[i], 'emissiveIntensity');
 		}
+	}
+}
+
+function startFlamesPulsing() {
+	for (let i = 0; i < 7; i++) {
+		flamePulsing(brainModel.flames.children[i]);
 	}
 }
