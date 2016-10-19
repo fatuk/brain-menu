@@ -1236,6 +1236,7 @@ function render() {
 
 		if (isMoving) {
 			resetSelection();
+			resetIntense();
 			resetFlames();
 			myHint.close();
 		}
