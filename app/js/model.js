@@ -120,6 +120,7 @@ class BrainModel {
 		let jsonUrl = this.jsonUrl;
 
 		XHRLoader.load(jsonUrl, (text) => {
+			hideSpinner();
 			let json = JSON.parse(text);
 			let loader = new THREE.ObjectLoader();
 

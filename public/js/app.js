@@ -661,23 +661,6 @@ function lines() {
 }
 'use strict';
 
-function loadProgress(loading) {
-
-	console.log(loading);
-
-	var $progressContainer = document.getElementsByClassName('js-loader')[0];
-	var total = loading.total;
-	var loaded = loading.loaded;
-	var loadedPercents = Math.round(loaded / total * 100);
-
-	$progressContainer.textContent = loadedPercents + ' %';
-
-	if (loadedPercents === 100) {
-		$progressContainer.className = 'hide';
-	}
-}
-'use strict';
-
 function menu() {
 	var $aboutBtn = $('.js-about') || {};
 	var $projectsBtn = $('.js-projects') || {};
@@ -954,6 +937,7 @@ var BrainModel = function () {
 			var jsonUrl = this.jsonUrl;
 
 			XHRLoader.load(jsonUrl, function (text) {
+				hideSpinner();
 				var json = JSON.parse(text);
 				var loader = new THREE.ObjectLoader();
 
@@ -1291,5 +1275,11 @@ function render() {
 	if (scene) {
 		renderer.render(scene, camera);
 	}
+}
+'use strict';
+
+function hideSpinner() {
+	var $spinner = document.getElementsByClassName('js-spinner')[0];
+	$spinner.className = 'fadeOut';
 }
 //# sourceMappingURL=../js/app.js.map
