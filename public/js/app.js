@@ -69,7 +69,7 @@ var circleNumber = void 0;
 
 // Fade config
 var minIntense = 0;
-var maxIntense = 3;
+var maxIntense = 2;
 var fadeTime = 0.5; // seconds
 
 // Hover config
@@ -82,12 +82,10 @@ var isStoped = void 0;
 init();
 animate();
 
-var fadeMe = {};
-var hasStoped = new Event('hasStoped');
-
-window.addEventListener('hasStoped', function (e) {
-	console.log('stoped');
-}, false);
+// Player
+var brainPlayer = void 0;
+var waitingTimer = void 0;
+waitingTimer = waitForPlayer();
 
 function isStopedFn() {
 	if (!isStoped) {
@@ -123,6 +121,10 @@ function init() {
 
 	document.addEventListener('mousedown', function (e) {
 		isMovingLocked = true;
+		stopTimer(waitingTimer);
+		resetFlames();
+		myHint.close();
+		waitingTimer = waitForPlayer();
 	}, false);
 
 	document.addEventListener('mouseup', function (e) {
@@ -130,13 +132,41 @@ function init() {
 			goTo(currentPart);
 		}
 	}, false);
+}
+'use strict';
 
-	/*document.addEventListener('mouseup', function (e) {
- 	if (e.target.className !== 'hint__menu-link' && !isHover) {
- 		resetAll();
- 		myHint.close();
- 	}
- }, false);*/
+function waitForPlayer() {
+	var counter = 0;
+	var endTime = 10;
+	var timer = setInterval(function () {
+		if (counter === endTime) {
+			stopTimer(timer);
+			startPlayer();
+		}
+		counter++;
+		console.log('waitForPlayer: ', counter);
+	}, 1000);
+
+	stopTimer(brainPlayer);
+	return timer;
+}
+
+function stopTimer(playerId) {
+	window.clearInterval(playerId);
+}
+
+function startPlayer() {
+	var counter = 0;
+	var delay = 5000;
+	var parts = ['o-brain-1', 'o-brain-2', 'o-brain-3', 'o-brain-4', 'o-brain-5_1', 'o-brain-6_1', 'o-brain-7'];
+
+	brainPlayer = setInterval(function () {
+		if (counter === parts.length - 1) {
+			counter = 0;
+		}
+		goTo(parts[counter]);
+		counter++;
+	}, delay);
 }
 'use strict';
 
@@ -145,13 +175,15 @@ function goTo(part) {
 	var hintDelay = 1000;
 	isSelected = true;
 	startFlamesPulsing();
+	resetFlames();
+	resetIntense();
+	resetSelection();
 	switch (part) {
 		case 'o-brain-1':
 			console.log('[0] o-brain-1');
 			circleNumber = Math.floor(mesh.rotation.y / (Math.PI * 2));
 			targetRotationY = 0.84;
 			targetRotationX = 3.32 + circleNumber * Math.PI * 2;
-			resetAll();
 			fadeIn(brainModel.brain[0], 'emissiveIntensity');
 			brainModel.brain[0].selected = true;
 
@@ -180,7 +212,6 @@ function goTo(part) {
 			circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
 			targetRotationY = 0.75;
 			targetRotationX = -0.2 + circleNumber * Math.PI * 2;
-			resetAll();
 			fadeIn(brainModel.brain[1], 'emissiveIntensity');
 			brainModel.brain[1].selected = true;
 
@@ -210,7 +241,6 @@ function goTo(part) {
 			circleNumber = Math.floor(mesh.rotation.y / (Math.PI * 2));
 			targetRotationY = -0.23;
 			targetRotationX = 2.15 + circleNumber * Math.PI * 2;
-			resetAll();
 			fadeIn(brainModel.brain[2], 'emissiveIntensity');
 			brainModel.brain[2].selected = true;
 
@@ -239,7 +269,6 @@ function goTo(part) {
 			circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
 			targetRotationY = -0.4;
 			targetRotationX = 0.79 + circleNumber * Math.PI * 2;
-			resetAll();
 			fadeIn(brainModel.brain[3], 'emissiveIntensity');
 			brainModel.brain[3].selected = true;
 
@@ -268,7 +297,6 @@ function goTo(part) {
 			circleNumber = Math.floor(mesh.rotation.y / (Math.PI * 2));
 			targetRotationY = -0.5;
 			targetRotationX = 3.57 + circleNumber * Math.PI * 2;
-			resetAll();
 			fadeIn(brainModel.brain[4], 'emissiveIntensity');
 			fadeIn(brainModel.brain[5], 'emissiveIntensity');
 			brainModel.brain[4].selected = true;
@@ -299,7 +327,6 @@ function goTo(part) {
 			circleNumber = Math.floor(mesh.rotation.y / (Math.PI * 2));
 			targetRotationY = -0.5;
 			targetRotationX = 3.57 + circleNumber * Math.PI * 2;
-			resetAll();
 			fadeIn(brainModel.brain[4], 'emissiveIntensity');
 			fadeIn(brainModel.brain[5], 'emissiveIntensity');
 			brainModel.brain[4].selected = true;
@@ -330,7 +357,6 @@ function goTo(part) {
 			circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
 			targetRotationY = -0.5;
 			targetRotationX = -0.59 + circleNumber * Math.PI * 2;
-			resetAll();
 			fadeIn(brainModel.brain[6], 'emissiveIntensity');
 			fadeIn(brainModel.brain[7], 'emissiveIntensity');
 			brainModel.brain[6].selected = true;
@@ -361,7 +387,6 @@ function goTo(part) {
 			circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
 			targetRotationY = -0.5;
 			targetRotationX = -0.59 + circleNumber * Math.PI * 2;
-			resetAll();
 			fadeIn(brainModel.brain[6], 'emissiveIntensity');
 			fadeIn(brainModel.brain[7], 'emissiveIntensity');
 			brainModel.brain[6].selected = true;
@@ -392,7 +417,8 @@ function goTo(part) {
 			break;
 		default:
 			isSelected = false;
-			resetAll();
+			// resetAll();
+			resetIntense();
 			myHint.close();
 			break;
 	}
@@ -464,6 +490,8 @@ function onMouseHover(event) {
 
 function onDocumentMouseMove(event) {
 	isMoving = true;
+	stopTimer(waitingTimer);
+	waitingTimer = waitForPlayer();
 	mouseX = event.clientX - windowHalfX;
 	mouseY = event.clientY - windowHalfY;
 	targetRotationY = targetRotationOnMouseDownY + (mouseY - mouseYOnMouseDown) * MOUSE_ROTATION_SPEED;
@@ -1068,7 +1096,7 @@ var brainModel = new BrainModel();
 
 function fadeIn(obj, attr) {
     var min = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-    var max = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 3;
+    var max = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 2;
 
     var params = {};
     if (obj.material[attr] !== max) {
@@ -1088,7 +1116,7 @@ function fadeIn(obj, attr) {
 
 function fadeOut(obj, attr) {
     var min = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-    var max = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 3;
+    var max = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 2;
 
     var params = {};
     if (obj.material[attr] !== min) {
@@ -1235,9 +1263,10 @@ function render() {
 		}
 
 		if (isMoving) {
+			stopTimer(waitingTimer);
+			waitingTimer = waitForPlayer();
 			resetSelection();
 			resetIntense();
-			resetFlames();
 			myHint.close();
 		}
 

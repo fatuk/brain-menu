@@ -1,4 +1,4 @@
-function fadeIn(obj, attr, min = 0, max = 3) {
+function fadeIn(obj, attr, min = 0, max = 2) {
     let params = {};
     if (obj.material[attr] !== max) {
         params.intense = min;
@@ -15,7 +15,7 @@ function fadeIn(obj, attr, min = 0, max = 3) {
     });
 }
 
-function fadeOut(obj, attr, min = 0, max = 3) {
+function fadeOut(obj, attr, min = 0, max = 2) {
     let params = {};
     if (obj.material[attr] !== min) {
         params.intense = max;

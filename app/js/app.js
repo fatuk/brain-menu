@@ -60,7 +60,7 @@ let circleNumber;
 
 // Fade config
 let minIntense = 0;
-let maxIntense = 3;
+let maxIntense = 2;
 let fadeTime = 0.5; // seconds
 
 // Hover config
@@ -70,15 +70,14 @@ let isMovingLocked = false;
 let isSelected = false;
 let isStoped;
 
+
 init();
 animate();
 
-let fadeMe = {};
-let hasStoped = new Event('hasStoped');
-
-window.addEventListener('hasStoped', function (e) {
-	console.log('stoped');
-}, false);
+// Player
+let brainPlayer;
+let waitingTimer;
+waitingTimer = waitForPlayer();
 
 function isStopedFn() {
 	if (!isStoped) {
@@ -114,6 +113,10 @@ function init() {
 
 	document.addEventListener('mousedown', function (e) {
 		isMovingLocked = true;
+		stopTimer(waitingTimer);
+		resetFlames();
+		myHint.close();
+		waitingTimer = waitForPlayer();
 	}, false);
 
 	document.addEventListener('mouseup', function (e) {
@@ -121,11 +124,4 @@ function init() {
 			goTo(currentPart);
 		}
 	}, false);
-
-	/*document.addEventListener('mouseup', function (e) {
-		if (e.target.className !== 'hint__menu-link' && !isHover) {
-			resetAll();
-			myHint.close();
-		}
-	}, false);*/
 }

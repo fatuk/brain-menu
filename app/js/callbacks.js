@@ -31,6 +31,8 @@ function onMouseHover (event) {
 
 function onDocumentMouseMove(event) {
 	isMoving = true;
+	stopTimer(waitingTimer);
+	waitingTimer = waitForPlayer();
 	mouseX = event.clientX - windowHalfX;
 	mouseY = event.clientY - windowHalfY;
 	targetRotationY = targetRotationOnMouseDownY + (mouseY - mouseYOnMouseDown) * MOUSE_ROTATION_SPEED;

@@ -23,9 +23,10 @@ function render() {
 		}
 
 		if (isMoving) {
+			stopTimer(waitingTimer);
+			waitingTimer = waitForPlayer();
 			resetSelection();
 			resetIntense();
-			resetFlames();
 			myHint.close();
 		}
 
