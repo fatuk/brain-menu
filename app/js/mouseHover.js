@@ -84,12 +84,12 @@ function mouseHover() {
                         fadeOut(INTERSECTED, 'emissiveIntensity');
                         // Balls reset
                         if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
-                            fadeOut(brainModel.brain[4], 'emissiveIntensity');
-                            fadeOut(brainModel.brain[5], 'emissiveIntensity');
+                            fadeOut(brainModel.brain[4], 'emissiveIntensity', minIntense, maxIntense);
+                            fadeOut(brainModel.brain[5], 'emissiveIntensity', minIntense, maxIntense);
                         }
                         if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
-                            fadeOut(brainModel.brain[6], 'emissiveIntensity');
-                            fadeOut(brainModel.brain[7], 'emissiveIntensity');
+                            fadeOut(brainModel.brain[6], 'emissiveIntensity', minIntense, maxIntense);
+                            fadeOut(brainModel.brain[7], 'emissiveIntensity', minIntense, maxIntense);
                         }
                     }
                     isHover = false;
@@ -99,16 +99,16 @@ function mouseHover() {
                 INTERSECTED = intersects[0].object;
                 // Balls union
                 if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
-                    fadeIn(brainModel.brain[4], 'emissiveIntensity');
-                    fadeIn(brainModel.brain[5], 'emissiveIntensity');
+                    fadeIn(brainModel.brain[4], 'emissiveIntensity', minIntense, maxIntense);
+                    fadeIn(brainModel.brain[5], 'emissiveIntensity', minIntense, maxIntense);
                 }
                 if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
-                    fadeIn(brainModel.brain[6], 'emissiveIntensity');
-                    fadeIn(brainModel.brain[7], 'emissiveIntensity');
+                    fadeIn(brainModel.brain[6], 'emissiveIntensity', minIntense, maxIntense);
+                    fadeIn(brainModel.brain[7], 'emissiveIntensity', minIntense, maxIntense);
                 }
                 currentPart = INTERSECTED.name;
                 if (INTERSECTED.material.emissiveIntensity !== maxIntense) {
-                    fadeIn(INTERSECTED, 'emissiveIntensity');
+                    fadeIn(INTERSECTED, 'emissiveIntensity', minIntense, maxIntense);
                 }
                 isHover = true;
             }
@@ -119,12 +119,12 @@ function mouseHover() {
                     fadeOut(INTERSECTED, 'emissiveIntensity');
                     // Balls reset
                     if (INTERSECTED.name === 'o-brain-5_1' || INTERSECTED.name === 'o-brain-5_2') {
-                        fadeOut(brainModel.brain[4], 'emissiveIntensity');
-                        fadeOut(brainModel.brain[5], 'emissiveIntensity');
+                        fadeOut(brainModel.brain[4], 'emissiveIntensity', minIntense, maxIntense);
+                        fadeOut(brainModel.brain[5], 'emissiveIntensity', minIntense, maxIntense);
                     }
                     if (INTERSECTED.name === 'o-brain-6_1' || INTERSECTED.name === 'o-brain-6_2') {
-                        fadeOut(brainModel.brain[6], 'emissiveIntensity');
-                        fadeOut(brainModel.brain[7], 'emissiveIntensity');
+                        fadeOut(brainModel.brain[6], 'emissiveIntensity', minIntense, maxIntense);
+                        fadeOut(brainModel.brain[7], 'emissiveIntensity', minIntense, maxIntense);
                     }
                 }
                 isHover = false;

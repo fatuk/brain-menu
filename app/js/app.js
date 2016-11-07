@@ -32,6 +32,7 @@ let height = window.innerHeight;
 
 let $rotationInfoX = document.getElementsByClassName('js-rotationX')[0];
 let $rotationInfoY = document.getElementsByClassName('js-rotationY')[0];
+let $info = document.getElementsByClassName('js-info')[0];
 
 let targetRotationX = 0;
 let targetRotationOnMouseDownX = 0;
@@ -60,8 +61,11 @@ let circleNumber;
 
 // Fade config
 let minIntense = 0;
-let maxIntense = 2;
+let maxIntense = 3;
 let fadeTime = 0.5; // seconds
+
+// Info
+window.showInfo = false;
 
 // Hover config
 let isHover = false;

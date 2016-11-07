@@ -12,7 +12,7 @@ function goTo(part) {
 			circleNumber = Math.floor(mesh.rotation.y / (Math.PI * 2));
 			targetRotationY = 0.84;
 			targetRotationX = 3.32 + (circleNumber * Math.PI * 2);
-			fadeIn(brainModel.brain[0], 'emissiveIntensity');
+			fadeIn(brainModel.brain[0], 'emissiveIntensity', minIntense, maxIntense);
 			brainModel.brain[0].selected = true;
 
 			data = {
@@ -40,7 +40,7 @@ function goTo(part) {
 			circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
 			targetRotationY = 0.75;
 			targetRotationX = -0.2 + (circleNumber * Math.PI * 2);
-			fadeIn(brainModel.brain[1], 'emissiveIntensity');
+			fadeIn(brainModel.brain[1], 'emissiveIntensity', minIntense, maxIntense);
 			brainModel.brain[1].selected = true;
 
 			data = {
@@ -69,7 +69,7 @@ function goTo(part) {
 			circleNumber = Math.floor(mesh.rotation.y / (Math.PI * 2));
 			targetRotationY = -0.23;
 			targetRotationX = 2.15 + (circleNumber * Math.PI * 2);
-			fadeIn(brainModel.brain[2], 'emissiveIntensity');
+			fadeIn(brainModel.brain[2], 'emissiveIntensity', minIntense, maxIntense);
 			brainModel.brain[2].selected = true;
 
 			data = {
@@ -97,7 +97,7 @@ function goTo(part) {
 			circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
 			targetRotationY = -0.4;
 			targetRotationX = 0.79 + (circleNumber * Math.PI * 2);
-			fadeIn(brainModel.brain[3], 'emissiveIntensity');
+			fadeIn(brainModel.brain[3], 'emissiveIntensity', minIntense, maxIntense);
 			brainModel.brain[3].selected = true;
 
 			data = {
@@ -125,8 +125,8 @@ function goTo(part) {
 			circleNumber = Math.floor(mesh.rotation.y / (Math.PI * 2));
 			targetRotationY = -0.5;
 			targetRotationX = 3.57 + (circleNumber * Math.PI * 2);
-			fadeIn(brainModel.brain[4], 'emissiveIntensity');
-			fadeIn(brainModel.brain[5], 'emissiveIntensity');
+			fadeIn(brainModel.brain[4], 'emissiveIntensity', minIntense, maxIntense);
+			fadeIn(brainModel.brain[5], 'emissiveIntensity', minIntense, maxIntense);
 			brainModel.brain[4].selected = true;
 			brainModel.brain[5].selected = true;
 
@@ -155,8 +155,8 @@ function goTo(part) {
 			circleNumber = Math.floor(mesh.rotation.y / (Math.PI * 2));
 			targetRotationY = -0.5;
 			targetRotationX = 3.57 + (circleNumber * Math.PI * 2);
-			fadeIn(brainModel.brain[4], 'emissiveIntensity');
-			fadeIn(brainModel.brain[5], 'emissiveIntensity');
+			fadeIn(brainModel.brain[4], 'emissiveIntensity', minIntense, maxIntense);
+			fadeIn(brainModel.brain[5], 'emissiveIntensity', minIntense, maxIntense);
 			brainModel.brain[4].selected = true;
 			brainModel.brain[5].selected = true;
 
@@ -185,8 +185,8 @@ function goTo(part) {
 			circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
 			targetRotationY = -0.5;
 			targetRotationX = -0.59 + (circleNumber * Math.PI * 2);
-			fadeIn(brainModel.brain[6], 'emissiveIntensity');
-			fadeIn(brainModel.brain[7], 'emissiveIntensity');
+			fadeIn(brainModel.brain[6], 'emissiveIntensity', minIntense, maxIntense);
+			fadeIn(brainModel.brain[7], 'emissiveIntensity', minIntense, maxIntense);
 			brainModel.brain[6].selected = true;
 			brainModel.brain[7].selected = true;
 
@@ -215,8 +215,8 @@ function goTo(part) {
 			circleNumber = Math.round(mesh.rotation.y / (Math.PI * 2));
 			targetRotationY = -0.5;
 			targetRotationX = -0.59 + (circleNumber * Math.PI * 2);
-			fadeIn(brainModel.brain[6], 'emissiveIntensity');
-			fadeIn(brainModel.brain[7], 'emissiveIntensity');
+			fadeIn(brainModel.brain[6], 'emissiveIntensity', minIntense, maxIntense);
+			fadeIn(brainModel.brain[7], 'emissiveIntensity', minIntense, maxIntense);
 			brainModel.brain[6].selected = true;
 			brainModel.brain[7].selected = true;
 
@@ -273,7 +273,7 @@ function resetSelection() {
 function resetIntense() {
 	for (let i = 0; i < 9; i++) {
 		if (brainModel.brain[i].material.emissiveIntensity === maxIntense) {
-			fadeOut(brainModel.brain[i], 'emissiveIntensity');
+			fadeOut(brainModel.brain[i], 'emissiveIntensity', minIntense, maxIntense);
 		}
 	}
 }
